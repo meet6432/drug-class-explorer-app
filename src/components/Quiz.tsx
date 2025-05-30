@@ -36,13 +36,18 @@ const Quiz = ({ drugClasses }: QuizProps) => {
     const randomDrug = drugClasses[Math.floor(Math.random() * drugClasses.length)];
     
     if (questionType === 'example') {
+      if (randomDrug.examples.length === 0) {
+        // Fallback to use question if no examples
+        return generateRandomQuestion();
+      }
+      
       const correctExample = randomDrug.examples[Math.floor(Math.random() * randomDrug.examples.length)];
       const wrongOptions = [];
       
       // Get wrong examples from other drug classes
       while (wrongOptions.length < 3) {
         const randomOtherDrug = drugClasses[Math.floor(Math.random() * drugClasses.length)];
-        if (randomOtherDrug.name !== randomDrug.name) {
+        if (randomOtherDrug.id !== randomDrug.id && randomOtherDrug.examples.length > 0) {
           const wrongExample = randomOtherDrug.examples[Math.floor(Math.random() * randomOtherDrug.examples.length)];
           if (!wrongOptions.includes(wrongExample) && wrongExample !== correctExample) {
             wrongOptions.push(wrongExample);

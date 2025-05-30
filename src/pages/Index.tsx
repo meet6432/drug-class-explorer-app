@@ -1,25 +1,48 @@
 
 import { useState, useEffect } from 'react';
-import { Search, Filter, Award, BookOpen } from 'lucide-react';
+import { BookOpen, Award } from 'lucide-react';
 import DrugCard from '../components/DrugCard';
 import Quiz from '../components/Quiz';
-import { drugClassesData } from '../data/drugClasses';
+import SearchAndFilter from '../components/SearchAndFilter';
+import Pagination from '../components/Pagination';
+import { comprehensiveDrugClasses, drugCategories } from '../data/comprehensiveDrugClasses';
+
+const ITEMS_PER_PAGE = 12;
 
 const Index = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [showQuiz, setShowQuiz] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Get unique categories
-  const categories = ['All', ...Array.from(new Set(drugClassesData.map(drug => drug.category)))];
+  const categories = ['All', ...drugCategories];
 
   // Filter drug classes based on search and category
-  const filteredDrugs = drugClassesData.filter(drug => {
+  const filteredDrugs = comprehensiveDrugClasses.filter(drug => {
     const matchesSearch = drug.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         drug.category.toLowerCase().includes(searchTerm.toLowerCase());
+                         drug.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         drug.mechanism.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         drug.uses.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === 'All' || drug.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
+
+  // Calculate pagination
+  const totalPages = Math.ceil(filteredDrugs.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const currentDrugs = filteredDrugs.slice(startIndex, endIndex);
+
+  // Reset to first page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedCategory]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
@@ -33,7 +56,7 @@ const Index = () => {
             </h1>
           </div>
           <p className="text-center text-gray-600 mt-2 text-lg">
-            Learn Drug Classes with Interactive Cards & Quizzes
+            Master 400+ Drug Classes with Interactive Cards & Quizzes
           </p>
         </div>
       </header>
@@ -50,7 +73,7 @@ const Index = () => {
             }`}
           >
             <BookOpen className="inline h-5 w-5 mr-2" />
-            Drug Classes
+            Drug Classes ({comprehensiveDrugClasses.length})
           </button>
           <button
             onClick={() => setShowQuiz(true)}
@@ -68,48 +91,35 @@ const Index = () => {
         {!showQuiz ? (
           <>
             {/* Search and Filter Controls */}
-            <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-              <div className="flex flex-col md:flex-row gap-4">
-                <div className="flex-1 relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-                  <input
-                    type="text"
-                    placeholder="Search drug classes..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                  />
-                </div>
-                <div className="relative">
-                  <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-                  <select
-                    value={selectedCategory}
-                    onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="pl-10 pr-8 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white"
-                  >
-                    {categories.map(category => (
-                      <option key={category} value={category}>{category}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            {/* Results Count */}
-            <div className="mb-6">
-              <p className="text-gray-600 text-center">
-                Showing {filteredDrugs.length} of {drugClassesData.length} drug classes
-              </p>
-            </div>
+            <SearchAndFilter
+              searchTerm={searchTerm}
+              selectedCategory={selectedCategory}
+              onSearchChange={setSearchTerm}
+              onCategoryChange={setSelectedCategory}
+              categories={categories}
+              totalResults={filteredDrugs.length}
+              totalDrugs={comprehensiveDrugClasses.length}
+            />
 
             {/* Drug Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredDrugs.map((drug, index) => (
-                <DrugCard key={index} drug={drug} />
-              ))}
-            </div>
+            {currentDrugs.length > 0 ? (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+                  {currentDrugs.map((drug) => (
+                    <DrugCard key={drug.id} drug={drug} />
+                  ))}
+                </div>
 
-            {filteredDrugs.length === 0 && (
+                {/* Pagination */}
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  itemsPerPage={ITEMS_PER_PAGE}
+                  totalItems={filteredDrugs.length}
+                  onPageChange={handlePageChange}
+                />
+              </>
+            ) : (
               <div className="text-center py-12">
                 <div className="text-gray-400 text-6xl mb-4">🔍</div>
                 <h3 className="text-xl font-semibold text-gray-600 mb-2">No Results Found</h3>
@@ -118,7 +128,7 @@ const Index = () => {
             )}
           </>
         ) : (
-          <Quiz drugClasses={drugClassesData} />
+          <Quiz drugClasses={comprehensiveDrugClasses} />
         )}
       </div>
     </div>

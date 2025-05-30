@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
 interface DrugClass {
+  id: string;
   name: string;
   category: string;
   description: string;
@@ -27,7 +28,11 @@ const DrugCard = ({ drug }: DrugCardProps) => {
       'Gastrointestinal': 'bg-orange-100 text-orange-800 border-orange-200',
       'Endocrine': 'bg-blue-100 text-blue-800 border-blue-200',
       'Respiratory': 'bg-teal-100 text-teal-800 border-teal-200',
-      'Oncology': 'bg-pink-100 text-pink-800 border-pink-200'
+      'Oncology': 'bg-pink-100 text-pink-800 border-pink-200',
+      'Immunologic': 'bg-indigo-100 text-indigo-800 border-indigo-200',
+      'Dermatological': 'bg-yellow-100 text-yellow-800 border-yellow-200',
+      'Ophthalmic': 'bg-cyan-100 text-cyan-800 border-cyan-200',
+      'Genitourinary tract agents': 'bg-emerald-100 text-emerald-800 border-emerald-200'
     };
     return colors[category as keyof typeof colors] || 'bg-gray-100 text-gray-800 border-gray-200';
   };
