@@ -1,23 +1,24 @@
 
 import { useState } from 'react';
-import { Award, Brain, Star, Zap, Stethoscope, BookOpen } from 'lucide-react';
+import { Award, Brain, Star, Zap, Stethoscope, BookOpen, Search } from 'lucide-react';
 import QuizLevel from './QuizLevel';
 import SymptomDiagnosis from './SymptomDiagnosis';
+import DiseaseLookup from './DiseaseLookup';
 
-type QuizMode = 'menu' | 'easy' | 'medium' | 'hard' | 'symptoms';
+type QuizMode = 'menu' | 'easy' | 'medium' | 'hard' | 'symptoms' | 'diseases';
 
 const Quiz = () => {
   const [currentMode, setCurrentMode] = useState<QuizMode>('menu');
 
   const renderQuizMenu = () => (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-5xl mx-auto">
       <div className="text-center mb-12">
         <Award className="h-16 w-16 text-yellow-500 mx-auto mb-4" />
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">Pharmacy Quiz Center</h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">Pharmacy Learning Center</h1>
         <p className="text-xl text-gray-600">Choose your learning path</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
         {/* Easy Level */}
         <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
           <div className="bg-gradient-to-r from-green-400 to-green-600 p-6 text-white text-center">
@@ -109,6 +110,29 @@ const Quiz = () => {
             </button>
           </div>
         </div>
+
+        {/* Disease Lookup */}
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div className="bg-gradient-to-r from-blue-400 to-teal-600 p-6 text-white text-center">
+            <Search className="h-12 w-12 mx-auto mb-3" />
+            <h3 className="text-xl font-bold">Disease Lookup</h3>
+            <p className="text-blue-100 mt-2">Drug Reference</p>
+          </div>
+          <div className="p-6">
+            <ul className="text-sm text-gray-600 space-y-2 mb-6">
+              <li>• Search diseases & symptoms</li>
+              <li>• Detailed drug information</li>
+              <li>• Dosage & administration</li>
+              <li>• Side effects & precautions</li>
+            </ul>
+            <button
+              onClick={() => setCurrentMode('diseases')}
+              className="w-full bg-teal-500 text-white py-3 rounded-lg font-semibold hover:bg-teal-600 transition-colors"
+            >
+              Search Diseases
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Study Tips */}
@@ -117,7 +141,7 @@ const Quiz = () => {
           <BookOpen className="h-8 w-8 text-blue-600" />
           <h2 className="text-2xl font-bold text-gray-800">Study Tips</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-gray-700">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-gray-700">
           <div>
             <h3 className="font-semibold text-blue-800 mb-2">Start with Basics</h3>
             <p className="text-sm">Begin with easy level to build foundation knowledge before advancing.</p>
@@ -129,6 +153,10 @@ const Quiz = () => {
           <div>
             <h3 className="font-semibold text-blue-800 mb-2">Practice Cases</h3>
             <p className="text-sm">Use symptom diagnosis to apply knowledge in clinical scenarios.</p>
+          </div>
+          <div>
+            <h3 className="font-semibold text-blue-800 mb-2">Use Disease Lookup</h3>
+            <p className="text-sm">Search specific conditions to learn about drug treatments and dosages.</p>
           </div>
         </div>
       </div>
@@ -145,6 +173,8 @@ const Quiz = () => {
         return <QuizLevel difficulty="hard" onBackToMenu={() => setCurrentMode('menu')} />;
       case 'symptoms':
         return <SymptomDiagnosis onBackToMenu={() => setCurrentMode('menu')} />;
+      case 'diseases':
+        return <DiseaseLookup onBackToMenu={() => setCurrentMode('menu')} />;
       default:
         return renderQuizMenu();
     }
