@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Search, AlertTriangle, Pill, Clock, Shield, Info, Heart, Brain, Lungs } from 'lucide-react';
+import { Search, AlertTriangle, Pill, Clock, Shield, Info, Heart, Brain, Activity } from 'lucide-react';
 import { diseaseDatabase, diseaseCategories, searchDiseases, DiseaseInfo, DrugRecommendation } from '../data/diseaseDatabase';
 
 interface DiseaseLookupProps {
@@ -37,7 +37,7 @@ const DiseaseLookup = ({ onBackToMenu }: DiseaseLookupProps) => {
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case 'Cardiovascular': return <Heart className="h-5 w-5" />;
-      case 'Respiratory': return <Lungs className="h-5 w-5" />;
+      case 'Respiratory': return <Activity className="h-5 w-5" />;
       case 'Mental Health': return <Brain className="h-5 w-5" />;
       default: return <Pill className="h-5 w-5" />;
     }
