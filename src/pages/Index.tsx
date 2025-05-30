@@ -56,7 +56,7 @@ const Index = () => {
             </h1>
           </div>
           <p className="text-center text-gray-600 mt-2 text-lg">
-            Master 400+ Drug Classes with Interactive Cards & Quizzes
+            Master 400+ Drug Classes with Interactive Cards, Multi-Level Quizzes & Clinical Cases
           </p>
         </div>
       </header>
@@ -84,7 +84,7 @@ const Index = () => {
             }`}
           >
             <Award className="inline h-5 w-5 mr-2" />
-            Take Quiz
+            Interactive Quizzes & Cases
           </button>
         </div>
 
@@ -128,7 +128,7 @@ const Index = () => {
             )}
           </>
         ) : (
-          <Quiz drugClasses={comprehensiveDrugClasses} />
+          <Quiz />
         )}
       </div>
     </div>

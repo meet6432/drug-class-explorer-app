@@ -1,260 +1,156 @@
-import { useState, useEffect } from 'react';
-import { Award, RefreshCw, CheckCircle, XCircle } from 'lucide-react';
-import { DrugClass } from '../data/comprehensiveDrugClasses';
 
-interface QuizProps {
-  drugClasses: DrugClass[];
-}
+import { useState } from 'react';
+import { Award, Brain, Star, Zap, Stethoscope, BookOpen } from 'lucide-react';
+import QuizLevel from './QuizLevel';
+import SymptomDiagnosis from './SymptomDiagnosis';
 
-interface Question {
-  question: string;
-  options: string[];
-  correctAnswer: string;
-  type: 'example' | 'use';
-}
+type QuizMode = 'menu' | 'easy' | 'medium' | 'hard' | 'symptoms';
 
-const Quiz = ({ drugClasses }: QuizProps) => {
-  const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
-  const [selectedAnswer, setSelectedAnswer] = useState<string>('');
-  const [showResult, setShowResult] = useState(false);
-  const [score, setScore] = useState(0);
-  const [questionsAnswered, setQuestionsAnswered] = useState(0);
-  const [isCorrect, setIsCorrect] = useState(false);
+const Quiz = () => {
+  const [currentMode, setCurrentMode] = useState<QuizMode>('menu');
 
-  const generateRandomQuestion = (): Question => {
-    const questionType = Math.random() > 0.5 ? 'example' : 'use';
-    const randomDrug = drugClasses[Math.floor(Math.random() * drugClasses.length)];
-    
-    if (questionType === 'example') {
-      if (randomDrug.examples.length === 0) {
-        // Fallback to use question if no examples
-        return generateRandomQuestion();
-      }
-      
-      const correctExample = randomDrug.examples[Math.floor(Math.random() * randomDrug.examples.length)];
-      const wrongOptions = [];
-      
-      // Get wrong examples from other drug classes
-      while (wrongOptions.length < 3) {
-        const randomOtherDrug = drugClasses[Math.floor(Math.random() * drugClasses.length)];
-        if (randomOtherDrug.id !== randomDrug.id && randomOtherDrug.examples.length > 0) {
-          const wrongExample = randomOtherDrug.examples[Math.floor(Math.random() * randomOtherDrug.examples.length)];
-          if (!wrongOptions.includes(wrongExample) && wrongExample !== correctExample) {
-            wrongOptions.push(wrongExample);
-          }
-        }
-      }
-      
-      const allOptions = [correctExample, ...wrongOptions];
-      const shuffledOptions = allOptions.sort(() => Math.random() - 0.5);
-      
-      return {
-        question: `Which of these is an example of ${randomDrug.name}?`,
-        options: shuffledOptions,
-        correctAnswer: correctExample,
-        type: 'example'
-      };
-    } else {
-      // Use question
-      const uses = randomDrug.uses.split(',').map(use => use.trim());
-      const correctUse = uses[0]; // Take the first use
-      
-      const wrongOptions = [
-        'Treating common cold symptoms',
-        'Reducing fever only',
-        'Improving sleep quality'
-      ];
-      
-      const allOptions = [correctUse, ...wrongOptions];
-      const shuffledOptions = allOptions.sort(() => Math.random() - 0.5);
-      
-      return {
-        question: `What is a primary therapeutic use of ${randomDrug.name}?`,
-        options: shuffledOptions,
-        correctAnswer: correctUse,
-        type: 'use'
-      };
-    }
-  };
-
-  const startNewQuestion = () => {
-    setCurrentQuestion(generateRandomQuestion());
-    setSelectedAnswer('');
-    setShowResult(false);
-  };
-
-  const handleAnswerSubmit = () => {
-    if (!selectedAnswer || !currentQuestion) return;
-    
-    const correct = selectedAnswer === currentQuestion.correctAnswer;
-    setIsCorrect(correct);
-    setShowResult(true);
-    setQuestionsAnswered(prev => prev + 1);
-    
-    if (correct) {
-      setScore(prev => prev + 1);
-    }
-  };
-
-  const resetQuiz = () => {
-    setScore(0);
-    setQuestionsAnswered(0);
-    startNewQuestion();
-  };
-
-  useEffect(() => {
-    startNewQuestion();
-  }, []);
-
-  const getScoreColor = () => {
-    const percentage = questionsAnswered > 0 ? (score / questionsAnswered) * 100 : 0;
-    if (percentage >= 80) return 'text-green-600';
-    if (percentage >= 60) return 'text-yellow-600';
-    return 'text-red-600';
-  };
-
-  const showCelebration = score >= 10 && score % 5 === 0;
-
-  return (
+  const renderQuizMenu = () => (
     <div className="max-w-4xl mx-auto">
-      {/* Score Display */}
-      <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <Award className="h-8 w-8 text-yellow-500" />
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800">Quiz Score</h2>
-              <p className="text-gray-600">Test your pharmacy knowledge!</p>
-            </div>
+      <div className="text-center mb-12">
+        <Award className="h-16 w-16 text-yellow-500 mx-auto mb-4" />
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">Pharmacy Quiz Center</h1>
+        <p className="text-xl text-gray-600">Choose your learning path</p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        {/* Easy Level */}
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div className="bg-gradient-to-r from-green-400 to-green-600 p-6 text-white text-center">
+            <Star className="h-12 w-12 mx-auto mb-3" />
+            <h3 className="text-xl font-bold">Easy Level</h3>
+            <p className="text-green-100 mt-2">100+ Questions</p>
           </div>
-          <div className="text-right">
-            <div className={`text-3xl font-bold ${getScoreColor()}`}>
-              {score}/{questionsAnswered}
-            </div>
-            <p className="text-sm text-gray-500">
-              {questionsAnswered > 0 ? `${Math.round((score / questionsAnswered) * 100)}%` : '0%'} Correct
-            </p>
+          <div className="p-6">
+            <ul className="text-sm text-gray-600 space-y-2 mb-6">
+              <li>• Basic drug classifications</li>
+              <li>• Common indications</li>
+              <li>• Simple mechanisms</li>
+              <li>• Basic side effects</li>
+            </ul>
+            <button
+              onClick={() => setCurrentMode('easy')}
+              className="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors"
+            >
+              Start Easy Quiz
+            </button>
           </div>
         </div>
-        
-        {/* Progress Bar */}
-        <div className="mt-4">
-          <div className="bg-gray-200 rounded-full h-2">
-            <div 
-              className="bg-blue-500 h-2 rounded-full transition-all duration-300"
-              style={{ width: questionsAnswered > 0 ? `${(score / questionsAnswered) * 100}%` : '0%' }}
-            ></div>
+
+        {/* Medium Level */}
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-6 text-white text-center">
+            <Brain className="h-12 w-12 mx-auto mb-3" />
+            <h3 className="text-xl font-bold">Medium Level</h3>
+            <p className="text-yellow-100 mt-2">100+ Questions</p>
+          </div>
+          <div className="p-6">
+            <ul className="text-sm text-gray-600 space-y-2 mb-6">
+              <li>• Drug interactions</li>
+              <li>• Contraindications</li>
+              <li>• Detailed mechanisms</li>
+              <li>• Clinical applications</li>
+            </ul>
+            <button
+              onClick={() => setCurrentMode('medium')}
+              className="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600 transition-colors"
+            >
+              Start Medium Quiz
+            </button>
+          </div>
+        </div>
+
+        {/* Hard Level */}
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div className="bg-gradient-to-r from-red-400 to-red-600 p-6 text-white text-center">
+            <Zap className="h-12 w-12 mx-auto mb-3" />
+            <h3 className="text-xl font-bold">Hard Level</h3>
+            <p className="text-red-100 mt-2">100+ Questions</p>
+          </div>
+          <div className="p-6">
+            <ul className="text-sm text-gray-600 space-y-2 mb-6">
+              <li>• Complex drug interactions</li>
+              <li>• Advanced pharmacology</li>
+              <li>• Clinical decision making</li>
+              <li>• Specialized therapeutics</li>
+            </ul>
+            <button
+              onClick={() => setCurrentMode('hard')}
+              className="w-full bg-red-500 text-white py-3 rounded-lg font-semibold hover:bg-red-600 transition-colors"
+            >
+              Start Hard Quiz
+            </button>
+          </div>
+        </div>
+
+        {/* Symptom Diagnosis */}
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div className="bg-gradient-to-r from-purple-400 to-purple-600 p-6 text-white text-center">
+            <Stethoscope className="h-12 w-12 mx-auto mb-3" />
+            <h3 className="text-xl font-bold">Symptom Cases</h3>
+            <p className="text-purple-100 mt-2">Clinical Practice</p>
+          </div>
+          <div className="p-6">
+            <ul className="text-sm text-gray-600 space-y-2 mb-6">
+              <li>• Patient presentations</li>
+              <li>• Drug recommendations</li>
+              <li>• Clinical reasoning</li>
+              <li>• Real-world scenarios</li>
+            </ul>
+            <button
+              onClick={() => setCurrentMode('symptoms')}
+              className="w-full bg-purple-500 text-white py-3 rounded-lg font-semibold hover:bg-purple-600 transition-colors"
+            >
+              Practice Diagnosis
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Celebration */}
-      {showCelebration && (
-        <div className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg p-6 mb-6 text-white text-center animate-pulse">
-          <div className="text-4xl mb-2">🎉</div>
-          <h3 className="text-xl font-bold">Excellent Work!</h3>
-          <p>You've reached {score} correct answers!</p>
+      {/* Study Tips */}
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-8">
+        <div className="flex items-center space-x-3 mb-4">
+          <BookOpen className="h-8 w-8 text-blue-600" />
+          <h2 className="text-2xl font-bold text-gray-800">Study Tips</h2>
         </div>
-      )}
-
-      {/* Quiz Card */}
-      <div className="bg-white rounded-lg shadow-lg p-8">
-        {currentQuestion && (
-          <>
-            <div className="mb-6">
-              <h3 className="text-xl font-semibold text-gray-800 mb-4">
-                Question {questionsAnswered + 1}
-              </h3>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                {currentQuestion.question}
-              </p>
-            </div>
-
-            <div className="space-y-3 mb-6">
-              {currentQuestion.options.map((option, index) => (
-                <button
-                  key={index}
-                  onClick={() => !showResult && setSelectedAnswer(option)}
-                  disabled={showResult}
-                  className={`w-full text-left p-4 rounded-lg border-2 transition-all duration-200 ${
-                    showResult
-                      ? option === currentQuestion.correctAnswer
-                        ? 'bg-green-100 border-green-500 text-green-800'
-                        : option === selectedAnswer && option !== currentQuestion.correctAnswer
-                        ? 'bg-red-100 border-red-500 text-red-800'
-                        : 'bg-gray-50 border-gray-200 text-gray-600'
-                      : selectedAnswer === option
-                      ? 'bg-blue-100 border-blue-500 text-blue-800'
-                      : 'bg-gray-50 border-gray-200 hover:bg-gray-100 hover:border-gray-300'
-                  }`}
-                >
-                  <span className="font-medium mr-3">
-                    {String.fromCharCode(65 + index)}.
-                  </span>
-                  {option}
-                  {showResult && option === currentQuestion.correctAnswer && (
-                    <CheckCircle className="inline h-5 w-5 ml-2 text-green-600" />
-                  )}
-                  {showResult && option === selectedAnswer && option !== currentQuestion.correctAnswer && (
-                    <XCircle className="inline h-5 w-5 ml-2 text-red-600" />
-                  )}
-                </button>
-              ))}
-            </div>
-
-            {showResult && (
-              <div className={`p-4 rounded-lg mb-6 ${
-                isCorrect ? 'bg-green-100 border border-green-300' : 'bg-red-100 border border-red-300'
-              }`}>
-                <div className="flex items-center space-x-2">
-                  {isCorrect ? (
-                    <CheckCircle className="h-5 w-5 text-green-600" />
-                  ) : (
-                    <XCircle className="h-5 w-5 text-red-600" />
-                  )}
-                  <span className={`font-semibold ${isCorrect ? 'text-green-800' : 'text-red-800'}`}>
-                    {isCorrect ? 'Correct!' : 'Incorrect'}
-                  </span>
-                </div>
-                {!isCorrect && (
-                  <p className="text-red-700 mt-2">
-                    The correct answer is: <strong>{currentQuestion.correctAnswer}</strong>
-                  </p>
-                )}
-              </div>
-            )}
-
-            <div className="flex space-x-4">
-              {!showResult ? (
-                <button
-                  onClick={handleAnswerSubmit}
-                  disabled={!selectedAnswer}
-                  className="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-                >
-                  Submit Answer
-                </button>
-              ) : (
-                <button
-                  onClick={startNewQuestion}
-                  className="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors"
-                >
-                  Next Question
-                </button>
-              )}
-              
-              <button
-                onClick={resetQuiz}
-                className="bg-gray-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-600 transition-colors flex items-center space-x-2"
-              >
-                <RefreshCw className="h-4 w-4" />
-                <span>Reset Quiz</span>
-              </button>
-            </div>
-          </>
-        )}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-gray-700">
+          <div>
+            <h3 className="font-semibold text-blue-800 mb-2">Start with Basics</h3>
+            <p className="text-sm">Begin with easy level to build foundation knowledge before advancing.</p>
+          </div>
+          <div>
+            <h3 className="font-semibold text-blue-800 mb-2">Read Explanations</h3>
+            <p className="text-sm">Always read the explanations to understand the reasoning behind answers.</p>
+          </div>
+          <div>
+            <h3 className="font-semibold text-blue-800 mb-2">Practice Cases</h3>
+            <p className="text-sm">Use symptom diagnosis to apply knowledge in clinical scenarios.</p>
+          </div>
+        </div>
       </div>
     </div>
   );
+
+  const renderCurrentMode = () => {
+    switch (currentMode) {
+      case 'easy':
+        return <QuizLevel difficulty="easy" onBackToMenu={() => setCurrentMode('menu')} />;
+      case 'medium':
+        return <QuizLevel difficulty="medium" onBackToMenu={() => setCurrentMode('menu')} />;
+      case 'hard':
+        return <QuizLevel difficulty="hard" onBackToMenu={() => setCurrentMode('menu')} />;
+      case 'symptoms':
+        return <SymptomDiagnosis onBackToMenu={() => setCurrentMode('menu')} />;
+      default:
+        return renderQuizMenu();
+    }
+  };
+
+  return renderCurrentMode();
 };
 
 export default Quiz;
