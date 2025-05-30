@@ -1,16 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import { Award, RefreshCw, CheckCircle, XCircle } from 'lucide-react';
-
-interface DrugClass {
-  name: string;
-  category: string;
-  description: string;
-  mechanism: string;
-  uses: string;
-  side_effects: string;
-  examples: string[];
-}
+import { DrugClass } from '../data/comprehensiveDrugClasses';
 
 interface QuizProps {
   drugClasses: DrugClass[];
