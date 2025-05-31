@@ -1,4 +1,3 @@
-
 import { DrugClass } from './comprehensiveDrugClasses';
 
 export interface QuizQuestion {
@@ -1085,70 +1084,1004 @@ export const easyQuestions: QuizQuestion[] = [
 export const mediumQuestions: QuizQuestion[] = [
   {
     id: "medium-1",
-    question: "Which mechanism explains why ACE inhibitors can cause hyperkalemia?",
-    options: [
-      "Increased potassium absorption in gut",
-      "Reduced aldosterone secretion leading to potassium retention",
-      "Direct potassium channel blockade",
-      "Increased potassium release from cells"
-    ],
-    correctAnswer: "Reduced aldosterone secretion leading to potassium retention",
-    explanation: "ACE inhibitors reduce angiotensin II, which decreases aldosterone secretion, leading to potassium retention.",
-    category: "Cardiovascular",
+    question: "Which enzyme is primarily targeted by Fluoroquinolones to inhibit bacterial DNA replication?",
+    options: ["RNA polymerase", "DNA gyrase", "Peptidyl transferase", "Beta-lactamase"],
+    correctAnswer: "DNA gyrase",
+    explanation: "Fluoroquinolones, like Ciprofloxacin (Ciplox by Cipla), inhibit DNA gyrase and topoisomerase IV, preventing bacterial DNA replication, effective for urinary and respiratory infections.",
+    category: "Antimicrobial",
     difficulty: "medium",
     type: "mechanism"
   },
   {
     id: "medium-2",
-    question: "A patient with diabetes and hypertension should avoid which beta blocker characteristic?",
-    options: ["Cardioselectivity", "Non-selectivity", "Water solubility", "Long half-life"],
-    correctAnswer: "Non-selectivity",
-    explanation: "Non-selective beta blockers can mask hypoglycemia symptoms and worsen insulin resistance in diabetics.",
-    category: "Cardiovascular",
+    question: "Which Indian brand of Linezolid is used to treat vancomycin-resistant enterococci (VRE)?",
+    options: ["Lizolid", "Montair", "Voveran", "Rantac"],
+    correctAnswer: "Lizolid",
+    explanation: "Lizolid (Linezolid by Glenmark) is an Oxazolidinone used for resistant Gram-positive infections, including VRE.",
+    category: "Antimicrobial",
     difficulty: "medium",
-    type: "side-effects"
+    type: "drug-class"
   },
   {
     id: "medium-3",
-    question: "Why are fluoroquinolones contraindicated in pediatric patients?",
-    options: [
-      "Cause liver toxicity",
-      "Affect cartilage development",
-      "Cause kidney damage",
-      "Interfere with brain development"
-    ],
-    correctAnswer: "Affect cartilage development",
-    explanation: "Fluoroquinolones can cause arthropathy and affect cartilage development in growing children.",
+    question: "What is the primary clinical use of Aminoglycosides like Amikacin in combination therapy?",
+    options: ["Treat viral hepatitis", "Treat serious Gram-negative infections", "Treat osteoporosis", "Treat allergic rhinitis"],
+    correctAnswer: "Treat serious Gram-negative infections",
+    explanation: "Aminoglycosides, such as Amikacin (Amikacin by Cipla), are used for serious Gram-negative infections, often in combination due to their synergistic effects.",
+    category: "Antimicrobial",
+    difficulty: "medium",
+    type: "indication"
+  },
+  {
+    id: "medium-4",
+    question: "Which side effect of Carbapenems like Meropenem requires careful monitoring in patients with a history of epilepsy?",
+    options: ["Seizures", "Hypotension", "Photosensitivity", "Weight gain"],
+    correctAnswer: "Seizures",
+    explanation: "Carbapenems, like Meropenem (Meronem by AstraZeneca India), can lower the seizure threshold, requiring caution in epileptic patients.",
     category: "Antimicrobial",
     difficulty: "medium",
     type: "side-effects"
   },
   {
-    id: "medium-4",
-    question: "A patient presents with severe gastroesophageal reflux. Which combination therapy would be most effective?",
-    options: [
-      "PPI + H2 antagonist",
-      "PPI + Antacid",
-      "H2 antagonist + Antacid",
-      "PPI + Prokinetic agent"
-    ],
-    correctAnswer: "PPI + Prokinetic agent",
-    explanation: "PPI reduces acid production while prokinetic agents improve gastric motility and LES function.",
-    category: "Gastrointestinal",
+    id: "medium-5",
+    question: "Which Indian drug is a Sulfonamide used for urinary tract infections?",
+    options: ["Bactrim", "Zifi", "Rosuvas", "Liv.52"],
+    correctAnswer: "Bactrim",
+    explanation: "Bactrim (Sulfamethoxazole + Trimethoprim by Abbott India) is a Sulfonamide used for urinary tract infections and other bacterial infections.",
+    category: "Antimicrobial",
     difficulty: "medium",
-    type: "symptom-treatment"
+    type: "drug-class"
   },
   {
-    id: "medium-5",
-    question: "Which benzodiazepine characteristic makes it preferred for elderly patients?",
-    options: ["Long half-life", "Short half-life", "High potency", "Hepatic metabolism"],
-    correctAnswer: "Short half-life",
-    explanation: "Short-acting benzodiazepines are preferred in elderly to reduce accumulation and fall risk.",
+    id: "medium-6",
+    question: "What is the mechanism of action of Glycopeptides like Vancomycin?",
+    options: ["Inhibit folate synthesis", "Bind to D-alanyl-D-alanine", "Block serotonin receptors", "Increase insulin secretion"],
+    correctAnswer: "Bind to D-alanyl-D-alanine",
+    explanation: "Glycopeptides, like Vancomycin (Vanco by Cipla), inhibit cell wall synthesis by binding to D-alanyl-D-alanine, effective against MRSA.",
+    category: "Antimicrobial",
+    difficulty: "medium",
+    type: "mechanism"
+  },
+  {
+    id: "medium-7",
+    question: "Which Nitroimidazole is used for anaerobic bacterial infections and has a brand name Metrogyl?",
+    options: ["Tinidazole", "Metronidazole", "Clindamycin", "Azithromycin"],
+    correctAnswer: "Metronidazole",
+    explanation: "Metrogyl (Metronidazole by JB Chemicals) is a Nitroimidazole used for anaerobic bacterial and protozoal infections.",
+    category: "Antimicrobial",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-8",
+    question: "Which Indian drug is a Lincosamide used for anaerobic infections?",
+    options: ["Dalacin-C", "Telma", "Crocin", "Forcan"],
+    correctAnswer: "Dalacin-C",
+    explanation: "Dalacin-C (Clindamycin by Pfizer India) is a Lincosamide used for anaerobic and skin infections.",
+    category: "Antimicrobial",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-9",
+    question: "What is a key side effect of Rifampicin, an Antitubercular Agent, that affects liver function?",
+    options: ["Hepatotoxicity", "Nephrotoxicity", "Ototoxicity", "Cardiotoxicity"],
+    correctAnswer: "Hepatotoxicity",
+    explanation: "Rifampicin (R-Cin by Lupin) can cause hepatotoxicity, requiring liver function monitoring during tuberculosis treatment.",
+    category: "Antimycobacterials",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-10",
+    question: "Which Antileprotic Agent is associated with skin discoloration as a side effect?",
+    options: ["Dapsone", "Clofazimine", "Rifampicin", "Ethionamide"],
+    correctAnswer: "Clofazimine",
+    explanation: "Clofazimine (Clofazimine by Novartis India) causes reddish-brown skin discoloration in leprosy treatment.",
+    category: "Antimycobacterials",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-11",
+    question: "Which Indian drug is an Azole antifungal used for systemic candidiasis?",
+    options: ["Forcan", "Asthalin", "Ecosprin", "Pan-D"],
+    correctAnswer: "Forcan",
+    explanation: "Forcan (Fluconazole by Cipla) is an Azole antifungal used for systemic fungal infections like candidiasis.",
+    category: "Antifungals",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-12",
+    question: "What is the primary use of Polyene antifungals like Amphotericin B?",
+    options: ["Treat bacterial infections", "Treat systemic fungal infections", "Treat hypertension", "Treat diabetes"],
+    correctAnswer: "Treat systemic fungal infections",
+    explanation: "Polyenes, like Amphotericin B (Fungisome by Sun Pharma), treat severe fungal infections like aspergillosis.",
+    category: "Antifungals",
+    difficulty: "medium",
+    type: "indication"
+  },
+  {
+    id: "medium-13",
+    question: "Which side effect of Allylamines like Terbinafine requires liver function tests?",
+    options: ["Hepatotoxicity", "Hypoglycemia", "Bradycardia", "Dry mouth"],
+    correctAnswer: "Hepatotoxicity",
+    explanation: "Allylamines, like Terbinafine (Terbicip by Cipla), can cause hepatotoxicity, necessitating liver monitoring.",
+    category: "Antifungals",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-14",
+    question: "Which Indian drug is an Echinocandin used for invasive aspergillosis?",
+    options: ["Cancidas", "Voveran", "Metrogyl", "Zifi"],
+    correctAnswer: "Cancidas",
+    explanation: "Cancidas (Caspofungin by MSD India) is an Echinocandin used for invasive fungal infections.",
+    category: "Antifungals",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-15",
+    question: "What is the mechanism of action of Nucleoside Analogues like Acyclovir?",
+    options: ["Inhibit viral DNA polymerase", "Inhibit protein synthesis", "Block histamine receptors", "Reduce inflammation"],
+    correctAnswer: "Inhibit viral DNA polymerase",
+    explanation: "Nucleoside Analogues, like Acyclovir (Zovirax by GSK India), inhibit viral DNA polymerase to treat herpes infections.",
+    category: "Antivirals",
+    difficulty: "medium",
+    type: "mechanism"
+  },
+  {
+    id: "medium-16",
+    question: "Which Indian drug is a Non-Nucleoside Reverse Transcriptase Inhibitor (NNRTI) for HIV?",
+    options: ["Efavir", "Ciplox", "Rantac", "Crocin"],
+    correctAnswer: "Efavir",
+    explanation: "Efavir (Efavirenz by Cipla) is an NNRTI used in HIV combination therapy.",
+    category: "Antivirals",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-17",
+    question: "What is a key side effect of Protease Inhibitors like Lopinavir?",
+    options: ["GI upset", "Photosensitivity", "Hypotension", "Hair loss"],
+    correctAnswer: "GI upset",
+    explanation: "Protease Inhibitors, like Lopinavir (Lopimune by Cipla), commonly cause gastrointestinal disturbances and lipodystrophy.",
+    category: "Antivirals",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-18",
+    question: "Which Indian drug is a Neuraminidase Inhibitor used for influenza?",
+    options: ["Fluvir", "Telma", "Voveran", "Liv.52"],
+    correctAnswer: "Fluvir",
+    explanation: "Fluvir (Oseltamivir by Hetero Drugs) is a Neuraminidase Inhibitor for influenza treatment.",
+    category: "Antivirals",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-19",
+    question: "Which Antimalarial drug is associated with retinopathy as a long-term side effect?",
+    options: ["Chloroquine", "Artesunate", "Quinine", "Mefloquine"],
+    correctAnswer: "Chloroquine",
+    explanation: "Chloroquine (Lariago by Ipca Labs) can cause retinopathy with prolonged use, requiring eye monitoring.",
+    category: "Antiparasitics",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-20",
+    question: "Which Indian drug is an Anthelmintic used for roundworm infections?",
+    options: ["Zentel", "Zifi", "Rosuvas", "Pan-D"],
+    correctAnswer: "Zentel",
+    explanation: "Zentel (Albendazole by GSK India) is an Anthelmintic for helminthic infections like roundworm.",
+    category: "Antiparasitics",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-21",
+    question: "What is the primary use of Antiprotozoals like Tinidazole?",
+    options: ["Treat bacterial infections", "Treat protozoal infections", "Treat hypertension", "Treat asthma"],
+    correctAnswer: "Treat protozoal infections",
+    explanation: "Antiprotozoals, like Tinidazole (Tiniba by Zydus Cadila), treat infections like amoebiasis and giardiasis.",
+    category: "Antiparasitics",
+    difficulty: "medium",
+    type: "indication"
+  },
+  {
+    id: "medium-22",
+    question: "Which side effect of Alkylating Agents like Cyclophosphamide is a dose-limiting factor?",
+    options: ["Hemorrhagic cystitis", "Weight gain", "Hypertension", "Dry mouth"],
+    correctAnswer: "Hemorrhagic cystitis",
+    explanation: "Cyclophosphamide (Cycloxan by Zydus Cadila) can cause hemorrhagic cystitis, requiring hydration and mesna.",
+    category: "Antineoplastics",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-23",
+    question: "Which Indian drug is an Antimetabolite used for colorectal cancer?",
+    options: ["5-FU", "Ciplox", "Rantac", "Crocin"],
+    correctAnswer: "5-FU",
+    explanation: "5-FU (Fluorouracil by Biochem Pharma) is an Antimetabolite for colorectal and other cancers.",
+    category: "Antineoplastics",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-24",
+    question: "What is the mechanism of action of Topoisomerase Inhibitors like Irinotecan?",
+    options: ["Prevent DNA replication", "Inhibit protein synthesis", "Block histamine receptors", "Increase insulin secretion"],
+    correctAnswer: "Prevent DNA replication",
+    explanation: "Topoisomerase Inhibitors, like Irinotecan (Irnocam by Dr. Reddy's), block DNA replication in cancer cells.",
+    category: "Antineoplastics",
+    difficulty: "medium",
+    type: "mechanism"
+  },
+  {
+    id: "medium-25",
+    question: "Which Indian drug is a Mitotic Inhibitor used for breast cancer?",
+    options: ["Taxol", "Telma", "Voveran", "Liv.52"],
+    correctAnswer: "Taxol",
+    explanation: "Taxol (Paclitaxel by Cipla) is a Mitotic Inhibitor for breast and lung cancers.",
+    category: "Antineoplastics",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-26",
+    question: "Which side effect of Monoclonal Antibodies like Trastuzumab is a concern?",
+    options: ["Cardiotoxicity", "Hypoglycemia", "Bradycardia", "Dry eyes"],
+    correctAnswer: "Cardiotoxicity",
+    explanation: "Trastuzumab (Herclon by Roche India) can cause heart failure, requiring cardiac monitoring.",
+    category: "Antineoplastics",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-27",
+    question: "Which Indian drug is a Tyrosine Kinase Inhibitor for chronic myeloid leukemia?",
+    options: ["Imatib", "Zifi", "Rosuvas", "Pan-D"],
+    correctAnswer: "Imatib",
+    explanation: "Imatib (Imatinib by Cipla) is a Tyrosine Kinase Inhibitor for CML and other cancers.",
+    category: "Antineoplastics",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-28",
+    question: "Which NSAID is associated with a higher risk of cardiovascular events?",
+    options: ["Diclofenac", "Paracetamol", "Cetirizine", "Metformin"],
+    correctAnswer: "Diclofenac",
+    explanation: "Diclofenac (Voveran by Novartis India) has a higher cardiovascular risk compared to other NSAIDs.",
+    category: "Analgesics",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-29",
+    question: "Which Indian drug is an Opioid used for postoperative pain?",
+    options: ["Morcontin", "Ciplox", "Rantac", "Crocin"],
+    correctAnswer: "Morcontin",
+    explanation: "Morcontin (Morphine by Sun Pharma) is an Opioid for severe pain management.",
+    category: "Analgesics",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-30",
+    question: "What is the primary use of Non-Opioid Analgesics like Ibuprofen?",
+    options: ["Treat severe pain", "Treat mild to moderate pain", "Treat infections", "Treat hypertension"],
+    correctAnswer: "Treat mild to moderate pain",
+    explanation: "Ibuprofen (Brufen by Abbott India) is used for mild to moderate pain and inflammation.",
+    category: "Analgesics",
+    difficulty: "medium",
+    type: "indication"
+  },
+  {
+    id: "medium-31",
+    question: "Which side effect of Systemic Corticosteroids requires calcium supplementation?",
+    options: ["Osteoporosis", "Photosensitivity", "Hypotension", "Hair loss"],
+    correctAnswer: "Osteoporosis",
+    explanation: "Corticosteroids, like Prednisolone (Omnacortil by Macleods), cause bone loss, requiring calcium and vitamin D.",
+    category: "Anti-Inflammatory",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-32",
+    question: "Which Indian drug is a DMARD used for rheumatoid arthritis?",
+    options: ["Folitrax", "Zifi", "Rosuvas", "Liv.52"],
+    correctAnswer: "Folitrax",
+    explanation: "Folitrax (Methotrexate by Ipca Labs) is a DMARD for rheumatoid arthritis and autoimmune diseases.",
+    category: "Anti-Inflammatory",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-33",
+    question: "What is the mechanism of action of Proton Pump Inhibitors like Omeprazole?",
+    options: ["Inhibit H+/K+ ATPase", "Inhibit protein synthesis", "Block dopamine receptors", "Increase insulin secretion"],
+    correctAnswer: "Inhibit H+/K+ ATPase",
+    explanation: "PPIs, like Omeprazole (Rantac-D by JB Chemicals), reduce gastric acid by inhibiting the proton pump.",
+    category: "Antacids & Antiulcerants",
+    difficulty: "medium",
+    type: "mechanism"
+  },
+  {
+    id: "medium-34",
+    question: "Which Indian drug is an H2 Receptor Antagonist for dyspepsia?",
+    options: ["Famocid", "Ciplox", "Rantac", "Crocin"],
+    correctAnswer: "Famocid",
+    explanation: "Famocid (Famotidine by Sun Pharma) is an H2 Receptor Antagonist for ulcers and dyspepsia.",
+    category: "Antacids & Antiulcerants",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-35",
+    question: "Which Antacid is commonly used for heartburn in India?",
+    options: ["Digene", "Telma", "Voveran", "Zifi"],
+    correctAnswer: "Digene",
+    explanation: "Digene (Aluminum Hydroxide + Magnesium Hydroxide by Abbott India) neutralizes gastric acid for heartburn relief.",
+    category: "Antacids & Antiulcerants",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-36",
+    question: "Which side effect of Antiulcerants like Sucralfate is a concern?",
+    options: ["Constipation", "Weight gain", "Hypertension", "Dry eyes"],
+    correctAnswer: "Constipation",
+    explanation: "Sucralfate (Sucramal by Sun Pharma) can cause constipation by forming a protective barrier in the stomach.",
+    category: "Antacids & Antiulcerants",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-37",
+    question: "Which Indian drug is a Bulk-Forming Laxative?",
+    options: ["Naturolax", "Ciplox", "Rantac", "Crocin"],
+    correctAnswer: "Naturolax",
+    explanation: "Naturolax (Ispaghula by Zydus Cadila) is a Bulk-Forming Laxative for chronic constipation.",
+    category: "Laxatives",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-38",
+    question: "Which Expectorant is used in combination with a bronchodilator in India?",
+    options: ["Ascoril", "Voveran", "Metrogyl", "Telma"],
+    correctAnswer: "Ascoril",
+    explanation: "Ascoril (Guaifenesin + Terbutaline by Glenmark) combines an expectorant with a bronchodilator for cough.",
+    category: "Anti-Cough, Anti-Cold & Anti-Allergic",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-39",
+    question: "Which side effect of Antitussives like Dextromethorphan is a concern?",
+    options: ["Drowsiness", "Photosensitivity", "Hypotension", "Hair loss"],
+    correctAnswer: "Drowsiness",
+    explanation: "Dextromethorphan (Coretuss by Cipla) suppresses cough but can cause drowsiness.",
+    category: "Anti-Cough, Anti-Cold & Anti-Allergic",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-40",
+    question: "Which Indian drug is an Antihistamine for allergic rhinitis?",
+    options: ["Allegra", "Zifi", "Rosuvas", "Pan-D"],
+    correctAnswer: "Allegra",
+    explanation: "Allegra (Fexofenadine by Sanofi India) is an Antihistamine for allergies and rhinitis.",
+    category: "Anti-Cough, Anti-Cold & Anti-Allergic",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-41",
+    question: "Which Decongestant is used in nasal sprays in India?",
+    options: ["Nasivion", "Ciplox", "Rantac", "Crocin"],
+    correctAnswer: "Nasivion",
+    explanation: "Nasivion (Oxymetazoline by Merck India) is a Decongestant for nasal congestion.",
+    category: "Anti-Cough, Anti-Cold & Anti-Allergic",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-42",
+    question: "What is the primary use of Haematinics like Ferrous Fumarate?",
+    options: ["Treat infections", "Treat anemia", "Treat hypertension", "Treat asthma"],
+    correctAnswer: "Treat anemia",
+    explanation: "Haematinics, like Ferrous Fumarate (Livogen by Merck India), treat iron deficiency anemia.",
+    category: "Haematinics & Nutritional Supplements",
+    difficulty: "medium",
+    type: "indication"
+  },
+  {
+    id: "medium-43",
+    question: "Which Indian drug is a Vitamin B Complex supplement?",
+    options: ["Becozinc", "Voveran", "Metrogyl", "Telma"],
+    correctAnswer: "Becozinc",
+    explanation: "Becozinc (Vitamin B Complex by Dr. Reddy's) treats vitamin B deficiencies.",
+    category: "Haematinics & Nutritional Supplements",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-44",
+    question: "Which side effect of Mineral supplements like Calcium Carbonate requires monitoring?",
+    options: ["Hypercalcemia", "Hypoglycemia", "Bradycardia", "Dry eyes"],
+    correctAnswer: "Hypercalcemia",
+    explanation: "Calcium Carbonate (Shelcal by Dr. Reddy's) can cause hypercalcemia with excessive use.",
+    category: "Haematinics & Nutritional Supplements",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-45",
+    question: "Which Indian drug is an Antioxidant with Lycopene?",
+    options: ["Oxivit", "Zifi", "Rosuvas", "Liv.52"],
+    correctAnswer: "Oxivit",
+    explanation: "Oxivit (Lycopene + Multivitamins by Sun Pharma) is an Antioxidant for oxidative stress.",
+    category: "Haematinics & Nutritional Supplements",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-46",
+    question: "Which side effect of Dopamine Antagonist antiemetics like Metoclopramide is a concern?",
+    options: ["Block dopamine D2 receptors", "Inhibit protein synthesis", "Increase insulin secretion", "Relax bronchial muscles"],
+    correctAnswer: "Block dopamine D2 receptors",
+    explanation: "Metoclopramide (Reglan by Cipla) blocks dopamine D2 receptors to reduce nausea.",
+    category: "Antiemetics",
+    difficulty: "medium",
+    type: "mechanism"
+  },
+  {
+    id: "medium-47",
+    question: "Which Indian drug is an NK1 Receptor Antagonist for chemotherapy-induced nausea?",
+    options: ["Aprecap", "Ciplox", "Rantac", "Crocin"],
+    correctAnswer: "Aprecap",
+    explanation: "Aprecap (Aprepitant by Cipla) is an NK1 Receptor Antagonist for nausea prevention.",
+    category: "Antiemetics",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-48",
+    question: "Which side effect of Topical Corticosteroids is associated with prolonged use?",
+    options: ["Telangiectasia", "Weight gain", "Hypertension", "Hair loss"],
+    correctAnswer: "Telangiectasia",
+    explanation: "Topical Corticosteroids, like Betamethasone (Betnovate by GSK India), cause visible blood vessels with prolonged use.",
+    category: "Corticosteroids",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-49",
+    question: "Which Indian drug is an ACE Inhibitor for heart failure?",
+    options: ["Enam", "Voveran", "Metrogyl", "Zifi"],
+    correctAnswer: "Enam",
+    explanation: "Enam (Enalapril by Dr. Reddy's) is an ACE Inhibitor for hypertension and heart failure.",
+    category: "Cardiovascular",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-50",
+    question: "What is a key side effect of Beta-Blockers like Atenolol?",
+    options: ["Bronchospasm", "Photosensitivity", "Hypotension", "Dry eyes"],
+    correctAnswer: "Bronchospasm",
+    explanation: "Atenolol (Aten by Zydus Cadila) can cause bronchospasm, especially in asthmatic patients.",
+    category: "Cardiovascular",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-51",
+    question: "Which Indian drug is a Calcium Channel Blocker for angina?",
+    options: ["Amlong", "Ciplox", "Rantac", "Crocin"],
+    correctAnswer: "Amlong",
+    explanation: "Amlong (Amlodipine by Micro Labs) is a Calcium Channel Blocker for hypertension and angina.",
+    category: "Cardiovascular",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-52",
+    question: "Which side effect of Statins requires muscle enzyme monitoring?",
+    options: ["Myopathy", "Weight gain", "Hypertension", "Dry mouth"],
+    correctAnswer: "Myopathy",
+    explanation: "Statins, like Rosuvastatin (Rosuvas by Sun Pharma), can cause myopathy, requiring CPK monitoring.",
+    category: "Cardiovascular",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-53",
+    question: "Which Indian drug is an Antiplatelet for stroke prevention?",
+    options: ["Clopid", "Zifi", "Rosuvas", "Pan-D"],
+    correctAnswer: "Clopid",
+    explanation: "Clopid (Clopidogrel by Cipla) is an Antiplatelet to prevent stroke and myocardial infarction.",
+    category: "Cardiovascular",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-54",
+    question: "What is the mechanism of action of Anticoagulants like Warfarin?",
+    options: ["Inhibit clotting factors", "Inhibit protein synthesis", "Block histamine receptors", "Increase insulin secretion"],
+    correctAnswer: "Inhibit clotting factors",
+    explanation: "Warfarin (Warf by Cipla) inhibits vitamin K-dependent clotting factors to prevent thrombosis.",
+    category: "Cardiovascular",
+    difficulty: "medium",
+    type: "mechanism"
+  },
+  {
+    id: "medium-55",
+    question: "Which Indian drug is a Diuretic for edema?",
+    options: ["Lasix", "Voveran", "Metrogyl", "Telma"],
+    correctAnswer: "Lasix",
+    explanation: "Lasix (Furosemide by Sanofi India) is a Diuretic for edema and hypertension.",
+    category: "Cardiovascular",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-56",
+    question: "Which side effect of Nitrates like Nitroglycerin is common during initial use?",
+    options: ["Headache", "Hypoglycemia", "Bradycardia", "Hair loss"],
+    correctAnswer: "Headache",
+    explanation: "Nitroglycerin (Nitrocontin by Modi-Mundipharma) causes headaches due to vasodilation.",
+    category: "Cardiovascular",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-57",
+    question: "Which Indian drug is an Antiarrhythmic for atrial fibrillation?",
+    options: ["Cordarone", "Ciplox", "Rantac", "Crocin"],
+    correctAnswer: "Cordarone",
+    explanation: "Cordarone (Amiodarone by Sanofi India) is an Antiarrhythmic for arrhythmias like atrial fibrillation.",
+    category: "Cardiovascular",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-58",
+    question: "What is a key side effect of Sulfonylureas like Glibenclamide?",
+    options: ["Hypoglycemia", "Photosensitivity", "Hypotension", "Dry eyes"],
+    correctAnswer: "Hypoglycemia",
+    explanation: "Glibenclamide (Daonil by Sanofi India) stimulates insulin release, risking hypoglycemia.",
+    category: "Antidiabetics",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-59",
+    question: "Which Indian drug is a Thiazolidinedione for type 2 diabetes?",
+    options: ["Pioglar", "Zifi", "Rosuvas", "Liv.52"],
+    correctAnswer: "Pioglar",
+    explanation: "Pioglar (Pioglitazone by Sun Pharma) is a Thiazolidinedione for insulin sensitivity in diabetes.",
+    category: "Antidiabetics",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-60",
+    question: "Which side effect of SGLT2 Inhibitors requires patient education?",
+    options: ["Genital infections", "Weight gain", "Hypertension", "Dry mouth"],
+    correctAnswer: "Genital infections",
+    explanation: "SGLT2 Inhibitors, like Empagliflozin (Jardiance by Boehringer Ingelheim India), increase urinary glucose, risking genital infections.",
+    category: "Antidiabetics",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-61",
+    question: "Which Indian drug is a DPP-4 Inhibitor for type 2 diabetes?",
+    options: ["Januvia", "Voveran", "Metrogyl", "Telma"],
+    correctAnswer: "Januvia",
+    explanation: "Januvia (Sitagliptin by MSD India) is a DPP-4 Inhibitor for glycemic control.",
+    category: "Antidiabetics",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-62",
+    question: "What is the primary use of Insulin Analogues like Insulin Glargine?",
+    options: ["Treat infections", "Treat diabetes", "Treat hypertension", "Treat asthma"],
+    correctAnswer: "Treat diabetes",
+    explanation: "Insulin Glargine (Lantus by Sanofi India) regulates blood glucose in diabetes.",
+    category: "Antidiabetics",
+    difficulty: "medium",
+    type: "indication"
+  },
+  {
+    id: "medium-63",
+    question: "Which Indian drug is an Anticonvulsant for neuropathic pain?",
+    options: ["Eptoin", "Ciplox", "Rantac", "Crocin"],
+    correctAnswer: "Eptoin",
+    explanation: "Eptoin (Phenytoin by Abbott India) is an Anticonvulsant for epilepsy and neuropathic pain.",
+    category: "Central Nervous System",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-64",
+    question: "Which side effect of SSRIs like Sertraline requires patient counseling?",
+    options: ["Sexual dysfunction", "Photosensitivity", "Hypotension", "Hair loss"],
+    correctAnswer: "Sexual dysfunction",
+    explanation: "Sertraline (Sertaline by Zydus Cadila) can cause sexual dysfunction, impacting patient adherence.",
     category: "Central Nervous System",
     difficulty: "medium",
     type: "side-effects"
+  },
+  {
+    id: "medium-65",
+    question: "Which Indian drug is an SNRI for chronic pain?",
+    options: ["Duzela", "Zifi", "Rosuvas", "Pan-D"],
+    correctAnswer: "Duzela",
+    explanation: "Duzela (Duloxetine by Sun Pharma) is an SNRI for depression and chronic pain.",
+    category: "Central Nervous System",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-66",
+    question: "What is a key side effect of TCAs like Amitriptyline?",
+    options: ["Cardiac effects", "Weight loss", "Hypertension", "Dry eyes"],
+    correctAnswer: "Cardiac effects",
+    explanation: "Amitriptyline (Tryptomer by Wockhardt) can cause arrhythmias and QT prolongation.",
+    category: "Central Nervous System",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-67",
+    question: "Which Indian drug is an Atypical Antipsychotic for schizophrenia?",
+    options: ["Oleanz", "Voveran", "Metrogyl", "Telma"],
+    correctAnswer: "Oleanz",
+    explanation: "Oleanz (Olanzapine by Sun Pharma) is an Atypical Antipsychotic for schizophrenia and bipolar disorder.",
+    category: "Central Nervous System",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-68",
+    question: "Which side effect of Benzodiazepines like Lorazepam is a concern for long-term use?",
+    options: ["Dependence", "Photosensitivity", "Hypotension", "Hair loss"],
+    correctAnswer: "Dependence",
+    explanation: "Lorazepam (Ativan by Pfizer India) can cause physical dependence with prolonged use.",
+    category: "Central Nervous System",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-69",
+    question: "Which Indian drug is a Non-Benzodiazepine Anxiolytic for insomnia?",
+    options: ["Zolfresh", "Ciplox", "Rantac", "Crocin"],
+    correctAnswer: "Zolfresh",
+    explanation: "Zolfresh (Zolpidem by Abbott India) is a Non-Benzodiazepine for short-term insomnia treatment.",
+    category: "Central Nervous System",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-70",
+    question: "What is the primary use of Mood Stabilizers like Sodium Valproate?",
+    options: ["Treat infections", "Treat bipolar disorder", "Treat hypertension", "Treat asthma"],
+    correctAnswer: "Treat bipolar disorder",
+    explanation: "Sodium Valproate (Valprol by Intas) stabilizes mood in bipolar disorder.",
+    category: "Central Nervous System",
+    difficulty: "medium",
+    type: "indication"
+  },
+  {
+    id: "medium-71",
+    question: "Which Indian drug is an Antimigraine Agent for acute migraines?",
+    options: ["Suminat", "Zifi", "Rosuvas", "Pan-D"],
+    correctAnswer: "Suminat",
+    explanation: "Suminat (Sumatriptan by Sun Pharma) is an Antimigraine Agent for acute migraine relief.",
+    category: "Central Nervous System",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-72",
+    question: "Which side effect of Beta-2 Agonists like Salbutamol requires monitoring?",
+    options: ["Tachycardia", "Weight gain", "Hypertension", "Dry eyes"],
+    correctAnswer: "Tachycardia",
+    explanation: "Salbutamol (Asthalin by Cipla) can cause increased heart rate due to beta-2 stimulation.",
+    category: "Respiratory",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-73",
+    question: "Which Indian drug is an Anticholinergic Bronchodilator for COPD?",
+    options: ["Tiova", "Voveran", "Metrogyl", "Telma"],
+    correctAnswer: "Tiova",
+    explanation: "Tiova (Tiotropium by Cipla) is an Anticholinergic Bronchodilator for COPD management.",
+    category: "Respiratory",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-74",
+    question: "What is a key side effect of Leukotriene Receptor Antagonists like Montelukast?",
+    options: ["Hepatotoxicity", "Photosensitivity", "Hypotension", "Hair loss"],
+    correctAnswer: "Hepatotoxicity",
+    explanation: "Montelukast (Montair by Cipla) can cause rare hepatotoxicity, requiring liver function monitoring.",
+    category: "Respiratory",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-75",
+    question: "Which Indian drug is a Mast Cell Stabilizer for allergic conjunctivitis?",
+    options: ["Cromal", "Ciplox", "Rantac", "Crocin"],
+    correctAnswer: "Cromal",
+    explanation: "Cromal (Cromolyn Sodium by Cipla) prevents histamine release in allergic conjunctivitis.",
+    category: "Respiratory",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-76",
+    question: "Which side effect of Thyroid Hormones like Levothyroxine requires dose adjustment?",
+    options: ["Palpitations", "Weight gain", "Hypertension", "Dry eyes"],
+    correctAnswer: "Palpitations",
+    explanation: "Levothyroxine (Thyronorm by Abbott India) can cause palpitations if overdosed, requiring dose adjustment.",
+    category: "Hormones & Endocrine",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-77",
+    question: "Which Indian drug is an Antithyroid Drug for Graves' disease?",
+    options: ["PTU", "Zifi", "Rosuvas", "Pan-D"],
+    correctAnswer: "PTU",
+    explanation: "PTU (Propylthiouracil by Macleods) is an Antithyroid Drug for hyperthyroidism.",
+    category: "Hormones & Endocrine",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-78",
+    question: "What is the primary use of Estrogens like Estradiol in postmenopausal women?",
+    options: ["Treat infections", "Treat osteoporosis", "Treat diabetes", "Treat asthma"],
+    correctAnswer: "Treat osteoporosis",
+    explanation: "Estradiol (Estrabet by Abbott India) prevents bone loss in postmenopausal osteoporosis.",
+    category: "Hormones & Endocrine",
+    difficulty: "medium",
+    type: "indication"
+  },
+  {
+    id: "medium-79",
+    question: "Which Indian drug is a Progestin for contraception?",
+    options: ["Depo-Provera", "Voveran", "Metrogyl", "Telma"],
+    correctAnswer: "Depo-Provera",
+    explanation: "Depo-Provera (Medroxyprogesterone by Pfizer India) is a Progestin for contraception.",
+    category: "Hormones & Endocrine",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-80",
+    question: "Which side effect of Androgens like Testosterone is a concern in males?",
+    options: ["Prostate enlargement", "Photosensitivity", "Hypotension", "Hair loss"],
+    correctAnswer: "Prostate enlargement",
+    explanation: "Testosterone (Sustanon by Zydus Cadila) can cause prostate hypertrophy in males.",
+    category: "Hormones & Endocrine",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-81",
+    question: "Which Indian drug is a Growth Hormone Analogue for growth deficiency?",
+    options: ["Norditropin", "Ciplox", "Rantac", "Crocin"],
+    correctAnswer: "Norditropin",
+    explanation: "Norditropin (Somatropin by Novo Nordisk India) treats growth hormone deficiency.",
+    category: "Hormones & Endocrine",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-82",
+    question: "Which side effect of GnRH Analogues like Leuprolide is a concern?",
+    options: ["Hot flashes", "Weight gain", "Hypertension", "Dry eyes"],
+    correctAnswer: "Hot flashes",
+    explanation: "Leuprolide (Lupride by Sun Pharma) causes hot flashes due to hormonal suppression.",
+    category: "Hormones & Endocrine",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-83",
+    question: "Which Indian drug is an mTOR Inhibitor for transplant rejection?",
+    options: ["Siroboom", "Zifi", "Rosuvas", "Pan-D"],
+    correctAnswer: "Siroboom",
+    explanation: "Siroboom (Sirolimus by Biocon) is an mTOR Inhibitor for immunosuppression.",
+    category: "Immunosuppressants",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-84",
+    question: "Which side effect of Antimetabolite Immunosuppressants like Azathioprine is dose-limiting?",
+    options: ["Bone marrow suppression", "Photosensitivity", "Hypotension", "Hair loss"],
+    correctAnswer: "Bone marrow suppression",
+    explanation: "Azathioprine (Immuran by GSK India) causes bone marrow suppression, requiring blood count monitoring.",
+    category: "Immunosuppressants",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-85",
+    question: "Which Indian drug is an Antispasmodic for IBS?",
+    options: ["Mebiz", "Voveran", "Metrogyl", "Telma"],
+    correctAnswer: "Mebiz",
+    explanation: "Mebiz (Mebeverine by Abbott India) is an Antispasmodic for irritable bowel syndrome.",
+    category: "Gastrointestinal",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-86",
+    question: "What is the primary use of Antidiarrheals like Racecadotril?",
+    options: ["Treat infections", "Treat diarrhea", "Treat hypertension", "Treat asthma"],
+    correctAnswer: "Treat diarrhea",
+    explanation: "Racecadotril (Redotil by Dr. Reddy's) reduces intestinal secretion in diarrhea.",
+    category: "Gastrointestinal",
+    difficulty: "medium",
+    type: "indication"
+  },
+  {
+    id: "medium-87",
+    question: "Which Indian drug is a Prokinetic for gastroparesis?",
+    options: ["Ganaton", "Ciplox", "Rantac", "Crocin"],
+    correctAnswer: "Ganaton",
+    explanation: "Ganaton (Itopride by Abbott India) enhances GI motility for gastroparesis.",
+    category: "Gastrointestinal",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-88",
+    question: "Which side effect of Probiotics like Saccharomyces boulardii is rare but serious?",
+    options: ["Infections", "Weight gain", "Hypertension", "Dry eyes"],
+    correctAnswer: "Infections",
+    explanation: "Saccharomyces boulardii (Econorm by Dr. Reddy's) can rarely cause fungemia in immunocompromised patients.",
+    category: "Gastrointestinal",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-89",
+    question: "Which Indian drug is a Topical Antibacterial for wounds?",
+    options: ["Bactroban", "Zifi", "Rosuvas", "Pan-D"],
+    correctAnswer: "Bactroban",
+    explanation: "Bactroban (Mupirocin by GSK India) treats bacterial skin infections.",
+    category: "Dermatologicals",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-90",
+    question: "What is a key side effect of Keratolytics like Tretinoin?",
+    options: ["Skin irritation", "Photosensitivity", "Hypotension", "Hair loss"],
+    correctAnswer: "Skin irritation",
+    explanation: "Tretinoin (Retin-A by J&J India) causes skin irritation and peeling in acne treatment.",
+    category: "Dermatologicals",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-91",
+    question: "Which Indian drug is an Emollient for dry skin?",
+    options: ["Moisturex", "Voveran", "Metrogyl", "Telma"],
+    correctAnswer: "Moisturex",
+    explanation: "Moisturex (Urea by Ranbaxy) hydrates and softens dry skin.",
+    category: "Dermatologicals",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-92",
+    question: "Which side effect of Mydriatics like Atropine is a concern in glaucoma patients?",
+    options: ["Increased intraocular pressure", "Weight gain", "Hypertension", "Dry eyes"],
+    correctAnswer: "Increased intraocular pressure",
+    explanation: "Atropine (Atropine by FDC Ltd.) can worsen glaucoma by increasing intraocular pressure.",
+    category: "Ophthalmic",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-93",
+    question: "Which Indian drug is an Anti-Glaucoma Agent for ocular hypertension?",
+    options: ["Travatan", "Ciplox", "Rantac", "Crocin"],
+    correctAnswer: "Travatan",
+    explanation: "Travatan (Travoprost by Alcon India) reduces intraocular pressure in glaucoma.",
+    category: "Ophthalmic",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-94",
+    question: "What is the primary use of Ophthalmic Anti-Infectives like Moxifloxacin?",
+    options: ["Treat conjunctivitis", "Treat infections", "Treat hypertension", "Treat asthma"],
+    correctAnswer: "Treat conjunctivitis",
+    explanation: "Moxifloxacin (Vigamox by Alcon India) treats bacterial conjunctivitis.",
+    category: "Ophthalmic",
+    difficulty: "medium",
+    type: "indication"
+  },
+  {
+    id: "medium-95",
+    question: "Which Indian drug is an Otic Anti-Infective for otitis externa?",
+    options: ["Candibiotic", "Zifi", "Rosuvas", "Pan-D"],
+    correctAnswer: "Candibiotic",
+    explanation: "Candibiotic (Chloramphenicol + Clotrimazole by Glenmark) treats ear infections.",
+    category: "Otic",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-96",
+    question: "Which side effect of Urinary Antiseptics like Nitrofurantoin is a concern in G6PD deficiency?",
+    options: ["Hemolysis", "Photosensitivity", "Hypotension", "Hair loss"],
+    correctAnswer: "Hemolysis",
+    explanation: "Nitrofurantoin (Nitrofur by Sun Pharma) can cause hemolysis in G6PD-deficient patients.",
+    category: "Urinary",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-97",
+    question: "Which Indian drug is an Antivertigo Agent for Meniere's disease?",
+    options: ["Stugeron", "Voveran", "Metrogyl", "Telma"],
+    correctAnswer: "Stugeron",
+    explanation: "Stugeron (Cinnarizine by J&J) treats vertigo and improves vestibular function.",
+    category: "Neurological",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-98",
+    question: "What is a key side effect of Alpha-Blockers like Tamsulosin?",
+    options: ["Orthostatic hypotension", "Weight gain", "Hypertension", "Dry eyes"],
+    correctAnswer: "Orthostatic hypotension",
+    explanation: "Tamsulosin (Urofos by Urocare) causes dizziness due to orthostatic hypotension.",
+    category: "Urogenital",
+    difficulty: "medium",
+    type: "side-effects"
+  },
+  {
+    id: "medium-99",
+    question: "Which Indian drug is a 5-Alpha Reductase Inhibitor for BPH therapy?",
+    options: ["Finpecia", "Ciplox", "Rantac", "Crocin"],
+    correctAnswer: "Finpecia",
+    explanation: "Finpecia (Finasteride by Cipla) is a 5-alpha reductase inhibitor used for benign prostatic hyperplasia (BPH) and hair loss.",
+    category: "Urogenital",
+    difficulty: "medium",
+    type: "drug-class"
+  },
+  {
+    id: "medium-100",
+    question: "Which Indian herbal drug is used as a uterine tonic for menstrual disorders?",
+    options: ["Evecare", "Zifi", "Rosuvas", "Pan-D"],
+    correctAnswer: "Evecare",
+    explanation: "Evecare (by Himalaya) is an Ayurvedic uterine tonic used to manage menstrual disorders and support reproductive health.",
+    category: "Herbal & Natural Products",
+    difficulty: "medium",
+    type: "drug-class"
   }
-  // Continue with 95+ more medium questions...
 ];
 
 export const hardQuestions: QuizQuestion[] = [
