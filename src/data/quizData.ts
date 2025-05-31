@@ -42,23 +42,6 @@ export const symptomCases: SymptomCase[] = [
   }
 ];
 
-function shuffleOptionsAndUpdateAnswer(question: QuizQuestion): QuizQuestion {
-  const correctAnswerIndex = question.options.indexOf(question.correctAnswer);
-  const shuffledOptions = [...question.options];
-  
-  // Fisher-Yates shuffle algorithm
-  for (let i = shuffledOptions.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffledOptions[i], shuffledOptions[j]] = [shuffledOptions[j], shuffledOptions[i]];
-  }
-  
-  return {
-    ...question,
-    options: shuffledOptions,
-    correctAnswer: question.correctAnswer // Keep the same correct answer text
-  };
-}
-
 const easyQuizQuestions: QuizQuestion[] = [
   {
     id: 'easy-1',
@@ -100,7 +83,7 @@ const easyQuizQuestions: QuizQuestion[] = [
     explanation: 'PPIs inhibit the proton pump in parietal cells, reducing acid secretion.',
     category: 'Gastrointestinal'
   }
-].map(shuffleOptionsAndUpdateAnswer);
+];
 
 const mediumQuizQuestions: QuizQuestion[] = [
   {
@@ -143,7 +126,7 @@ const mediumQuizQuestions: QuizQuestion[] = [
     explanation: 'Omeprazole is metabolized by CYP2C19, affecting its efficacy in some patients.',
     category: 'Gastrointestinal'
   }
-].map(shuffleOptionsAndUpdateAnswer);
+];
 
 const hardQuizQuestions: QuizQuestion[] = [
   {
