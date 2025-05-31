@@ -256,6 +256,7 @@ export type Database = {
         Row: {
           created_at: string
           email: string
+          full_name: string | null
           id: string
           phone: string | null
           role: string
@@ -265,6 +266,7 @@ export type Database = {
         Insert: {
           created_at?: string
           email: string
+          full_name?: string | null
           id: string
           phone?: string | null
           role?: string
@@ -274,6 +276,7 @@ export type Database = {
         Update: {
           created_at?: string
           email?: string
+          full_name?: string | null
           id?: string
           phone?: string | null
           role?: string
@@ -281,6 +284,53 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      quiz_progress: {
+        Row: {
+          badges: Json | null
+          correct_answers: number | null
+          created_at: string | null
+          current_part: number | null
+          difficulty: string
+          id: string
+          questions_answered: number | null
+          total_score: number | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          badges?: Json | null
+          correct_answers?: number | null
+          created_at?: string | null
+          current_part?: number | null
+          difficulty: string
+          id?: string
+          questions_answered?: number | null
+          total_score?: number | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          badges?: Json | null
+          correct_answers?: number | null
+          created_at?: string | null
+          current_part?: number | null
+          difficulty?: string
+          id?: string
+          questions_answered?: number | null
+          total_score?: number | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quiz_progress_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       subscription_plans: {
         Row: {
@@ -317,6 +367,101 @@ export type Database = {
           price?: number
         }
         Relationships: []
+      }
+      teacher_tests: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          is_active: boolean | null
+          questions: Json
+          share_link: string | null
+          teacher_id: string
+          time_limit: number | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          questions: Json
+          share_link?: string | null
+          teacher_id: string
+          time_limit?: number | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          questions?: Json
+          share_link?: string | null
+          teacher_id?: string
+          time_limit?: number | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "teacher_tests_teacher_id_fkey"
+            columns: ["teacher_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      test_submissions: {
+        Row: {
+          answers: Json
+          id: string
+          score: number
+          student_id: string
+          student_name: string
+          submitted_at: string | null
+          test_id: string
+          total_questions: number
+        }
+        Insert: {
+          answers: Json
+          id?: string
+          score: number
+          student_id: string
+          student_name: string
+          submitted_at?: string | null
+          test_id: string
+          total_questions: number
+        }
+        Update: {
+          answers?: Json
+          id?: string
+          score?: number
+          student_id?: string
+          student_name?: string
+          submitted_at?: string | null
+          test_id?: string
+          total_questions?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "test_submissions_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "test_submissions_test_id_fkey"
+            columns: ["test_id"]
+            isOneToOne: false
+            referencedRelation: "teacher_tests"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_subscriptions: {
         Row: {
@@ -368,6 +513,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      generate_share_link: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
       get_user_limits: {
         Args: { user_uuid: string }
         Returns: {
