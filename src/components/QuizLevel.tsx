@@ -9,28 +9,36 @@ interface QuizLevelProps {
 }
 
 const QuizLevel = ({ difficulty, onBackToMenu }: QuizLevelProps) => {
-  const [questions] = useState<QuizQuestion[]>(getQuestionsByDifficulty(difficulty));
+  const [allQuestions, setAllQuestions] = useState<QuizQuestion[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string>('');
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const [questionsAnswered, setQuestionsAnswered] = useState(0);
   const [isCorrect, setIsCorrect] = useState(false);
-  const [usedQuestions, setUsedQuestions] = useState<Set<number>>(new Set());
 
-  const currentQuestion = questions[currentQuestionIndex];
+  // Initialize questions on component mount and difficulty change
+  useEffect(() => {
+    const questions = getQuestionsByDifficulty(difficulty);
+    setAllQuestions(questions);
+    setCurrentQuestionIndex(0);
+    setScore(0);
+    setQuestionsAnswered(0);
+    setSelectedAnswer('');
+    setShowResult(false);
+  }, [difficulty]);
+
+  const currentQuestion = allQuestions[currentQuestionIndex];
 
   const getRandomQuestion = () => {
-    if (usedQuestions.size >= questions.length) {
-      setUsedQuestions(new Set());
-    }
+    if (allQuestions.length === 0) return;
     
+    // Get a random index different from current
     let randomIndex;
     do {
-      randomIndex = Math.floor(Math.random() * questions.length);
-    } while (usedQuestions.has(randomIndex) && usedQuestions.size < questions.length);
+      randomIndex = Math.floor(Math.random() * allQuestions.length);
+    } while (randomIndex === currentQuestionIndex && allQuestions.length > 1);
     
-    setUsedQuestions(prev => new Set([...prev, randomIndex]));
     setCurrentQuestionIndex(randomIndex);
   };
 
@@ -54,15 +62,15 @@ const QuizLevel = ({ difficulty, onBackToMenu }: QuizLevelProps) => {
   };
 
   const resetQuiz = () => {
+    // Reshuffle questions when resetting
+    const questions = getQuestionsByDifficulty(difficulty);
+    setAllQuestions(questions);
     setScore(0);
     setQuestionsAnswered(0);
-    setUsedQuestions(new Set());
-    startNewQuestion();
+    setCurrentQuestionIndex(0);
+    setSelectedAnswer('');
+    setShowResult(false);
   };
-
-  useEffect(() => {
-    startNewQuestion();
-  }, []);
 
   const getDifficultyIcon = () => {
     switch (difficulty) {
@@ -87,6 +95,17 @@ const QuizLevel = ({ difficulty, onBackToMenu }: QuizLevelProps) => {
     return 'text-red-600';
   };
 
+  if (allQuestions.length === 0) {
+    return (
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center py-8">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-2 text-gray-600">Loading questions...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-4xl mx-auto">
       {/* Header */}
@@ -110,7 +129,7 @@ const QuizLevel = ({ difficulty, onBackToMenu }: QuizLevelProps) => {
             <Award className="h-8 w-8 text-yellow-500" />
             <div>
               <h2 className="text-2xl font-bold text-gray-800">Quiz Score</h2>
-              <p className="text-gray-600">Questions available: {questions.length}</p>
+              <p className="text-gray-600">Questions available: {allQuestions.length}</p>
             </div>
           </div>
           <div className="text-right">
