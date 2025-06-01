@@ -1,4 +1,6 @@
 import { mediumQuizQuestions } from './mediumQuizData';
+import { hardQuizQuestions } from './hardQuizData';
+import { additionalEasyQuizQuestions } from './easyQuizData';
 
 export interface QuizQuestion {
   id: string;
@@ -329,19 +331,8 @@ const easyQuizQuestions: QuizQuestion[] = [
     correctAnswer: 'Inhibit heme polymerization',
     explanation: 'Chloroquine accumulates in the parasite\'s food vacuole, inhibiting heme polymerization and killing the malaria parasite.',
     category: 'Antiparasitic'
-  }
-];
-
-const hardQuizQuestions: QuizQuestion[] = [
-  {
-    id: 'hard-1',
-    question: 'Advanced pharmacology question...',
-    options: ['Option A', 'Option B', 'Option C', 'Option D'],
-    correctAnswer: 'Option A',
-    explanation: 'Detailed explanation...',
-    category: 'Advanced'
-  }
-  // More hard questions would go here
+  },
+  ...additionalEasyQuizQuestions
 ];
 
 export interface SymptomCase {
