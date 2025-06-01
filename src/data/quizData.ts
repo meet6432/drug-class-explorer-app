@@ -1,46 +1,4 @@
-import { QuizQuestion, SymptomCase } from '../types/quizTypes';
-
-// Export the QuizQuestion type for external use
-export type { QuizQuestion, SymptomCase };
-
-// Sample symptom cases for the SymptomDiagnosis component
-export const symptomCases: SymptomCase[] = [
-  {
-    id: 'symptom-1',
-    symptom: 'Chest Pain',
-    description: 'A 45-year-old male presents with crushing chest pain radiating to the left arm, accompanied by shortness of breath and diaphoresis.',
-    recommendedDrugClasses: ['Antiplatelet Agents', 'Beta-Blockers', 'ACE Inhibitors', 'Statins'],
-    explanation: 'This presentation suggests acute coronary syndrome. Antiplatelet agents prevent further clot formation, beta-blockers reduce myocardial oxygen demand, ACE inhibitors provide cardioprotection, and statins stabilize plaque.'
-  },
-  {
-    id: 'symptom-2',
-    symptom: 'Hypertension',
-    description: 'A 55-year-old female with blood pressure readings consistently above 150/90 mmHg, with no other comorbidities.',
-    recommendedDrugClasses: ['ACE Inhibitors', 'Calcium Channel Blockers', 'Thiazide Diuretics'],
-    explanation: 'For uncomplicated hypertension, first-line agents include ACE inhibitors, calcium channel blockers, and thiazide diuretics. These effectively reduce blood pressure and cardiovascular risk.'
-  },
-  {
-    id: 'symptom-3',
-    symptom: 'Type 2 Diabetes',
-    description: 'A 50-year-old obese patient with HbA1c of 8.5%, presenting with polyuria, polydipsia, and unexplained weight loss.',
-    recommendedDrugClasses: ['Biguanides', 'Sulfonylureas', 'DPP-4 Inhibitors', 'SGLT2 Inhibitors'],
-    explanation: 'Metformin (biguanide) is first-line therapy. Sulfonylureas increase insulin secretion, DPP-4 inhibitors enhance incretin action, and SGLT2 inhibitors provide glucose-lowering with cardiovascular benefits.'
-  },
-  {
-    id: 'symptom-4',
-    symptom: 'Bacterial Pneumonia',
-    description: 'A 35-year-old patient presents with fever, productive cough with purulent sputum, and chest X-ray showing consolidation.',
-    recommendedDrugClasses: ['Beta-Lactam Antibiotics', 'Macrolides', 'Fluoroquinolones'],
-    explanation: 'Community-acquired pneumonia typically responds to beta-lactams (penicillins, cephalosporins), macrolides for atypical coverage, or fluoroquinolones for broader spectrum activity.'
-  },
-  {
-    id: 'symptom-5',
-    symptom: 'Asthma Exacerbation',
-    description: 'A 25-year-old patient with known asthma presents with wheezing, shortness of breath, and chest tightness.',
-    recommendedDrugClasses: ['Short-Acting Beta-2 Agonists', 'Corticosteroids', 'Long-Acting Beta-2 Agonists'],
-    explanation: 'Acute asthma requires short-acting beta-2 agonists for immediate bronchodilation. Corticosteroids reduce inflammation, while long-acting beta-2 agonists provide sustained control.'
-  }
-];
+import { QuizQuestion } from '../types/quizTypes';
 
 const easyQuizQuestions: QuizQuestion[] = [
   {
