@@ -1,3 +1,5 @@
+import { mediumQuizQuestions } from './mediumQuizData';
+
 export interface QuizQuestion {
   id: string;
   question: string;
