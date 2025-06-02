@@ -13,6 +13,7 @@ import TeacherDashboard from "./pages/TeacherDashboard";
 import StudentDashboard from "./pages/StudentDashboard";
 import TakeTest from "./pages/TakeTest";
 import DiseaseLookup from "./components/DiseaseLookup";
+import DataManagement from "./components/DataManagement";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();

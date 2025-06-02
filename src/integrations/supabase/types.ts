@@ -80,6 +80,54 @@ export type Database = {
           },
         ]
       }
+      disease_lookup: {
+        Row: {
+          associated_symptoms: Json
+          category: string
+          created_at: string
+          description: string
+          disease_id: string
+          drug_recommendations: Json
+          general_advice: Json
+          id: string
+          name: string
+          severity: string
+          symptoms: Json
+          updated_at: string
+          when_to_see_doctor: Json
+        }
+        Insert: {
+          associated_symptoms: Json
+          category: string
+          created_at?: string
+          description: string
+          disease_id: string
+          drug_recommendations: Json
+          general_advice: Json
+          id?: string
+          name: string
+          severity: string
+          symptoms: Json
+          updated_at?: string
+          when_to_see_doctor: Json
+        }
+        Update: {
+          associated_symptoms?: Json
+          category?: string
+          created_at?: string
+          description?: string
+          disease_id?: string
+          drug_recommendations?: Json
+          general_advice?: Json
+          id?: string
+          name?: string
+          severity?: string
+          symptoms?: Json
+          updated_at?: string
+          when_to_see_doctor?: Json
+        }
+        Relationships: []
+      }
       event_categories: {
         Row: {
           created_at: string
@@ -332,6 +380,45 @@ export type Database = {
           },
         ]
       }
+      quiz_questions: {
+        Row: {
+          category: string
+          correct_answer: string
+          created_at: string
+          difficulty: string
+          explanation: string
+          id: string
+          options: Json
+          question: string
+          question_id: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          correct_answer: string
+          created_at?: string
+          difficulty: string
+          explanation: string
+          id?: string
+          options: Json
+          question: string
+          question_id: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          correct_answer?: string
+          created_at?: string
+          difficulty?: string
+          explanation?: string
+          id?: string
+          options?: Json
+          question?: string
+          question_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       subscription_plans: {
         Row: {
           created_at: string
@@ -365,6 +452,45 @@ export type Database = {
           id?: string
           name?: string
           price?: number
+        }
+        Relationships: []
+      }
+      symptom_cases: {
+        Row: {
+          case_id: string
+          correct_answer: string
+          created_at: string
+          explanation: string
+          id: string
+          options: Json
+          patient_profile: string
+          question: string
+          symptoms: Json
+          updated_at: string
+        }
+        Insert: {
+          case_id: string
+          correct_answer: string
+          created_at?: string
+          explanation: string
+          id?: string
+          options: Json
+          patient_profile: string
+          question: string
+          symptoms: Json
+          updated_at?: string
+        }
+        Update: {
+          case_id?: string
+          correct_answer?: string
+          created_at?: string
+          explanation?: string
+          id?: string
+          options?: Json
+          patient_profile?: string
+          question?: string
+          symptoms?: Json
+          updated_at?: string
         }
         Relationships: []
       }
