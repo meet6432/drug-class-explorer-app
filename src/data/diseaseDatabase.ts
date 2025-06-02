@@ -674,6 +674,1023 @@ export const diseaseDatabase: DiseaseInfo[] = [
     generalAdvice: ["Avoid NSAIDs", "Eradicate H. pylori", "Eat small frequent meals"],
     whenToSeeDoctor: ["Black stools", "Severe pain", "Vomiting blood"],
     searchKeywords: ["peptic ulcer", "stomach ulcer", "duodenal ulcer", "h pylori"]
+  },
+
+  {
+    id: "acute-constipation",
+    name: "Acute Constipation",
+    category: "Gastrointestinal",
+    description: "Temporary difficulty in bowel movements due to diet or dehydration",
+    symptoms: ["Hard stools", "Straining", "Infrequent bowel movements"],
+    severity: "mild",
+    commonSymptoms: ["hard stools", "straining", "constipation"],
+    associatedSymptoms: ["abdominal discomfort", "bloating"],
+    drugRecommendations: [
+      {
+        name: "Bisacodyl (Dulcolax by Boehringer Ingelheim India)",
+        class: "Stimulant Laxative",
+        dosage: "5–10 mg",
+        frequency: "Once daily",
+        duration: "1–3 days",
+        whenToTake: "At bedtime",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Abdominal cramps", "Diarrhea"],
+        contraindications: ["Bowel obstruction"],
+        foodInteractions: "Avoid milk; interacts with antacids",
+        precautions: ["Short-term use only"]
+      }
+    ],
+    generalAdvice: ["Increase fiber intake", "Hydrate", "Exercise regularly"],
+    whenToSeeDoctor: ["No bowel movement for >3 days", "Severe pain"],
+    searchKeywords: ["constipation", "hard stools", "bowel movement", "laxative"]
+  },
+
+  {
+    id: "chronic-constipation",
+    name: "Chronic Constipation",
+    category: "Gastrointestinal",
+    description: "Persistent difficulty in bowel movements, often idiopathic or due to IBS",
+    symptoms: ["Infrequent stools", "Hard stools", "Straining"],
+    severity: "moderate",
+    commonSymptoms: ["chronic constipation", "hard stools", "straining"],
+    associatedSymptoms: ["bloating", "fatigue", "hemorrhoids"],
+    drugRecommendations: [
+      {
+        name: "Lactulose (Cremaffin by Abbott India)",
+        class: "Osmotic Laxative",
+        dosage: "15–30 mL",
+        frequency: "Once daily",
+        duration: "As needed",
+        whenToTake: "Evening",
+        howToTake: "Mix with water or juice",
+        sideEffects: ["Bloating", "Diarrhea"],
+        contraindications: ["Galactosemia"],
+        foodInteractions: "No significant interactions",
+        precautions: ["Monitor for electrolyte imbalance"]
+      },
+      {
+        name: "Ispaghula (Naturolax by Zydus Cadila)",
+        class: "Bulk-Forming Laxative",
+        dosage: "3.5–7 g",
+        frequency: "Once–twice daily",
+        duration: "Long-term",
+        whenToTake: "Morning and evening",
+        howToTake: "Mix in 200 mL water, drink immediately",
+        sideEffects: ["Bloating", "Flatulence"],
+        contraindications: ["Bowel obstruction"],
+        foodInteractions: "Take separately from other drugs",
+        precautions: ["Ensure adequate fluid intake"]
+      }
+    ],
+    generalAdvice: ["High-fiber diet", "Regular exercise", "Establish bowel routine"],
+    whenToSeeDoctor: ["Blood in stools", "Weight loss", "Persistent symptoms"],
+    searchKeywords: ["chronic constipation", "ibs", "fiber", "bowel habits"]
+  },
+
+  {
+    id: "ponv",
+    name: "Postoperative Nausea and Vomiting (PONV)",
+    category: "Gastrointestinal",
+    description: "Nausea/vomiting post-surgery due to anesthesia or pain medications",
+    symptoms: ["Nausea", "Vomiting", "Dizziness"],
+    severity: "moderate",
+    commonSymptoms: ["nausea", "vomiting", "post-surgery"],
+    associatedSymptoms: ["sweating", "dehydration"],
+    drugRecommendations: [
+      {
+        name: "Ondansetron (Emigo by Cipla)",
+        class: "5-HT3 Receptor Antagonist",
+        dosage: "8 mg",
+        frequency: "Every 8 hours",
+        duration: "1–2 days",
+        whenToTake: "Before surgery or as needed",
+        howToTake: "Swallow tablet or dissolve ODT",
+        sideEffects: ["Headache", "Constipation"],
+        contraindications: ["QT prolongation"],
+        foodInteractions: "No food interaction; interacts with apomorphine",
+        precautions: ["Monitor ECG in cardiac patients"]
+      },
+      {
+        name: "Domperidone (Domstal by Torrent Pharma)",
+        class: "Dopamine Receptor Antagonist",
+        dosage: "10 mg",
+        frequency: "Three times daily",
+        duration: "Short-term",
+        whenToTake: "30 minutes before food",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Drowsiness", "Hyperprolactinemia"],
+        contraindications: ["Cardiac arrhythmias"],
+        foodInteractions: "Avoid grapefruit; interacts with ketoconazole",
+        precautions: ["Monitor for cardiac effects"]
+      }
+    ],
+    generalAdvice: ["Stay hydrated", "Avoid heavy meals post-surgery", "Rest"],
+    whenToSeeDoctor: ["Persistent vomiting", "Dehydration", "Severe dizziness"],
+    searchKeywords: ["ponv", "post-operative nausea", "surgery nausea", "antiemetic"]
+  },
+
+  {
+    id: "cinv",
+    name: "Chemotherapy-Induced Nausea and Vomiting (CINV)",
+    category: "Gastrointestinal",
+    description: "Nausea/vomiting due to chemotherapeutic agents",
+    symptoms: ["Severe nausea", "Vomiting", "Loss of appetite"],
+    severity: "severe",
+    commonSymptoms: ["chemotherapy nausea", "severe vomiting", "appetite loss"],
+    associatedSymptoms: ["fatigue", "dehydration"],
+    drugRecommendations: [
+      {
+        name: "Granisetron (Granicip by Cipla)",
+        class: "5-HT3 Receptor Antagonist",
+        dosage: "1 mg IV or 2 mg oral",
+        frequency: "Once daily",
+        duration: "As per cycle",
+        whenToTake: "Before chemotherapy",
+        howToTake: "IV infusion or oral tablet",
+        sideEffects: ["Headache", "Fatigue"],
+        contraindications: ["5-HT3 antagonist allergy"],
+        foodInteractions: "No food interaction; monitor with QT-prolonging drugs",
+        precautions: ["Monitor for serotonin syndrome"]
+      },
+      {
+        name: "Aprepitant (Aprecap by Cipla)",
+        class: "NK1 Receptor Antagonist",
+        dosage: "125 mg day 1, 80 mg days 2–3",
+        frequency: "Once daily",
+        duration: "3 days per cycle",
+        whenToTake: "Morning",
+        howToTake: "Swallow capsule with water",
+        sideEffects: ["Fatigue", "Hiccups"],
+        contraindications: ["CYP3A4 inhibitor use"],
+        foodInteractions: "Avoid grapefruit; interacts with warfarin",
+        precautions: ["Monitor drug interactions"]
+      }
+    ],
+    generalAdvice: ["Small frequent meals", "Stay hydrated", "Use antiemetic prophylaxis"],
+    whenToSeeDoctor: ["Inability to eat/drink", "Severe dehydration", "Persistent vomiting"],
+    searchKeywords: ["cinv", "chemotherapy nausea", "cancer treatment", "antiemetic"]
+  },
+
+  {
+    id: "hypertension",
+    name: "Hypertension",
+    category: "Cardiovascular",
+    description: "Elevated blood pressure, classified by severity (mild: 140–159/90–99 mmHg, moderate: 160–179/100–109 mmHg, severe: ≥180/≥110 mmHg)",
+    symptoms: ["Often asymptomatic", "Headache", "Dizziness"],
+    severity: "moderate",
+    commonSymptoms: ["high blood pressure", "headache", "dizziness"],
+    associatedSymptoms: ["blurred vision", "chest pain"],
+    drugRecommendations: [
+      {
+        name: "Telmisartan (Telma by Glenmark)",
+        class: "ARB",
+        dosage: "40 mg",
+        frequency: "Once daily",
+        duration: "Long-term",
+        whenToTake: "Morning",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Dizziness", "Hyperkalemia"],
+        contraindications: ["Bilateral renal artery stenosis"],
+        foodInteractions: "Avoid potassium supplements; interacts with NSAIDs",
+        precautions: ["Monitor potassium, renal function"]
+      },
+      {
+        name: "Enalapril (Enam by Dr. Reddy's)",
+        class: "ACE Inhibitor",
+        dosage: "5–10 mg",
+        frequency: "Once–twice daily",
+        duration: "Long-term",
+        whenToTake: "Morning and evening",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Cough", "Angioedema"],
+        contraindications: ["Pregnancy"],
+        foodInteractions: "Avoid salt substitutes; interacts with diuretics",
+        precautions: ["Monitor for angioedema"]
+      }
+    ],
+    generalAdvice: ["Low-salt diet", "Regular exercise", "Monitor BP regularly"],
+    whenToSeeDoctor: ["BP >180/110 mmHg", "Chest pain", "Vision changes"],
+    searchKeywords: ["hypertension", "high blood pressure", "bp", "cardiovascular"]
+  },
+
+  {
+    id: "angina-pectoris",
+    name: "Angina Pectoris",
+    category: "Cardiovascular",
+    description: "Chest pain due to reduced blood flow to the heart",
+    symptoms: ["Chest pain", "Pressure", "Discomfort"],
+    severity: "moderate",
+    commonSymptoms: ["chest pain", "angina", "heart pain"],
+    associatedSymptoms: ["shortness of breath", "sweating"],
+    drugRecommendations: [
+      {
+        name: "Isosorbide Dinitrate (Sorbitrate by Abbott India)",
+        class: "Nitrate",
+        dosage: "5 mg sublingual",
+        frequency: "As needed for acute attack",
+        duration: "Short-term relief",
+        whenToTake: "At onset of symptoms",
+        howToTake: "Place under tongue",
+        sideEffects: ["Headache", "Hypotension"],
+        contraindications: ["Severe hypotension"],
+        foodInteractions: "No food interaction; interacts with PDE5 inhibitors",
+        precautions: ["Avoid sudden posture changes"]
+      },
+      {
+        name: "Atenolol (Aten by Zydus Cadila)",
+        class: "Beta Blocker",
+        dosage: "50 mg",
+        frequency: "Once daily",
+        duration: "Long-term",
+        whenToTake: "Morning",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Bradycardia", "Bronchospasm"],
+        contraindications: ["Asthma"],
+        foodInteractions: "Avoid abrupt discontinuation; interacts with calcium channel blockers",
+        precautions: ["Monitor heart rate"]
+      }
+    ],
+    generalAdvice: ["Avoid triggers (e.g., stress)", "Maintain healthy weight", "Carry nitrates"],
+    whenToSeeDoctor: ["Pain lasting >5 minutes", "Worsening symptoms"],
+    searchKeywords: ["angina", "chest pain", "heart pain", "nitrates"]
+  },
+
+  {
+    id: "heart-failure",
+    name: "Heart Failure",
+    category: "Cardiovascular",
+    description: "Heart's inability to pump blood effectively",
+    symptoms: ["Shortness of breath", "Fatigue", "Edema"],
+    severity: "severe",
+    commonSymptoms: ["heart failure", "shortness of breath", "swelling"],
+    associatedSymptoms: ["cough", "weight gain", "palpitations"],
+    drugRecommendations: [
+      {
+        name: "Furosemide (Lasix by Sanofi India)",
+        class: "Loop Diuretic",
+        dosage: "20–40 mg",
+        frequency: "Once–twice daily",
+        duration: "Long-term",
+        whenToTake: "Morning",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Hypokalemia", "Ototoxicity"],
+        contraindications: ["Anuria"],
+        foodInteractions: "Avoid NSAIDs; interacts with digoxin",
+        precautions: ["Monitor electrolytes"]
+      },
+      {
+        name: "Ramipril (Cardace by Sanofi India)",
+        class: "ACE Inhibitor",
+        dosage: "2.5–5 mg",
+        frequency: "Once daily",
+        duration: "Long-term",
+        whenToTake: "Morning",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Cough", "Hypotension"],
+        contraindications: ["Renal artery stenosis"],
+        foodInteractions: "Avoid potassium supplements; interacts with diuretics",
+        precautions: ["Monitor renal function"]
+      }
+    ],
+    generalAdvice: ["Low-sodium diet", "Monitor weight daily", "Avoid excessive fluid intake"],
+    whenToSeeDoctor: ["Worsening edema", "Weight gain >2 kg in 3 days"],
+    searchKeywords: ["heart failure", "cardiac failure", "edema", "diuretics"]
+  },
+
+  {
+    id: "type1-diabetes",
+    name: "Type 1 Diabetes",
+    category: "Endocrine",
+    description: "Autoimmune destruction of pancreatic beta cells, requiring insulin",
+    symptoms: ["Polyuria", "Polydipsia", "Weight loss"],
+    severity: "severe",
+    commonSymptoms: ["diabetes", "frequent urination", "excessive thirst"],
+    associatedSymptoms: ["fatigue", "blurred vision", "ketoacidosis"],
+    drugRecommendations: [
+      {
+        name: "Insulin Glargine (Lantus by Sanofi India)",
+        class: "Long-Acting Insulin",
+        dosage: "0.2–0.4 units/kg",
+        frequency: "Once daily",
+        duration: "Lifelong",
+        whenToTake: "Bedtime",
+        howToTake: "Subcutaneous injection",
+        sideEffects: ["Hypoglycemia", "Injection site reactions"],
+        contraindications: ["Hypoglycemia"],
+        foodInteractions: "No food interaction; monitor with oral hypoglycemics",
+        precautions: ["Monitor blood glucose"]
+      },
+      {
+        name: "Insulin Aspart (Novorapid by Novo Nordisk India)",
+        class: "Rapid-Acting Insulin",
+        dosage: "0.5–1 unit/kg/day",
+        frequency: "Before meals",
+        duration: "Lifelong",
+        whenToTake: "5–10 minutes before eating",
+        howToTake: "Subcutaneous injection",
+        sideEffects: ["Hypoglycemia", "Weight gain"],
+        contraindications: ["Hypoglycemia"],
+        foodInteractions: "Adjust with meals; monitor with beta-blockers",
+        precautions: ["Rotate injection sites"]
+      }
+    ],
+    generalAdvice: ["Monitor blood glucose", "Follow carb-counting diet", "Exercise regularly"],
+    whenToSeeDoctor: ["Hypoglycemia", "Ketoacidosis symptoms", "Uncontrolled glucose"],
+    searchKeywords: ["type 1 diabetes", "insulin", "blood sugar", "diabetes"]
+  },
+
+  {
+    id: "type2-diabetes",
+    name: "Type 2 Diabetes",
+    category: "Endocrine",
+    description: "Insulin resistance with relative insulin deficiency",
+    symptoms: ["Polyuria", "Polydipsia", "Fatigue"],
+    severity: "moderate",
+    commonSymptoms: ["type 2 diabetes", "frequent urination", "fatigue"],
+    associatedSymptoms: ["weight gain", "neuropathy", "infections"],
+    drugRecommendations: [
+      {
+        name: "Metformin (Glycomet by USV Ltd.)",
+        class: "Biguanide",
+        dosage: "500 mg",
+        frequency: "Twice daily",
+        duration: "Long-term",
+        whenToTake: "With meals",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["GI upset", "Lactic acidosis (rare)"],
+        contraindications: ["Renal impairment (CrCl <30 mL/min)"],
+        foodInteractions: "Avoid alcohol; interacts with contrast media",
+        precautions: ["Monitor renal function"]
+      },
+      {
+        name: "Sitagliptin (Januvia by MSD India)",
+        class: "DPP-4 Inhibitor",
+        dosage: "100 mg",
+        frequency: "Once daily",
+        duration: "Long-term",
+        whenToTake: "Morning",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Nasopharyngitis", "Pancreatitis"],
+        contraindications: ["Pancreatitis history"],
+        foodInteractions: "No food interaction; monitor with digoxin",
+        precautions: ["Monitor for joint pain"]
+      }
+    ],
+    generalAdvice: ["Low-carb diet", "Regular exercise", "Monitor HbA1c"],
+    whenToSeeDoctor: ["Persistent hyperglycemia", "Infections", "Severe side effects"],
+    searchKeywords: ["type 2 diabetes", "metformin", "blood sugar", "diabetes"]
+  },
+
+  {
+    id: "epilepsy",
+    name: "Epilepsy",
+    category: "Central Nervous System",
+    description: "Recurrent seizures due to abnormal brain electrical activity",
+    symptoms: ["Seizures", "Loss of consciousness", "Convulsions"],
+    severity: "severe",
+    commonSymptoms: ["seizures", "epilepsy", "convulsions"],
+    associatedSymptoms: ["confusion", "fatigue", "aura"],
+    drugRecommendations: [
+      {
+        name: "Phenytoin (Eptoin by Abbott India)",
+        class: "Antiepileptic",
+        dosage: "300 mg",
+        frequency: "Once daily",
+        duration: "Long-term",
+        whenToTake: "Evening",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Gingival hyperplasia", "Rash"],
+        contraindications: ["Phenytoin allergy"],
+        foodInteractions: "Avoid alcohol; interacts with warfarin",
+        precautions: ["Monitor blood levels"]
+      },
+      {
+        name: "Sodium Valproate (Valprol by Intas)",
+        class: "Antiepileptic",
+        dosage: "500 mg",
+        frequency: "Twice daily",
+        duration: "Long-term",
+        whenToTake: "Morning and evening",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Hepatotoxicity", "Weight gain"],
+        contraindications: ["Liver disease"],
+        foodInteractions: "Avoid alcohol; interacts with carbamazepine",
+        precautions: ["Monitor liver function"]
+      }
+    ],
+    generalAdvice: ["Avoid triggers (e.g., stress)", "Maintain regular sleep", "Adhere to medication"],
+    whenToSeeDoctor: ["Frequent seizures", "Status epilepticus", "Side effects"],
+    searchKeywords: ["epilepsy", "seizures", "antiepileptic", "convulsions"]
+  },
+
+  {
+    id: "depression",
+    name: "Depression",
+    category: "Central Nervous System",
+    description: "Mood disorder characterized by persistent sadness and loss of interest",
+    symptoms: ["Sadness", "Fatigue", "Insomnia"],
+    severity: "moderate",
+    commonSymptoms: ["depression", "sadness", "fatigue"],
+    associatedSymptoms: ["appetite changes", "suicidal thoughts"],
+    drugRecommendations: [
+      {
+        name: "Sertraline (Sertaline by Zydus Cadila)",
+        class: "SSRI",
+        dosage: "50 mg",
+        frequency: "Once daily",
+        duration: "Long-term",
+        whenToTake: "Morning",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Sexual dysfunction", "Nausea"],
+        contraindications: ["Bipolar disorder"],
+        foodInteractions: "Avoid alcohol; interacts with MAO inhibitors",
+        precautions: ["Monitor for suicidal ideation"]
+      },
+      {
+        name: "Duloxetine (Duzela by Sun Pharma)",
+        class: "SNRI",
+        dosage: "60 mg",
+        frequency: "Once daily",
+        duration: "Long-term",
+        whenToTake: "Morning",
+        howToTake: "Swallow capsule with water",
+        sideEffects: ["Hypertension", "Dry mouth"],
+        contraindications: ["Uncontrolled hypertension"],
+        foodInteractions: "Avoid alcohol; interacts with tramadol",
+        precautions: ["Gradual tapering"]
+      }
+    ],
+    generalAdvice: ["Seek therapy", "Maintain social support", "Avoid alcohol"],
+    whenToSeeDoctor: ["Worsening mood", "Suicidal thoughts", "Side effects"],
+    searchKeywords: ["depression", "antidepressant", "ssri", "mood disorder"]
+  },
+
+  {
+    id: "schizophrenia",
+    name: "Schizophrenia",
+    category: "Central Nervous System",
+    description: "Psychotic disorder with delusions, hallucinations, and disorganized thinking",
+    symptoms: ["Hallucinations", "Delusions", "Social withdrawal"],
+    severity: "severe",
+    commonSymptoms: ["schizophrenia", "hallucinations", "delusions"],
+    associatedSymptoms: ["cognitive impairment", "agitation"],
+    drugRecommendations: [
+      {
+        name: "Olanzapine (Oleanz by Sun Pharma)",
+        class: "Atypical Antipsychotic",
+        dosage: "10 mg",
+        frequency: "Once daily",
+        duration: "Long-term",
+        whenToTake: "Evening",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Weight gain", "Sedation"],
+        contraindications: ["Dementia-related psychosis"],
+        foodInteractions: "Avoid alcohol; interacts with fluvoxamine",
+        precautions: ["Monitor metabolic parameters"]
+      },
+      {
+        name: "Clozapine (Sizopin by Sun Pharma)",
+        class: "Atypical Antipsychotic",
+        dosage: "300 mg",
+        frequency: "Twice daily",
+        duration: "Long-term",
+        whenToTake: "Morning and evening",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Agranulocytosis", "Seizures"],
+        contraindications: ["Bone marrow suppression"],
+        foodInteractions: "Avoid caffeine; interacts with carbamazepine",
+        precautions: ["Weekly blood monitoring"]
+      }
+    ],
+    generalAdvice: ["Adhere to medication", "Engage in therapy", "Avoid recreational drugs"],
+    whenToSeeDoctor: ["Worsening psychosis", "Severe side effects", "Suicidal behavior"],
+    searchKeywords: ["schizophrenia", "psychosis", "antipsychotic", "hallucinations"]
+  },
+
+  {
+    id: "asthma",
+    name: "Asthma",
+    category: "Respiratory",
+    description: "Chronic inflammatory airway disease with reversible obstruction",
+    symptoms: ["Wheezing", "Shortness of breath", "Chest tightness"],
+    severity: "moderate",
+    commonSymptoms: ["asthma", "wheezing", "shortness of breath"],
+    associatedSymptoms: ["cough", "nocturnal symptoms"],
+    drugRecommendations: [
+      {
+        name: "Salbutamol (Asthalin by Cipla)",
+        class: "Beta-2 Agonist",
+        dosage: "2 puffs (100 mcg/puff)",
+        frequency: "As needed, up to 4 times daily",
+        duration: "Short-term relief",
+        whenToTake: "At symptom onset",
+        howToTake: "Use inhaler with spacer",
+        sideEffects: ["Tachycardia", "Tremors"],
+        contraindications: ["Uncontrolled arrhythmias"],
+        foodInteractions: "No food interaction; monitor with beta-blockers",
+        precautions: ["Monitor heart rate"]
+      },
+      {
+        name: "Montelukast (Montair by Cipla)",
+        class: "Leukotriene Receptor Antagonist",
+        dosage: "10 mg",
+        frequency: "Once daily",
+        duration: "Long-term",
+        whenToTake: "Evening",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Hepatotoxicity", "Mood changes"],
+        contraindications: ["Acute asthma attack"],
+        foodInteractions: "No food interaction; monitor with phenytoin",
+        precautions: ["Monitor for neuropsychiatric events"]
+      }
+    ],
+    generalAdvice: ["Avoid triggers (e.g., allergens)", "Use peak flow meter", "Maintain inhaler technique"],
+    whenToSeeDoctor: ["Frequent symptoms", "Rescue inhaler overuse", "Severe attack"],
+    searchKeywords: ["asthma", "wheezing", "bronchodilator", "inhaler"]
+  },
+
+  {
+    id: "copd",
+    name: "Chronic Obstructive Pulmonary Disease (COPD)",
+    category: "Respiratory",
+    description: "Progressive lung disease with airflow limitation",
+    symptoms: ["Chronic cough", "Dyspnea", "Sputum production"],
+    severity: "moderate",
+    commonSymptoms: ["copd", "chronic cough", "shortness of breath"],
+    associatedSymptoms: ["fatigue", "weight loss", "exacerbations"],
+    drugRecommendations: [
+      {
+        name: "Tiotropium (Tiova by Cipla)",
+        class: "Anticholinergic",
+        dosage: "1 puff (18 mcg)",
+        frequency: "Once daily",
+        duration: "Long-term",
+        whenToTake: "Morning",
+        howToTake: "Use HandiHaler device",
+        sideEffects: ["Dry mouth", "Urinary retention"],
+        contraindications: ["Narrow-angle glaucoma"],
+        foodInteractions: "No food interaction; monitor with anticholinergics",
+        precautions: ["Monitor for urinary symptoms"]
+      },
+      {
+        name: "Salmeterol + Fluticasone (Foracort by Cipla)",
+        class: "LABA + ICS Combination",
+        dosage: "2 puffs (25/125 mcg)",
+        frequency: "Twice daily",
+        duration: "Long-term",
+        whenToTake: "Morning and evening",
+        howToTake: "Use inhaler with spacer",
+        sideEffects: ["Oral thrush", "Hoarseness"],
+        contraindications: ["Acute bronchospasm"],
+        foodInteractions: "No food interaction; monitor with ketoconazole",
+        precautions: ["Rinse mouth after use"]
+      }
+    ],
+    generalAdvice: ["Quit smoking", "Pulmonary rehabilitation", "Get vaccinated"],
+    whenToSeeDoctor: ["Worsening dyspnea", "Frequent exacerbations", "Cyanosis"],
+    searchKeywords: ["copd", "chronic cough", "emphysema", "bronchitis"]
+  },
+
+  {
+    id: "hypothyroidism",
+    name: "Hypothyroidism",
+    category: "Endocrine",
+    description: "Underactive thyroid gland causing reduced hormone production",
+    symptoms: ["Fatigue", "Weight gain", "Cold intolerance"],
+    severity: "moderate",
+    commonSymptoms: ["hypothyroidism", "fatigue", "weight gain"],
+    associatedSymptoms: ["dry skin", "hair loss", "constipation"],
+    drugRecommendations: [
+      {
+        name: "Levothyroxine (Thyronorm by Abbott India)",
+        class: "Thyroid Hormone",
+        dosage: "50–100 mcg",
+        frequency: "Once daily",
+        duration: "Lifelong",
+        whenToTake: "30–60 minutes before food",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Palpitations", "Weight loss"],
+        contraindications: ["Untreated adrenal insufficiency"],
+        foodInteractions: "Avoid calcium/iron supplements; interacts with PPIs",
+        precautions: ["Monitor TSH levels"]
+      }
+    ],
+    generalAdvice: ["Regular thyroid function tests", "Maintain consistent dosing", "Avoid goitrogenic foods"],
+    whenToSeeDoctor: ["Worsening symptoms", "Palpitations", "TSH abnormalities"],
+    searchKeywords: ["hypothyroidism", "thyroid", "levothyroxine", "tsh"]
+  },
+
+  {
+    id: "menopause",
+    name: "Menopause Symptoms",
+    category: "Endocrine",
+    description: "Hormonal changes causing menopausal symptoms like hot flashes",
+    symptoms: ["Hot flashes", "Night sweats", "Mood changes"],
+    severity: "mild",
+    commonSymptoms: ["menopause", "hot flashes", "night sweats"],
+    associatedSymptoms: ["vaginal dryness", "osteoporosis risk"],
+    drugRecommendations: [
+      {
+        name: "Conjugated Estrogens (Premarin by Pfizer India)",
+        class: "Hormone Replacement Therapy",
+        dosage: "0.625 mg",
+        frequency: "Once daily",
+        duration: "Shortest duration needed",
+        whenToTake: "Morning",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Breast tenderness", "VTE risk"],
+        contraindications: ["Breast cancer", "VTE history"],
+        foodInteractions: "No food interaction; interacts with warfarin",
+        precautions: ["Regular mammograms"]
+      }
+    ],
+    generalAdvice: ["Calcium-rich diet", "Exercise", "Avoid smoking"],
+    whenToSeeDoctor: ["Severe symptoms", "Abnormal bleeding", "Breast changes"],
+    searchKeywords: ["menopause", "hot flashes", "hormone replacement", "estrogen"]
+  },
+
+  {
+    id: "bph",
+    name: "Benign Prostatic Hyperplasia (BPH)",
+    category: "Urology",
+    description: "Non-cancerous prostate enlargement causing urinary symptoms",
+    symptoms: ["Weak urine stream", "Nocturia", "Urgency"],
+    severity: "moderate",
+    commonSymptoms: ["bph", "prostate", "urinary problems"],
+    associatedSymptoms: ["incomplete bladder emptying", "infections"],
+    drugRecommendations: [
+      {
+        name: "Tamsulosin (Urofos by Urocare)",
+        class: "Alpha-1 Blocker",
+        dosage: "0.4 mg",
+        frequency: "Once daily",
+        duration: "Long-term",
+        whenToTake: "30 minutes after dinner",
+        howToTake: "Swallow capsule with water",
+        sideEffects: ["Orthostatic hypotension", "Retrograde ejaculation"],
+        contraindications: ["Severe hypotension"],
+        foodInteractions: "Avoid alcohol; interacts with PDE5 inhibitors",
+        precautions: ["Monitor blood pressure"]
+      },
+      {
+        name: "Finasteride (Finpecia by Cipla)",
+        class: "5-Alpha Reductase Inhibitor",
+        dosage: "5 mg",
+        frequency: "Once daily",
+        duration: "Long-term",
+        whenToTake: "Morning",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Sexual dysfunction", "Breast tenderness"],
+        contraindications: ["Pregnancy exposure"],
+        foodInteractions: "No food interaction; monitor with testosterone",
+        precautions: ["PSA monitoring"]
+      }
+    ],
+    generalAdvice: ["Avoid caffeine", "Maintain regular urination schedule"],
+    whenToSeeDoctor: ["Urinary retention", "Hematuria", "Severe symptoms"],
+    searchKeywords: ["bph", "prostate enlargement", "urinary retention", "tamsulosin"]
+  },
+
+  {
+    id: "rheumatoid-arthritis",
+    name: "Rheumatoid Arthritis",
+    category: "Musculoskeletal",
+    description: "Autoimmune joint inflammation causing pain and deformity",
+    symptoms: ["Joint pain", "Swelling", "Morning stiffness"],
+    severity: "moderate",
+    commonSymptoms: ["rheumatoid arthritis", "joint pain", "swelling"],
+    associatedSymptoms: ["fatigue", "fever", "weight loss"],
+    drugRecommendations: [
+      {
+        name: "Methotrexate (Folitrax by Ipca Labs)",
+        class: "DMARD",
+        dosage: "7.5–15 mg",
+        frequency: "Once weekly",
+        duration: "Long-term",
+        whenToTake: "Same day each week",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Hepatotoxicity", "Bone marrow suppression"],
+        contraindications: ["Liver disease"],
+        foodInteractions: "Avoid alcohol; interacts with NSAIDs",
+        precautions: ["Folic acid supplementation"]
+      },
+      {
+        name: "Hydroxychloroquine (HCQS by Ipca Labs)",
+        class: "Antimalarial DMARD",
+        dosage: "400 mg",
+        frequency: "Once daily",
+        duration: "Long-term",
+        whenToTake: "Evening",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Retinal toxicity", "GI upset"],
+        contraindications: ["Retinal disease"],
+        foodInteractions: "Take with meals; interacts with digoxin",
+        precautions: ["Regular eye exams"]
+      }
+    ],
+    generalAdvice: ["Physical therapy", "Maintain joint mobility", "Avoid infections"],
+    whenToSeeDoctor: ["Worsening joint pain", "Infections", "Vision changes"],
+    searchKeywords: ["rheumatoid arthritis", "joint pain", "dmard", "methotrexate"]
+  },
+
+  {
+    id: "organ-transplant",
+    name: "Organ Transplant Rejection",
+    category: "Immunology",
+    description: "Immune response against transplanted organs",
+    symptoms: ["Fever", "Organ dysfunction", "Pain at transplant site"],
+    severity: "severe",
+    commonSymptoms: ["transplant rejection", "fever", "organ dysfunction"],
+    associatedSymptoms: ["fatigue", "reduced urine output"],
+    drugRecommendations: [
+      {
+        name: "Tacrolimus (Pangraf by Panacea Biotec)",
+        class: "Calcineurin Inhibitor",
+        dosage: "0.1–0.2 mg/kg",
+        frequency: "Twice daily",
+        duration: "Lifelong",
+        whenToTake: "Every 12 hours",
+        howToTake: "Swallow capsule with water",
+        sideEffects: ["Nephrotoxicity", "Tremors"],
+        contraindications: ["Tacrolimus allergy"],
+        foodInteractions: "Avoid grapefruit; interacts with cyclosporine",
+        precautions: ["Monitor blood levels"]
+      },
+      {
+        name: "Mycophenolate (Mycophen by Panacea Biotec)",
+        class: "Antimetabolite",
+        dosage: "1 g",
+        frequency: "Twice daily",
+        duration: "Lifelong",
+        whenToTake: "Morning and evening",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["GI perforation", "Infections"],
+        contraindications: ["Pregnancy"],
+        foodInteractions: "Avoid antacids; interacts with PPIs",
+        precautions: ["Monitor for infections"]
+      }
+    ],
+    generalAdvice: ["Adhere to immunosuppression", "Regular follow-ups", "Avoid infections"],
+    whenToSeeDoctor: ["Fever", "Organ dysfunction", "Signs of rejection"],
+    searchKeywords: ["transplant", "immunosuppression", "rejection", "tacrolimus"]
+  },
+
+  {
+    id: "ibs",
+    name: "Irritable Bowel Syndrome (IBS)",
+    category: "Gastrointestinal",
+    description: "Functional GI disorder with abdominal pain and altered bowel habits",
+    symptoms: ["Abdominal pain", "Bloating", "Diarrhea/constipation"],
+    severity: "mild",
+    commonSymptoms: ["ibs", "abdominal pain", "bloating"],
+    associatedSymptoms: ["fatigue", "anxiety"],
+    drugRecommendations: [
+      {
+        name: "Mebeverine (Mebiz by Abbott India)",
+        class: "Antispasmodic",
+        dosage: "135 mg",
+        frequency: "Three times daily",
+        duration: "As needed",
+        whenToTake: "20 minutes before meals",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Dizziness", "Headache"],
+        contraindications: ["Paralytic ileus"],
+        foodInteractions: "No food interaction; monitor with antispasmodics",
+        precautions: ["Monitor for allergic reactions"]
+      }
+    ],
+    generalAdvice: ["High-fiber diet (IBS-C)", "Avoid triggers", "Stress management"],
+    whenToSeeDoctor: ["Severe pain", "Weight loss", "Blood in stools"],
+    searchKeywords: ["ibs", "irritable bowel", "abdominal pain", "antispasmodic"]
+  },
+
+  {
+    id: "acute-diarrhea",
+    name: "Acute Diarrhea",
+    category: "Gastrointestinal",
+    description: "Sudden onset of frequent, watery stools, often infectious",
+    symptoms: ["Loose stools", "Abdominal cramps", "Dehydration"],
+    severity: "mild",
+    commonSymptoms: ["diarrhea", "loose stools", "cramps"],
+    associatedSymptoms: ["fever", "nausea", "vomiting"],
+    drugRecommendations: [
+      {
+        name: "Loperamide (Lopamide by Torrent Pharma)",
+        class: "Antidiarrheal",
+        dosage: "4 mg initially, then 2 mg after each loose stool",
+        frequency: "As needed",
+        duration: "Up to 2 days",
+        whenToTake: "After loose stool",
+        howToTake: "Swallow tablet with water",
+        sideEffects: ["Constipation", "Dizziness"],
+        contraindications: ["Bloody diarrhea"],
+        foodInteractions: "No food interaction; avoid in infectious diarrhea",
+        precautions: ["Monitor for dehydration"]
+      },
+      {
+        name: "Racecadotril (Redotil by Dr. Reddy's)",
+        class: "Enkephalinase Inhibitor",
+        dosage: "100 mg",
+        frequency: "Three times daily",
+        duration: "Up to 7 days",
+        whenToTake: "Before meals",
+        howToTake: "Swallow capsule with water",
+        sideEffects: ["Headache", "Rash"],
+        contraindications: ["Chronic diarrhea"],
+        foodInteractions: "No food interaction; monitor with loperamide",
+        precautions: ["Ensure hydration"]
+      }
+    ],
+    generalAdvice: ["Oral rehydration solution", "Avoid dairy", "Rest"],
+    whenToSeeDoctor: ["Dehydration", "Fever >102°F", "Persistent diarrhea"],
+    searchKeywords: ["diarrhea", "loose stools", "antidiarrheal", "dehydration"]
+  },
+
+  {
+    id: "acne",
+    name: "Acne",
+    category: "Dermatological",
+    description: "Inflammatory skin condition with pimples, caused by sebum and bacteria",
+    symptoms: ["Pimples", "Blackheads", "Redness"],
+    severity: "mild",
+    commonSymptoms: ["acne", "pimples", "blackheads"],
+    associatedSymptoms: ["scarring", "pain"],
+    drugRecommendations: [
+      {
+        name: "Salicylic Acid (Saslic by Cipla)",
+        class: "Keratolytic",
+        dosage: "2% gel",
+        frequency: "Once–twice daily",
+        duration: "As needed",
+        whenToTake: "Morning and evening",
+        howToTake: "Apply to affected area",
+        sideEffects: ["Skin irritation", "Dryness"],
+        contraindications: ["Hypersensitivity"],
+        foodInteractions: "No food interaction; avoid with other keratolytics",
+        precautions: ["Avoid eyes, mucous membranes"]
+      },
+      {
+        name: "Tretinoin (Retin-A by J&J India)",
+        class: "Retinoid",
+        dosage: "0.025% cream",
+        frequency: "Once daily",
+        duration: "Long-term",
+        whenToTake: "Night",
+        howToTake: "Apply to clean, dry skin",
+        sideEffects: ["Peeling", "Photosensitivity"],
+        contraindications: ["Pregnancy"],
+        foodInteractions: "No food interaction; avoid with benzoyl peroxide",
+        precautions: ["Use sunscreen"]
+      }
+    ],
+    generalAdvice: ["Avoid oily cosmetics", "Wash face gently", "Use non-comedogenic products"],
+    whenToSeeDoctor: ["Severe acne", "Scarring", "No improvement after 8 weeks"],
+    searchKeywords: ["acne", "pimples", "tretinoin", "salicylic acid"]
+  },
+
+  {
+    id: "psoriasis",
+    name: "Psoriasis",
+    category: "Dermatological",
+    description: "Autoimmune skin disorder with scaly plaques",
+    symptoms: ["Red, scaly patches", "Itching"],
+    severity: "moderate",
+    commonSymptoms: ["psoriasis", "scaly patches", "itching"],
+    associatedSymptoms: ["joint pain", "nail changes"],
+    drugRecommendations: [
+      {
+        name: "Clobetasol (Tenovate by GSK India)",
+        class: "Topical Corticosteroid",
+        dosage: "0.05% cream",
+        frequency: "Twice daily",
+        duration: "Up to 2 weeks",
+        whenToTake: "Morning and evening",
+        howToTake: "Apply to affected area",
+        sideEffects: ["Skin atrophy", "Telangiectasia"],
+        contraindications: ["Skin infections"],
+        foodInteractions: "No food interaction; avoid with other steroids",
+        precautions: ["Avoid long-term use"]
+      }
+    ],
+    generalAdvice: ["Moisturize skin", "Avoid triggers (e.g., stress)", "Use phototherapy if prescribed"],
+    whenToSeeDoctor: ["Worsening plaques", "Joint involvement", "Infections"],
+    searchKeywords: ["psoriasis", "scaly skin", "topical steroids", "autoimmune"]
+  },
+
+  {
+    id: "bacterial-conjunctivitis",
+    name: "Bacterial Conjunctivitis",
+    category: "Ophthalmic",
+    description: "Bacterial infection of the conjunctiva",
+    symptoms: ["Red eyes", "Discharge", "Gritty sensation"],
+    severity: "mild",
+    commonSymptoms: ["conjunctivitis", "red eyes", "eye discharge"],
+    associatedSymptoms: ["crusting", "eyelid swelling"],
+    drugRecommendations: [
+      {
+        name: "Ciprofloxacin (Ciplox-D by Cipla)",
+        class: "Antibiotic Eye Drop",
+        dosage: "1–2 drops",
+        frequency: "Every 4 hours",
+        duration: "7 days",
+        whenToTake: "As prescribed",
+        howToTake: "Instill in affected eye",
+        sideEffects: ["Burning", "Irritation"],
+        contraindications: ["Hypersensitivity"],
+        foodInteractions: "No food interaction; avoid contact lenses",
+        precautions: ["Avoid contamination of dropper"]
+      }
+    ],
+    generalAdvice: ["Maintain hygiene", "Avoid sharing towels", "Remove contact lenses"],
+    whenToSeeDoctor: ["No improvement after 3 days", "Vision changes"],
+    searchKeywords: ["conjunctivitis", "pink eye", "eye infection", "antibiotic drops"]
+  },
+
+  {
+    id: "glaucoma",
+    name: "Glaucoma",
+    category: "Ophthalmic",
+    description: "Optic nerve damage due to increased intraocular pressure",
+    symptoms: ["Often asymptomatic", "Vision loss"],
+    severity: "severe",
+    commonSymptoms: ["glaucoma", "vision loss", "eye pressure"],
+    associatedSymptoms: ["halos around lights", "eye pain"],
+    drugRecommendations: [
+      {
+        name: "Travoprost (Travatan by Alcon India)",
+        class: "Prostaglandin Analog",
+        dosage: "1 drop",
+        frequency: "Once daily",
+        duration: "Long-term",
+        whenToTake: "Evening",
+        howToTake: "Instill in affected eye",
+        sideEffects: ["Eye redness", "Iris pigmentation"],
+        contraindications: ["Uveitis"],
+        foodInteractions: "No food interaction; avoid with other prostaglandins",
+        precautions: ["Monitor IOP"]
+      }
+    ],
+    generalAdvice: ["Regular eye check-ups", "Adhere to medication", "Avoid rubbing eyes"],
+    whenToSeeDoctor: ["Vision loss", "Severe eye pain", "Halos"],
+    searchKeywords: ["glaucoma", "eye pressure", "vision loss", "travoprost"]
+  },
+
+  {
+    id: "otitis-externa",
+    name: "Otitis Externa",
+    category: "Otic",
+    description: "Infection or inflammation of the outer ear canal, often bacterial or fungal",
+    symptoms: ["Ear pain", "Itching", "Discharge"],
+    severity: "mild",
+    commonSymptoms: ["ear infection", "ear pain", "itching"],
+    associatedSymptoms: ["hearing loss", "swelling"],
+    drugRecommendations: [
+      {
+        name: "Chloramphenicol + Clotrimazole (Candibiotic by Glenmark)",
+        class: "Antibiotic + Antifungal Ear Drop",
+        dosage: "2–3 drops",
+        frequency: "Three times daily",
+        duration: "7 days",
+        whenToTake: "Every 8 hours",
+        howToTake: "Instill in affected ear",
+        sideEffects: ["Burning", "Irritation"],
+        contraindications: ["Perforated eardrum"],
+        foodInteractions: "No food interaction; avoid water in ear",
+        precautions: ["Keep ear dry"]
+      }
+    ],
+    generalAdvice: ["Avoid swimming", "Use earplugs", "Keep ear dry"],
+    whenToSeeDoctor: ["Severe pain", "Hearing loss", "No improvement after 5 days"],
+    searchKeywords: ["otitis externa", "ear infection", "swimmer's ear", "ear drops"]
+  },
+
+  {
+    id: "menstrual-disorders",
+    name: "Menstrual Disorders",
+    category: "Ayurvedic/Herbal",
+    description: "Painful or irregular menstrual cycles, often due to hormonal imbalances",
+    symptoms: ["Pelvic pain", "Irregular bleeding", "Cramps"],
+    severity: "mild",
+    commonSymptoms: ["menstrual disorders", "period pain", "irregular periods"],
+    associatedSymptoms: ["mood swings", "fatigue"],
+    drugRecommendations: [
+      {
+        name: "Evecare (by Himalaya)",
+        class: "Ayurvedic Supplement",
+        dosage: "2 capsules",
+        frequency: "Twice daily",
+        duration: "3–6 months",
+        whenToTake: "Morning and evening",
+        howToTake: "Swallow capsule with water",
+        sideEffects: ["Rare GI upset"],
+        contraindications: ["Hypersensitivity"],
+        foodInteractions: "No significant interactions",
+        precautions: ["Consult for prolonged use"]
+      }
+    ],
+    generalAdvice: ["Maintain healthy diet", "Exercise", "Manage stress"],
+    whenToSeeDoctor: ["Severe pain", "Heavy bleeding", "Persistent irregularity"],
+    searchKeywords: ["menstrual disorders", "period problems", "evecare", "ayurvedic"]
   }
 ];
 
