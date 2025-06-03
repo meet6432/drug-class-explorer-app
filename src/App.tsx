@@ -33,6 +33,7 @@ const App = () => (
             <Route path="/student" element={<StudentDashboard />} />
             <Route path="/test/:shareLink" element={<TakeTest />} />
             <Route path="/diseases" element={<DiseaseLookup onBackToMenu={() => window.history.back()} />} />
+            <Route path="/data-management" element={<DataManagement />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
