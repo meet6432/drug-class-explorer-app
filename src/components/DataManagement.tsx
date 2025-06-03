@@ -20,11 +20,17 @@ const DataManagement: React.FC = () => {
   const { data: quizQuestions, isLoading: loadingQuiz } = useQuery({
     queryKey: ['admin-quiz-questions', selectedDifficulty],
     queryFn: async () => {
-      const tableName = `${selectedDifficulty}_quiz_questions`;
-      const { data, error } = await supabase
-        .from(tableName)
-        .select('*')
-        .order('created_at', { ascending: false });
+      let query;
+      
+      if (selectedDifficulty === 'easy') {
+        query = supabase.from('easy_quiz_questions').select('*').order('created_at', { ascending: false });
+      } else if (selectedDifficulty === 'medium') {
+        query = supabase.from('medium_quiz_questions').select('*').order('created_at', { ascending: false });
+      } else {
+        query = supabase.from('hard_quiz_questions').select('*').order('created_at', { ascending: false });
+      }
+
+      const { data, error } = await query;
       
       if (error) throw error;
       return data;
@@ -33,10 +39,17 @@ const DataManagement: React.FC = () => {
 
   const addQuizMutation = useMutation({
     mutationFn: async (newQuestion: any) => {
-      const tableName = `${selectedDifficulty}_quiz_questions`;
-      const { error } = await supabase
-        .from(tableName)
-        .insert([newQuestion]);
+      let query;
+      
+      if (selectedDifficulty === 'easy') {
+        query = supabase.from('easy_quiz_questions').insert([newQuestion]);
+      } else if (selectedDifficulty === 'medium') {
+        query = supabase.from('medium_quiz_questions').insert([newQuestion]);
+      } else {
+        query = supabase.from('hard_quiz_questions').insert([newQuestion]);
+      }
+
+      const { error } = await query;
       
       if (error) throw error;
     },

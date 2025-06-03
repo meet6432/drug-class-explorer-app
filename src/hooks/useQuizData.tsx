@@ -15,12 +15,17 @@ export const useQuizQuestions = (difficulty: 'easy' | 'medium' | 'hard') => {
   return useQuery({
     queryKey: ['quiz-questions', difficulty],
     queryFn: async () => {
-      const tableName = `${difficulty}_quiz_questions`;
+      let query;
       
-      const { data, error } = await supabase
-        .from(tableName)
-        .select('*')
-        .order('created_at', { ascending: false });
+      if (difficulty === 'easy') {
+        query = supabase.from('easy_quiz_questions').select('*').order('created_at', { ascending: false });
+      } else if (difficulty === 'medium') {
+        query = supabase.from('medium_quiz_questions').select('*').order('created_at', { ascending: false });
+      } else {
+        query = supabase.from('hard_quiz_questions').select('*').order('created_at', { ascending: false });
+      }
+
+      const { data, error } = await query;
 
       if (error) {
         throw new Error(`Failed to fetch ${difficulty} quiz questions: ${error.message}`);
@@ -42,12 +47,17 @@ export const useRandomQuizQuestion = (difficulty: 'easy' | 'medium' | 'hard') =>
   return useQuery({
     queryKey: ['random-quiz-question', difficulty],
     queryFn: async () => {
-      const tableName = `${difficulty}_quiz_questions`;
+      let countQuery, dataQuery;
       
-      // Get count first
-      const { count } = await supabase
-        .from(tableName)
-        .select('*', { count: 'exact', head: true });
+      if (difficulty === 'easy') {
+        countQuery = supabase.from('easy_quiz_questions').select('*', { count: 'exact', head: true });
+      } else if (difficulty === 'medium') {
+        countQuery = supabase.from('medium_quiz_questions').select('*', { count: 'exact', head: true });
+      } else {
+        countQuery = supabase.from('hard_quiz_questions').select('*', { count: 'exact', head: true });
+      }
+
+      const { count } = await countQuery;
 
       if (!count || count === 0) {
         throw new Error(`No ${difficulty} questions available`);
@@ -56,11 +66,15 @@ export const useRandomQuizQuestion = (difficulty: 'easy' | 'medium' | 'hard') =>
       // Get random offset
       const randomOffset = Math.floor(Math.random() * count);
 
-      const { data, error } = await supabase
-        .from(tableName)
-        .select('*')
-        .range(randomOffset, randomOffset)
-        .limit(1);
+      if (difficulty === 'easy') {
+        dataQuery = supabase.from('easy_quiz_questions').select('*').range(randomOffset, randomOffset).limit(1);
+      } else if (difficulty === 'medium') {
+        dataQuery = supabase.from('medium_quiz_questions').select('*').range(randomOffset, randomOffset).limit(1);
+      } else {
+        dataQuery = supabase.from('hard_quiz_questions').select('*').range(randomOffset, randomOffset).limit(1);
+      }
+
+      const { data, error } = await dataQuery;
 
       if (error || !data || data.length === 0) {
         throw new Error(`Failed to fetch random ${difficulty} question: ${error?.message}`);
