@@ -15,14 +15,15 @@ export const useQuizQuestions = (difficulty: 'easy' | 'medium' | 'hard') => {
   return useQuery({
     queryKey: ['quiz-questions', difficulty],
     queryFn: async () => {
+      const tableName = `${difficulty}_quiz_questions`;
+      
       const { data, error } = await supabase
-        .from('quiz_questions')
+        .from(tableName)
         .select('*')
-        .eq('difficulty', difficulty)
         .order('created_at', { ascending: false });
 
       if (error) {
-        throw new Error(`Failed to fetch quiz questions: ${error.message}`);
+        throw new Error(`Failed to fetch ${difficulty} quiz questions: ${error.message}`);
       }
 
       return data.map(item => ({
@@ -41,28 +42,28 @@ export const useRandomQuizQuestion = (difficulty: 'easy' | 'medium' | 'hard') =>
   return useQuery({
     queryKey: ['random-quiz-question', difficulty],
     queryFn: async () => {
+      const tableName = `${difficulty}_quiz_questions`;
+      
       // Get count first
       const { count } = await supabase
-        .from('quiz_questions')
-        .select('*', { count: 'exact', head: true })
-        .eq('difficulty', difficulty);
+        .from(tableName)
+        .select('*', { count: 'exact', head: true });
 
       if (!count || count === 0) {
-        throw new Error('No questions available');
+        throw new Error(`No ${difficulty} questions available`);
       }
 
       // Get random offset
       const randomOffset = Math.floor(Math.random() * count);
 
       const { data, error } = await supabase
-        .from('quiz_questions')
+        .from(tableName)
         .select('*')
-        .eq('difficulty', difficulty)
         .range(randomOffset, randomOffset)
         .limit(1);
 
       if (error || !data || data.length === 0) {
-        throw new Error(`Failed to fetch random question: ${error?.message}`);
+        throw new Error(`Failed to fetch random ${difficulty} question: ${error?.message}`);
       }
 
       const item = data[0];

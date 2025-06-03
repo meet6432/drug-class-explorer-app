@@ -14,13 +14,15 @@ import { toast } from 'sonner';
 const DataManagement: React.FC = () => {
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState('quiz');
+  const [selectedDifficulty, setSelectedDifficulty] = useState<'easy' | 'medium' | 'hard'>('easy');
 
-  // Quiz Questions Management
+  // Quiz Questions Management for specific difficulty
   const { data: quizQuestions, isLoading: loadingQuiz } = useQuery({
-    queryKey: ['admin-quiz-questions'],
+    queryKey: ['admin-quiz-questions', selectedDifficulty],
     queryFn: async () => {
+      const tableName = `${selectedDifficulty}_quiz_questions`;
       const { data, error } = await supabase
-        .from('quiz_questions')
+        .from(tableName)
         .select('*')
         .order('created_at', { ascending: false });
       
@@ -31,15 +33,16 @@ const DataManagement: React.FC = () => {
 
   const addQuizMutation = useMutation({
     mutationFn: async (newQuestion: any) => {
+      const tableName = `${selectedDifficulty}_quiz_questions`;
       const { error } = await supabase
-        .from('quiz_questions')
+        .from(tableName)
         .insert([newQuestion]);
       
       if (error) throw error;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['admin-quiz-questions'] });
-      toast.success('Quiz question added successfully!');
+      queryClient.invalidateQueries({ queryKey: ['admin-quiz-questions', selectedDifficulty] });
+      toast.success(`${selectedDifficulty.charAt(0).toUpperCase() + selectedDifficulty.slice(1)} quiz question added successfully!`);
     },
     onError: (error) => {
       toast.error('Failed to add quiz question: ' + error.message);
@@ -120,13 +123,12 @@ const DataManagement: React.FC = () => {
     ].filter(Boolean);
 
     addQuizMutation.mutate({
-      question_id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      question_id: `${selectedDifficulty}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       question: formData.get('question'),
       options: options,
       correct_answer: formData.get('correctAnswer'),
       explanation: formData.get('explanation'),
-      category: formData.get('category'),
-      difficulty: formData.get('difficulty')
+      category: formData.get('category')
     });
 
     (e.target as HTMLFormElement).reset();
@@ -146,7 +148,19 @@ const DataManagement: React.FC = () => {
         <TabsContent value="quiz" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Add New Quiz Question</CardTitle>
+              <CardTitle className="flex items-center justify-between">
+                Add New Quiz Question
+                <Select value={selectedDifficulty} onValueChange={(value: 'easy' | 'medium' | 'hard') => setSelectedDifficulty(value)}>
+                  <SelectTrigger className="w-32">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="easy">Easy</SelectItem>
+                    <SelectItem value="medium">Medium</SelectItem>
+                    <SelectItem value="hard">Hard</SelectItem>
+                  </SelectContent>
+                </Select>
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleAddQuizQuestion} className="space-y-4">
@@ -180,7 +194,7 @@ const DataManagement: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-2">Correct Answer</label>
                     <Input name="correctAnswer" required />
@@ -189,23 +203,10 @@ const DataManagement: React.FC = () => {
                     <label className="block text-sm font-medium mb-2">Category</label>
                     <Input name="category" required />
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Difficulty</label>
-                    <Select name="difficulty" required>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select difficulty" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="easy">Easy</SelectItem>
-                        <SelectItem value="medium">Medium</SelectItem>
-                        <SelectItem value="hard">Hard</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
                 </div>
                 
                 <Button type="submit" disabled={addQuizMutation.isPending}>
-                  {addQuizMutation.isPending ? 'Adding...' : 'Add Question'}
+                  {addQuizMutation.isPending ? 'Adding...' : `Add ${selectedDifficulty.charAt(0).toUpperCase() + selectedDifficulty.slice(1)} Question`}
                 </Button>
               </form>
             </CardContent>
@@ -213,7 +214,7 @@ const DataManagement: React.FC = () => {
 
           <Card>
             <CardHeader>
-              <CardTitle>Existing Quiz Questions</CardTitle>
+              <CardTitle>{selectedDifficulty.charAt(0).toUpperCase() + selectedDifficulty.slice(1)} Quiz Questions</CardTitle>
             </CardHeader>
             <CardContent>
               {loadingQuiz ? (
@@ -223,7 +224,6 @@ const DataManagement: React.FC = () => {
                   <TableHeader>
                     <TableRow>
                       <TableHead>Question</TableHead>
-                      <TableHead>Difficulty</TableHead>
                       <TableHead>Category</TableHead>
                       <TableHead>Created</TableHead>
                     </TableRow>
@@ -232,7 +232,6 @@ const DataManagement: React.FC = () => {
                     {quizQuestions?.map((question) => (
                       <TableRow key={question.id}>
                         <TableCell className="max-w-md truncate">{question.question}</TableCell>
-                        <TableCell>{question.difficulty}</TableCell>
                         <TableCell>{question.category}</TableCell>
                         <TableCell>{new Date(question.created_at).toLocaleDateString()}</TableCell>
                       </TableRow>

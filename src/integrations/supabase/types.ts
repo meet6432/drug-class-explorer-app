@@ -128,6 +128,42 @@ export type Database = {
         }
         Relationships: []
       }
+      easy_quiz_questions: {
+        Row: {
+          category: string
+          correct_answer: string
+          created_at: string
+          explanation: string
+          id: string
+          options: Json
+          question: string
+          question_id: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          correct_answer: string
+          created_at?: string
+          explanation: string
+          id?: string
+          options: Json
+          question: string
+          question_id: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          correct_answer?: string
+          created_at?: string
+          explanation?: string
+          id?: string
+          options?: Json
+          question?: string
+          question_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       event_categories: {
         Row: {
           created_at: string
@@ -264,6 +300,78 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      hard_quiz_questions: {
+        Row: {
+          category: string
+          correct_answer: string
+          created_at: string
+          explanation: string
+          id: string
+          options: Json
+          question: string
+          question_id: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          correct_answer: string
+          created_at?: string
+          explanation: string
+          id?: string
+          options: Json
+          question: string
+          question_id: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          correct_answer?: string
+          created_at?: string
+          explanation?: string
+          id?: string
+          options?: Json
+          question?: string
+          question_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      medium_quiz_questions: {
+        Row: {
+          category: string
+          correct_answer: string
+          created_at: string
+          explanation: string
+          id: string
+          options: Json
+          question: string
+          question_id: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          correct_answer: string
+          created_at?: string
+          explanation: string
+          id?: string
+          options: Json
+          question: string
+          question_id: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          correct_answer?: string
+          created_at?: string
+          explanation?: string
+          id?: string
+          options?: Json
+          question?: string
+          question_id?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
       notifications: {
         Row: {
