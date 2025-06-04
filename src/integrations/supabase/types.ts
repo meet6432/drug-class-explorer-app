@@ -39,6 +39,51 @@ export type Database = {
         }
         Relationships: []
       }
+      clinical_cases: {
+        Row: {
+          case_id: string
+          category: string
+          created_at: string
+          difficulty_level: string
+          estimated_duration: number | null
+          id: string
+          initial_presentation: string
+          learning_objectives: Json | null
+          patient_info: Json
+          steps: Json
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          case_id: string
+          category: string
+          created_at?: string
+          difficulty_level: string
+          estimated_duration?: number | null
+          id?: string
+          initial_presentation: string
+          learning_objectives?: Json | null
+          patient_info: Json
+          steps: Json
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          case_id?: string
+          category?: string
+          created_at?: string
+          difficulty_level?: string
+          estimated_duration?: number | null
+          id?: string
+          initial_presentation?: string
+          learning_objectives?: Json | null
+          patient_info?: Json
+          steps?: Json
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       contributions: {
         Row: {
           amount: number
@@ -125,6 +170,180 @@ export type Database = {
           symptoms?: Json
           updated_at?: string
           when_to_see_doctor?: Json
+        }
+        Relationships: []
+      }
+      dosage_formulas: {
+        Row: {
+          contraindications: Json | null
+          created_at: string
+          drug_name: string
+          formula: string
+          formula_type: string
+          id: string
+          indication: string
+          parameters: Json
+          safety_limits: Json | null
+          special_populations: Json | null
+          units: string
+          updated_at: string
+        }
+        Insert: {
+          contraindications?: Json | null
+          created_at?: string
+          drug_name: string
+          formula: string
+          formula_type: string
+          id?: string
+          indication: string
+          parameters: Json
+          safety_limits?: Json | null
+          special_populations?: Json | null
+          units: string
+          updated_at?: string
+        }
+        Update: {
+          contraindications?: Json | null
+          created_at?: string
+          drug_name?: string
+          formula?: string
+          formula_type?: string
+          id?: string
+          indication?: string
+          parameters?: Json
+          safety_limits?: Json | null
+          special_populations?: Json | null
+          units?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      drug_class_relationships: {
+        Row: {
+          child_class: string
+          connection_strength: number | null
+          created_at: string
+          description: string | null
+          id: string
+          parent_class: string
+          relationship_type: string
+          updated_at: string
+          visual_position: Json | null
+        }
+        Insert: {
+          child_class: string
+          connection_strength?: number | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          parent_class: string
+          relationship_type: string
+          updated_at?: string
+          visual_position?: Json | null
+        }
+        Update: {
+          child_class?: string
+          connection_strength?: number | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          parent_class?: string
+          relationship_type?: string
+          updated_at?: string
+          visual_position?: Json | null
+        }
+        Relationships: []
+      }
+      drug_interactions: {
+        Row: {
+          clinical_effects: Json | null
+          created_at: string
+          description: string
+          drug1_name: string
+          drug2_name: string
+          id: string
+          interaction_type: string
+          management_recommendations: string | null
+          mechanism: string | null
+          reference_sources: string | null
+          severity_level: number
+          updated_at: string
+        }
+        Insert: {
+          clinical_effects?: Json | null
+          created_at?: string
+          description: string
+          drug1_name: string
+          drug2_name: string
+          id?: string
+          interaction_type: string
+          management_recommendations?: string | null
+          mechanism?: string | null
+          reference_sources?: string | null
+          severity_level?: number
+          updated_at?: string
+        }
+        Update: {
+          clinical_effects?: Json | null
+          created_at?: string
+          description?: string
+          drug1_name?: string
+          drug2_name?: string
+          id?: string
+          interaction_type?: string
+          management_recommendations?: string | null
+          mechanism?: string | null
+          reference_sources?: string | null
+          severity_level?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      drug_side_effects: {
+        Row: {
+          body_system: string
+          created_at: string
+          description: string | null
+          drug_name: string
+          frequency: string
+          frequency_percentage: string | null
+          id: string
+          management: string | null
+          monitoring_required: boolean | null
+          onset_time: string | null
+          severity: string
+          side_effect: string
+          updated_at: string
+        }
+        Insert: {
+          body_system: string
+          created_at?: string
+          description?: string | null
+          drug_name: string
+          frequency: string
+          frequency_percentage?: string | null
+          id?: string
+          management?: string | null
+          monitoring_required?: boolean | null
+          onset_time?: string | null
+          severity: string
+          side_effect: string
+          updated_at?: string
+        }
+        Update: {
+          body_system?: string
+          created_at?: string
+          description?: string | null
+          drug_name?: string
+          frequency?: string
+          frequency_percentage?: string | null
+          id?: string
+          management?: string | null
+          monitoring_required?: boolean | null
+          onset_time?: string | null
+          severity?: string
+          side_effect?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -407,6 +626,63 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      pharmacokinetics_data: {
+        Row: {
+          absorption_rate: number | null
+          bioavailability: number | null
+          clearance: number | null
+          created_at: string
+          distribution_volume: number | null
+          dosing_frequency: string | null
+          drug_name: string
+          elimination_half_life: number | null
+          excretion_route: Json | null
+          id: string
+          metabolism_pathway: Json | null
+          peak_concentration: number | null
+          peak_time: number | null
+          protein_binding: number | null
+          route_of_administration: string
+          updated_at: string
+        }
+        Insert: {
+          absorption_rate?: number | null
+          bioavailability?: number | null
+          clearance?: number | null
+          created_at?: string
+          distribution_volume?: number | null
+          dosing_frequency?: string | null
+          drug_name: string
+          elimination_half_life?: number | null
+          excretion_route?: Json | null
+          id?: string
+          metabolism_pathway?: Json | null
+          peak_concentration?: number | null
+          peak_time?: number | null
+          protein_binding?: number | null
+          route_of_administration: string
+          updated_at?: string
+        }
+        Update: {
+          absorption_rate?: number | null
+          bioavailability?: number | null
+          clearance?: number | null
+          created_at?: string
+          distribution_volume?: number | null
+          dosing_frequency?: string | null
+          drug_name?: string
+          elimination_half_life?: number | null
+          excretion_route?: Json | null
+          id?: string
+          metabolism_pathway?: Json | null
+          peak_concentration?: number | null
+          peak_time?: number | null
+          protein_binding?: number | null
+          route_of_administration?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
       profiles: {
         Row: {

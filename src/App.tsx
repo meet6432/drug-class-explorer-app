@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -15,6 +14,12 @@ import TakeTest from "./pages/TakeTest";
 import DiseaseLookup from "./components/DiseaseLookup";
 import DataManagement from "./components/DataManagement";
 import NotFound from "./pages/NotFound";
+import DrugInteractionChecker from "./components/DrugInteractionChecker";
+import DrugClassExplorer from "./components/DrugClassExplorer";
+import ClinicalCaseSimulator from "./components/ClinicalCaseSimulator";
+import DosageCalculator from "./components/DosageCalculator";
+import SideEffectsDatabase from "./components/SideEffectsDatabase";
+import PharmacokineticsSimulator from "./components/PharmacokineticsSimulator";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +39,12 @@ const App = () => (
             <Route path="/test/:shareLink" element={<TakeTest />} />
             <Route path="/diseases" element={<DiseaseLookup onBackToMenu={() => window.history.back()} />} />
             <Route path="/data-management" element={<DataManagement />} />
+            <Route path="/drug-interactions" element={<DrugInteractionChecker onBackToMenu={() => window.history.back()} />} />
+            <Route path="/drug-classes" element={<DrugClassExplorer onBackToMenu={() => window.history.back()} />} />
+            <Route path="/clinical-cases" element={<ClinicalCaseSimulator onBackToMenu={() => window.history.back()} />} />
+            <Route path="/dosage-calculator" element={<DosageCalculator onBackToMenu={() => window.history.back()} />} />
+            <Route path="/side-effects" element={<SideEffectsDatabase onBackToMenu={() => window.history.back()} />} />
+            <Route path="/pharmacokinetics" element={<PharmacokineticsSimulator onBackToMenu={() => window.history.back()} />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
