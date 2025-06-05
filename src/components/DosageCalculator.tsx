@@ -77,6 +77,8 @@ const DosageCalculator = ({ onBackToMenu }: DosageCalculatorProps) => {
     const weightKg = parseFloat(weight);
     const ageYears = parseInt(age);
     
+    console.log('Calculating dose for:', { formula: formula.formula, weight: weightKg, age: ageYears });
+    
     if (formula.formula_type === 'weight_based' && weightKg) {
       const formulaText = formula.formula.toLowerCase();
       if (formulaText.includes('mg/kg')) {
@@ -93,10 +95,75 @@ const DosageCalculator = ({ onBackToMenu }: DosageCalculatorProps) => {
       }
     }
     
-    return 'Calculation requires specific parameters';
+    // Age-based calculations
+    if (formula.formula_type === 'age_based' && ageYears) {
+      const formulaText = formula.formula.toLowerCase();
+      if (formulaText.includes('mg/year')) {
+        const match = formulaText.match(/(\d+(?:-\d+)?)\s*mg\/year/);
+        if (match) {
+          const doseRange = match[1];
+          if (doseRange.includes('-')) {
+            const [min, max] = doseRange.split('-').map(Number);
+            return `${min * ageYears}-${max * ageYears} mg`;
+          } else {
+            return `${parseInt(doseRange) * ageYears} mg`;
+          }
+        }
+      }
+    }
+    
+    // Combined weight and age calculations
+    if (formula.formula_type === 'weight_age_based' && weightKg && ageYears) {
+      const formulaText = formula.formula.toLowerCase();
+      
+      // Check for pediatric dosing adjustments
+      if (ageYears < 18) {
+        const pediatricMatch = formulaText.match(/pediatric:\s*(\d+(?:-\d+)?)\s*mg\/kg/i);
+        if (pediatricMatch) {
+          const doseRange = pediatricMatch[1];
+          if (doseRange.includes('-')) {
+            const [min, max] = doseRange.split('-').map(Number);
+            return `${min * weightKg}-${max * weightKg} mg (Pediatric dose)`;
+          } else {
+            return `${parseInt(doseRange) * weightKg} mg (Pediatric dose)`;
+          }
+        }
+      }
+      
+      // Adult dosing
+      const adultMatch = formulaText.match(/adult:\s*(\d+(?:-\d+)?)\s*mg\/kg/i);
+      if (adultMatch) {
+        const doseRange = adultMatch[1];
+        if (doseRange.includes('-')) {
+          const [min, max] = doseRange.split('-').map(Number);
+          return `${min * weightKg}-${max * weightKg} mg (Adult dose)`;
+        } else {
+          return `${parseInt(doseRange) * weightKg} mg (Adult dose)`;
+        }
+      }
+    }
+    
+    return 'Calculation requires specific parameters or formula not recognized';
   };
 
   const uniqueDrugs = Array.from(new Set(formulas?.map(f => f.drug_name) || []));
+
+  // Re-calculate when weight or age changes
+  const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWeight(e.target.value);
+    if (hasCalculated && calculationResults.length > 0) {
+      // Force re-render by updating the state
+      setCalculationResults([...calculationResults]);
+    }
+  };
+
+  const handleAgeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAge(e.target.value);
+    if (hasCalculated && calculationResults.length > 0) {
+      // Force re-render by updating the state
+      setCalculationResults([...calculationResults]);
+    }
+  };
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -144,7 +211,7 @@ const DosageCalculator = ({ onBackToMenu }: DosageCalculatorProps) => {
               <Input
                 type="number"
                 value={weight}
-                onChange={(e) => setWeight(e.target.value)}
+                onChange={handleWeightChange}
                 placeholder="Enter weight..."
               />
             </div>
@@ -156,7 +223,7 @@ const DosageCalculator = ({ onBackToMenu }: DosageCalculatorProps) => {
               <Input
                 type="number"
                 value={age}
-                onChange={(e) => setAge(e.target.value)}
+                onChange={handleAgeChange}
                 placeholder="Enter age..."
               />
             </div>
@@ -192,12 +259,17 @@ const DosageCalculator = ({ onBackToMenu }: DosageCalculatorProps) => {
                       <h4 className="font-semibold mb-2">Dosage Formula</h4>
                       <p className="text-gray-700 mb-4">{formula.formula}</p>
                       
-                      {weight && (
+                      {(weight || age) && (
                         <div className="bg-green-50 border border-green-200 rounded-lg p-4">
                           <h5 className="font-semibold text-green-800 mb-2">Calculated Dose</h5>
                           <p className="text-green-700 text-lg font-medium">
                             {calculateDose(formula)}
                           </p>
+                          {weight && age && (
+                            <p className="text-sm text-gray-600 mt-2">
+                              Based on: Weight {weight}kg, Age {age} years
+                            </p>
+                          )}
                         </div>
                       )}
                     </div>

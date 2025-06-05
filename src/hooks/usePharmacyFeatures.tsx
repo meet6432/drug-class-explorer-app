@@ -49,6 +49,36 @@ export const useDrugClassRelationships = () => {
   });
 };
 
+export const useAddDrugClassRelationship = () => {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: async (relationship: {
+      parent_class: string;
+      child_class: string;
+      relationship_type: string;
+      connection_strength: number;
+      description?: string;
+    }) => {
+      const { data, error } = await supabase
+        .from('drug_class_relationships')
+        .insert([relationship])
+        .select()
+        .single();
+      
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['drug-class-relationships'] });
+      toast.success('Drug class relationship added successfully!');
+    },
+    onError: (error) => {
+      toast.error('Failed to add drug class relationship: ' + error.message);
+    }
+  });
+};
+
 // Clinical Cases
 export const useClinicalCases = () => {
   return useQuery({
