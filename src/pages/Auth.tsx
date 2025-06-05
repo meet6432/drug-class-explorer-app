@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { BookOpen, GraduationCap, Users, Award } from 'lucide-react';
+import { BookOpen, GraduationCap, Users, Award, CreditCard, Shield } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Auth = () => {
@@ -111,14 +111,14 @@ const Auth = () => {
             <p className="text-xs text-gray-500">Create & Share Tests</p>
           </div>
           <div className="bg-white p-4 rounded-lg shadow-sm text-center">
-            <Award className="h-6 w-6 text-purple-500 mx-auto mb-2" />
-            <p className="text-sm font-medium text-gray-700">Badges & Rewards</p>
-            <p className="text-xs text-gray-500">Track Progress</p>
+            <CreditCard className="h-6 w-6 text-purple-500 mx-auto mb-2" />
+            <p className="text-sm font-medium text-gray-700">Premium Quizzes</p>
+            <p className="text-xs text-gray-500">₹15-30 Lifetime</p>
           </div>
           <div className="bg-white p-4 rounded-lg shadow-sm text-center">
-            <BookOpen className="h-6 w-6 text-orange-500 mx-auto mb-2" />
-            <p className="text-sm font-medium text-gray-700">400+ Drug Classes</p>
-            <p className="text-xs text-gray-500">Comprehensive Database</p>
+            <Shield className="h-6 w-6 text-orange-500 mx-auto mb-2" />
+            <p className="text-sm font-medium text-gray-700">Free Tools</p>
+            <p className="text-xs text-gray-500">Drug Interactions & More</p>
           </div>
         </div>
 
@@ -126,7 +126,7 @@ const Auth = () => {
           <CardHeader>
             <CardTitle>Get Started</CardTitle>
             <CardDescription>
-              Sign in to your account or create a new one to start learning
+              Sign in to your account or create a new one to access premium quizzes
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -221,6 +221,17 @@ const Auth = () => {
             </Tabs>
           </CardContent>
         </Card>
+
+        {/* Payment Info */}
+        <div className="text-center mt-6 p-4 bg-white rounded-lg shadow-sm">
+          <h3 className="font-semibold text-gray-800 mb-2">Why Create an Account?</h3>
+          <div className="text-sm text-gray-600 space-y-1">
+            <p>• Access premium quiz levels (₹15-30 lifetime)</p>
+            <p>• Track your learning progress</p>
+            <p>• Secure payments via Razorpay</p>
+            <p>• All pharmacy tools remain free forever!</p>
+          </div>
+        </div>
 
         <div className="text-center mt-6 text-sm text-gray-500">
           By signing up, you agree to our Terms of Service and Privacy Policy
