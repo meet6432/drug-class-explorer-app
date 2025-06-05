@@ -229,7 +229,7 @@ const PharmacokineticsSimulator = ({ onBackToMenu }: PharmacokineticsSimulatorPr
                         {Object.entries(JSON.parse(selectedDrug.metabolism_pathway)).map(([key, value]) => (
                           <div key={key} className="flex justify-between">
                             <span className="capitalize">{key}:</span>
-                            <span>{value as string}</span>
+                            <span>{String(value)}</span>
                           </div>
                         ))}
                       </div>
@@ -243,7 +243,7 @@ const PharmacokineticsSimulator = ({ onBackToMenu }: PharmacokineticsSimulatorPr
                         {Object.entries(JSON.parse(selectedDrug.excretion_route)).map(([key, value]) => (
                           <div key={key} className="flex justify-between">
                             <span className="capitalize">{key}:</span>
-                            <span>{value}%</span>
+                            <span>{String(value)}%</span>
                           </div>
                         ))}
                       </div>
