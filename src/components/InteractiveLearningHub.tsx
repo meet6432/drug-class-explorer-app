@@ -10,7 +10,7 @@ import ClinicalCaseSimulator from './ClinicalCaseSimulator';
 import DosageCalculator from './DosageCalculator';
 import SideEffectsDatabase from './SideEffectsDatabase';
 import PharmacokineticsSimulator from './PharmacokineticsSimulator';
-import Quiz from './Quiz';
+import QuizLevel from './QuizLevel';
 import SymptomDiagnosis from './SymptomDiagnosis';
 
 interface InteractiveLearningHubProps {
@@ -79,7 +79,7 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
       description: 'Start with basic pharmacy and medical questions',
       icon: BookOpen,
       color: 'from-green-400 to-green-600',
-      difficulty: 'easy'
+      difficulty: 'easy' as const
     },
     {
       id: 'medium-quiz',
@@ -87,7 +87,7 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
       description: 'Intermediate level questions for developing knowledge',
       icon: Brain,
       color: 'from-yellow-400 to-yellow-600',
-      difficulty: 'medium'
+      difficulty: 'medium' as const
     },
     {
       id: 'hard-quiz',
@@ -95,7 +95,7 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
       description: 'Advanced questions for expert-level understanding',
       icon: Clock,
       color: 'from-red-400 to-red-600',
-      difficulty: 'hard'
+      difficulty: 'hard' as const
     },
     {
       id: 'symptom-diagnosis',
@@ -122,7 +122,7 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
         const Component = quiz.component;
         return <Component onBackToMenu={() => setActiveQuiz(null)} />;
       } else if (quiz.difficulty) {
-        return <Quiz difficulty={quiz.difficulty} onBackToMenu={() => setActiveQuiz(null)} />;
+        return <QuizLevel difficulty={quiz.difficulty} onBack={() => setActiveQuiz(null)} />;
       }
     }
   }

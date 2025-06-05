@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import { Navigate } from 'react-router-dom';
@@ -6,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { BookOpen, Brain, Users, Trophy, LogOut, Play, GraduationCap } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import Quiz from '@/components/Quiz';
+import QuizLevel from '@/components/QuizLevel';
 import SymptomDiagnosis from '@/components/SymptomDiagnosis';
 import InteractiveLearningHub from '@/components/InteractiveLearningHub';
 
@@ -83,7 +84,7 @@ const StudentDashboard = () => {
   }
 
   if (currentView === 'easy' || currentView === 'medium' || currentView === 'hard') {
-    return <Quiz difficulty={currentView} onBackToMenu={() => setCurrentView('dashboard')} />;
+    return <QuizLevel difficulty={currentView} onBack={() => setCurrentView('dashboard')} />;
   }
 
   if (currentView === 'symptom') {
