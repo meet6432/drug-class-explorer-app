@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useSupabaseClient, useSession } from '@supabase/auth-helpers-react';
 import { Navigate } from 'react-router-dom';
@@ -75,6 +74,10 @@ const Auth = () => {
         title: "Welcome back!",
         description: "You have been signed in successfully.",
       });
+
+      // Redirect to dashboard or previous page
+      const returnUrl = new URLSearchParams(window.location.search).get('returnUrl') || '/dashboard';
+      window.location.href = returnUrl;
     } catch (error: any) {
       toast({
         title: "Error",

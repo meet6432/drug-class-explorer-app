@@ -1,10 +1,9 @@
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowLeft, BookOpen, Brain, Microscope, Calculator, Activity, Network, Pill, AlertTriangle, Clock, Search, Stethoscope, DollarSign } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useSession } from '@supabase/auth-helpers-react';
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import DrugInteractionChecker from './DrugInteractionChecker';
 import DrugClassExplorer from './DrugClassExplorer';
 import ClinicalCaseSimulator from './ClinicalCaseSimulator';
@@ -25,7 +24,9 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
   const [activeQuiz, setActiveQuiz] = useState<string | null>(null);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [selectedQuiz, setSelectedQuiz] = useState<{ difficulty: 'easy' | 'medium' | 'hard'; price: number } | null>(null);
+  const [purchasedQuizzes, setPurchasedQuizzes] = useState<string[]>([]);
   const session = useSession();
+  const supabase = useSupabaseClient();
 
   const pharmacyFeatures = [
     {
@@ -124,6 +125,28 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
     }
   ];
 
+  useEffect(() => {
+    if (session?.user?.id) {
+      checkPurchasedQuizzes();
+    }
+  }, [session]);
+
+  const checkPurchasedQuizzes = async () => {
+    if (!session?.user?.id) return;
+
+    const { data, error } = await supabase
+      .from('quiz_purchases')
+      .select('difficulty')
+      .eq('user_id', session.user.id);
+
+    if (error) {
+      console.error('Error fetching purchases:', error);
+      return;
+    }
+
+    setPurchasedQuizzes(data.map(p => p.difficulty));
+  };
+
   const handleQuizAccess = async (quiz: { difficulty: 'easy' | 'medium' | 'hard'; price: number }) => {
     if (!session) {
       // Redirect to auth page
@@ -132,7 +155,13 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
     }
 
     // Check if user has already purchased this quiz level
-    // For now, we'll show the payment modal - this will be enhanced with actual purchase checking
+    if (purchasedQuizzes.includes(quiz.difficulty)) {
+      // User has already purchased, allow direct access
+      setActiveQuiz(`${quiz.difficulty}-quiz`);
+      return;
+    }
+
+    // Show payment modal for purchase
     setSelectedQuiz(quiz);
     setShowPaymentModal(true);
   };
@@ -236,6 +265,7 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
             {quizFeatures.map((quiz) => {
               const Icon = quiz.icon;
               const isPaid = quiz.price !== undefined;
+              const isPurchased = isPaid && purchasedQuizzes.includes(quiz.difficulty!);
               return (
                 <Card 
                   key={quiz.id} 
@@ -260,6 +290,11 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
                       <div className="flex items-center justify-center gap-1 mt-2">
                         <DollarSign className="h-4 w-4 text-green-600" />
                         <span className="text-green-600 font-semibold">₹{quiz.price}</span>
+                        {isPurchased && (
+                          <span className="ml-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
+                            Purchased
+                          </span>
+                        )}
                       </div>
                     )}
                     {!isPaid && (
@@ -268,7 +303,7 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
                   </CardHeader>
                   <CardContent>
                     <Button className="w-full" variant="outline">
-                      {isPaid ? (session ? 'Purchase & Start' : 'Login to Purchase') : 'Start Free'}
+                      {isPaid ? (isPurchased ? 'Start Quiz' : (session ? 'Purchase & Start' : 'Login to Purchase')) : 'Start Free'}
                     </Button>
                   </CardContent>
                 </Card>
@@ -323,6 +358,8 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
           onSuccess={(difficulty) => {
             setShowPaymentModal(false);
             setSelectedQuiz(null);
+            // Refresh purchased quizzes
+            checkPurchasedQuizzes();
             setActiveQuiz(`${difficulty}-quiz`);
           }}
         />
