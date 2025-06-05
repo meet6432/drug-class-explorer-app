@@ -20,6 +20,47 @@ const DosageCalculator = ({ onBackToMenu }: DosageCalculatorProps) => {
   const { data: formulas, isLoading } = useDosageFormulas();
   const calculateMutation = useCalculateDosage();
 
+  // Helper function to safely parse JSON data
+  const safeParseJson = (data: any) => {
+    if (!data) return {};
+    
+    // If it's already an object, return it
+    if (typeof data === 'object' && !Array.isArray(data)) return data;
+    
+    // If it's a string, try to parse as JSON
+    if (typeof data === 'string') {
+      try {
+        return JSON.parse(data);
+      } catch (e) {
+        console.warn('Failed to parse JSON:', data);
+        return {};
+      }
+    }
+    
+    return {};
+  };
+
+  // Helper function to safely parse contraindications array
+  const safeParseContraindications = (data: any) => {
+    if (!data) return [];
+    
+    // If it's already an array, return it
+    if (Array.isArray(data)) return data;
+    
+    // If it's a string, try to parse as JSON
+    if (typeof data === 'string') {
+      try {
+        const parsed = JSON.parse(data);
+        return Array.isArray(parsed) ? parsed : [data];
+      } catch (e) {
+        console.warn('Failed to parse contraindications:', data);
+        return [data];
+      }
+    }
+    
+    return [];
+  };
+
   const handleCalculate = async () => {
     if (!selectedDrug.trim()) return;
     
@@ -166,7 +207,7 @@ const DosageCalculator = ({ onBackToMenu }: DosageCalculatorProps) => {
                         <div>
                           <h5 className="font-semibold mb-2">Safety Limits</h5>
                           <div className="text-sm space-y-1">
-                            {Object.entries(JSON.parse(formula.safety_limits)).map(([key, value]) => (
+                            {Object.entries(safeParseJson(formula.safety_limits)).map(([key, value]) => (
                               <div key={key} className="flex justify-between">
                                 <span className="capitalize">{key.replace('_', ' ')}:</span>
                                 <span className="font-medium">{value as string}</span>
@@ -180,7 +221,7 @@ const DosageCalculator = ({ onBackToMenu }: DosageCalculatorProps) => {
                         <div>
                           <h5 className="font-semibold mb-2">Special Populations</h5>
                           <div className="text-sm space-y-1">
-                            {Object.entries(JSON.parse(formula.special_populations)).map(([key, value]) => (
+                            {Object.entries(safeParseJson(formula.special_populations)).map(([key, value]) => (
                               <div key={key}>
                                 <span className="capitalize font-medium">{key}: </span>
                                 <span>{value as string}</span>
@@ -194,7 +235,7 @@ const DosageCalculator = ({ onBackToMenu }: DosageCalculatorProps) => {
                         <div>
                           <h5 className="font-semibold mb-2 text-red-800">Contraindications</h5>
                           <div className="text-sm text-red-700">
-                            {JSON.parse(formula.contraindications).map((item: string, index: number) => (
+                            {safeParseContraindications(formula.contraindications).map((item: string, index: number) => (
                               <div key={index}>• {item}</div>
                             ))}
                           </div>
