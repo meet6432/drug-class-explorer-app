@@ -18,6 +18,28 @@ const DrugInteractionChecker = ({ onBackToMenu }: DrugInteractionCheckerProps) =
 
   const checkInteractionMutation = useCheckDrugInteraction();
 
+  // Helper function to safely parse clinical effects
+  const safeParseClinicalEffects = (effects: any) => {
+    if (!effects) return [];
+    
+    // If it's already an array, return it
+    if (Array.isArray(effects)) return effects;
+    
+    // If it's a string, try to parse as JSON first
+    if (typeof effects === 'string') {
+      try {
+        const parsed = JSON.parse(effects);
+        return Array.isArray(parsed) ? parsed : [effects];
+      } catch (e) {
+        // If parsing fails, treat as single string and return as array
+        return [effects];
+      }
+    }
+    
+    // For any other type, convert to array
+    return [String(effects)];
+  };
+
   const handleCheck = async () => {
     if (!drug1.trim() || !drug2.trim()) return;
     
@@ -138,7 +160,7 @@ const DrugInteractionChecker = ({ onBackToMenu }: DrugInteractionCheckerProps) =
                           <div className="mb-3">
                             <h4 className="font-semibold mb-1">Clinical Effects:</h4>
                             <ul className="text-sm list-disc list-inside">
-                              {JSON.parse(interaction.clinical_effects).map((effect: string, index: number) => (
+                              {safeParseClinicalEffects(interaction.clinical_effects).map((effect: string, index: number) => (
                                 <li key={index}>{effect}</li>
                               ))}
                             </ul>
