@@ -55,6 +55,19 @@ const PharmacokineticsSimulator = ({ onBackToMenu }: PharmacokineticsSimulatorPr
     return Math.max(0, concentration);
   };
 
+  // Helper function to safely parse JSON or return the object if already parsed
+  const safeJsonParse = (data: any) => {
+    if (typeof data === 'string') {
+      try {
+        return JSON.parse(data);
+      } catch (e) {
+        console.error('JSON parse error:', e);
+        return {};
+      }
+    }
+    return data || {};
+  };
+
   const uniqueDrugs = Array.from(new Set(pkData?.map(d => d.drug_name) || []));
 
   return (
@@ -226,7 +239,7 @@ const PharmacokineticsSimulator = ({ onBackToMenu }: PharmacokineticsSimulatorPr
                     <div>
                       <h4 className="font-semibold text-teal-800 mb-2">Metabolism</h4>
                       <div className="text-sm text-teal-700">
-                        {Object.entries(JSON.parse(selectedDrug.metabolism_pathway)).map(([key, value]) => (
+                        {Object.entries(safeJsonParse(selectedDrug.metabolism_pathway)).map(([key, value]) => (
                           <div key={key} className="flex justify-between">
                             <span className="capitalize">{key}:</span>
                             <span>{String(value)}</span>
@@ -240,7 +253,7 @@ const PharmacokineticsSimulator = ({ onBackToMenu }: PharmacokineticsSimulatorPr
                     <div>
                       <h4 className="font-semibold text-teal-800 mb-2">Excretion</h4>
                       <div className="text-sm text-teal-700">
-                        {Object.entries(JSON.parse(selectedDrug.excretion_route)).map(([key, value]) => (
+                        {Object.entries(safeJsonParse(selectedDrug.excretion_route)).map(([key, value]) => (
                           <div key={key} className="flex justify-between">
                             <span className="capitalize">{key}:</span>
                             <span>{String(value)}%</span>
