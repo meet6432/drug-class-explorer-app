@@ -254,6 +254,45 @@ export type Database = {
         }
         Relationships: []
       }
+      drug_classes: {
+        Row: {
+          category: string
+          created_at: string
+          description: string
+          examples: Json
+          id: string
+          mechanism: string
+          name: string
+          side_effects: string
+          updated_at: string
+          uses: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description: string
+          examples?: Json
+          id?: string
+          mechanism: string
+          name: string
+          side_effects: string
+          updated_at?: string
+          uses: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string
+          examples?: Json
+          id?: string
+          mechanism?: string
+          name?: string
+          side_effects?: string
+          updated_at?: string
+          uses?: string
+        }
+        Relationships: []
+      }
       drug_interactions: {
         Row: {
           clinical_effects: Json | null
