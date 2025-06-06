@@ -5,14 +5,12 @@ import { Navigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { BookOpen, Brain, Users, Trophy, LogOut, Play, GraduationCap } from 'lucide-react';
+import { BookOpen, Brain, Users, Trophy, LogOut, Play, GraduationCap, ArrowLeft } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import QuizLevel from '@/components/QuizLevel';
-import SymptomDiagnosis from '@/components/SymptomDiagnosis';
 import InteractiveLearningHub from '@/components/InteractiveLearningHub';
 
 const StudentDashboard = () => {
-  const [currentView, setCurrentView] = useState<'dashboard' | 'easy' | 'medium' | 'hard' | 'symptom' | 'learning-hub'>('dashboard');
+  const [currentView, setCurrentView] = useState<'dashboard' | 'learning-hub'>('dashboard');
   const session = useSession();
   const supabase = useSupabaseClient();
   const { toast } = useToast();
@@ -59,6 +57,8 @@ const StudentDashboard = () => {
         description: error.message,
         variant: "destructive",
       });
+    } else {
+      window.location.href = '/';
     }
   };
 
@@ -83,14 +83,6 @@ const StudentDashboard = () => {
     return <InteractiveLearningHub onBackToMenu={() => setCurrentView('dashboard')} />;
   }
 
-  if (currentView === 'easy' || currentView === 'medium' || currentView === 'hard') {
-    return <QuizLevel difficulty={currentView} onBack={() => setCurrentView('dashboard')} />;
-  }
-
-  if (currentView === 'symptom') {
-    return <SymptomDiagnosis onBackToMenu={() => setCurrentView('dashboard')} />;
-  }
-
   const easyProgress = progress?.find(p => p.difficulty === 'easy');
   const mediumProgress = progress?.find(p => p.difficulty === 'medium');
   const hardProgress = progress?.find(p => p.difficulty === 'hard');
@@ -100,9 +92,19 @@ const StudentDashboard = () => {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-800">Student Dashboard</h1>
-            <p className="text-gray-600">Welcome back, {profile?.full_name || 'Student'}!</p>
+          <div className="flex items-center gap-4">
+            <Button 
+              onClick={() => window.location.href = '/'} 
+              variant="outline" 
+              className="flex items-center gap-2"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Home
+            </Button>
+            <div>
+              <h1 className="text-3xl font-bold text-gray-800">Student Dashboard</h1>
+              <p className="text-gray-600">Welcome back, {profile?.full_name || 'Student'}!</p>
+            </div>
           </div>
           <Button onClick={handleSignOut} variant="outline">
             <LogOut className="h-4 w-4 mr-2" />
@@ -164,95 +166,64 @@ const StudentDashboard = () => {
           </Card>
         </div>
 
-        {/* Main Learning Options */}
+        {/* Main Learning Hub Access */}
+        <Card className="mb-8">
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle className="flex items-center space-x-2 text-2xl">
+                  <GraduationCap className="h-8 w-8" />
+                  <span>Pharmacy MasterApp - Learning Hub</span>
+                </CardTitle>
+                <CardDescription className="text-lg mt-2">
+                  Access all pharmacy tools, drug classes, quizzes, and clinical case studies
+                </CardDescription>
+              </div>
+              <Button 
+                onClick={() => setCurrentView('learning-hub')}
+                size="lg"
+                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-lg px-8 py-4"
+              >
+                <Play className="h-5 w-5 mr-2" />
+                Enter Learning Hub
+              </Button>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-lg">
+                <h4 className="font-semibold text-blue-800 mb-3 text-lg">Free Pharmacy Tools</h4>
+                <ul className="text-sm text-blue-700 space-y-2">
+                  <li>• 400+ Drug Classes Database</li>
+                  <li>• Drug Interaction Checker</li>
+                  <li>• Drug Class Explorer</li>
+                  <li>• Dosage Calculator</li>
+                  <li>• Side Effects Database</li>
+                  <li>• Pharmacokinetics Simulator</li>
+                  <li>• Clinical Case Studies</li>
+                  <li>• Disease Lookup Tool</li>
+                  <li>• Symptom Diagnosis Practice</li>
+                </ul>
+              </div>
+              <div className="bg-gradient-to-r from-purple-50 to-purple-100 p-6 rounded-lg">
+                <h4 className="font-semibold text-purple-800 mb-3 text-lg">Premium Quiz System</h4>
+                <ul className="text-sm text-purple-700 space-y-2">
+                  <li>• Easy Quiz Level (₹15 lifetime)</li>
+                  <li>• Medium Quiz Level (₹20 lifetime)</li>
+                  <li>• Hard Quiz Level (₹30 lifetime)</li>
+                  <li>• 1000+ Questions per level</li>
+                  <li>• Detailed explanations</li>
+                  <li>• Progress tracking</li>
+                  <li>• Performance analytics</li>
+                  <li>• Secure Razorpay payments</li>
+                </ul>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Quick Stats */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Interactive Learning Hub */}
-          <Card className="lg:col-span-2">
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <div>
-                  <CardTitle className="flex items-center space-x-2">
-                    <GraduationCap className="h-6 w-6" />
-                    <span>Interactive Learning Hub</span>
-                  </CardTitle>
-                  <CardDescription>
-                    Access comprehensive pharmacy tools, quizzes, and clinical case studies
-                  </CardDescription>
-                </div>
-                <Button 
-                  onClick={() => setCurrentView('learning-hub')}
-                  className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
-                >
-                  <Play className="h-4 w-4 mr-2" />
-                  Enter Learning Hub
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg">
-                  <h4 className="font-semibold text-blue-800 mb-2">Pharmacy Tools</h4>
-                  <ul className="text-sm text-blue-700 space-y-1">
-                    <li>• Drug Interaction Checker</li>
-                    <li>• Drug Class Explorer</li>
-                    <li>• Dosage Calculator</li>
-                    <li>• Side Effects Database</li>
-                    <li>• Pharmacokinetics Simulator</li>
-                  </ul>
-                </div>
-                <div className="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg">
-                  <h4 className="font-semibold text-purple-800 mb-2">Interactive Learning</h4>
-                  <ul className="text-sm text-purple-700 space-y-1">
-                    <li>• Progressive Quiz Levels</li>
-                    <li>• Clinical Case Studies</li>
-                    <li>• Symptom Diagnosis Practice</li>
-                    <li>• Real-world Scenarios</li>
-                    <li>• Performance Analytics</li>
-                  </ul>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Quick Access Quizzes */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Quick Quiz Access</CardTitle>
-              <CardDescription>Jump directly into quiz practice</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <Button 
-                onClick={() => setCurrentView('easy')} 
-                className="w-full justify-start bg-green-500 hover:bg-green-600"
-              >
-                <BookOpen className="h-4 w-4 mr-2" />
-                Easy Quiz - Basic Concepts
-              </Button>
-              <Button 
-                onClick={() => setCurrentView('medium')} 
-                className="w-full justify-start bg-yellow-500 hover:bg-yellow-600"
-              >
-                <Brain className="h-4 w-4 mr-2" />
-                Medium Quiz - Intermediate
-              </Button>
-              <Button 
-                onClick={() => setCurrentView('hard')} 
-                className="w-full justify-start bg-red-500 hover:bg-red-600"
-              >
-                <Trophy className="h-4 w-4 mr-2" />
-                Hard Quiz - Advanced
-              </Button>
-              <Button 
-                onClick={() => setCurrentView('symptom')} 
-                className="w-full justify-start bg-purple-500 hover:bg-purple-600"
-              >
-                <Users className="h-4 w-4 mr-2" />
-                Symptom Diagnosis
-              </Button>
-            </CardContent>
-          </Card>
-
-          {/* Progress Overview */}
           <Card>
             <CardHeader>
               <CardTitle>Learning Progress</CardTitle>
@@ -280,6 +251,33 @@ const StudentDashboard = () => {
                     </div>
                   </div>
                 ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Getting Started</CardTitle>
+              <CardDescription>New to the platform? Start here!</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                <h4 className="font-semibold text-green-800 mb-2">✅ Step 1: Explore Free Tools</h4>
+                <p className="text-sm text-green-700">
+                  Start with our comprehensive drug database and free pharmacy tools
+                </p>
+              </div>
+              <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                <h4 className="font-semibold text-blue-800 mb-2">📚 Step 2: Try Free Features</h4>
+                <p className="text-sm text-blue-700">
+                  Practice with symptom diagnosis and clinical case studies
+                </p>
+              </div>
+              <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                <h4 className="font-semibold text-purple-800 mb-2">🎯 Step 3: Upgrade to Premium</h4>
+                <p className="text-sm text-purple-700">
+                  Access quiz levels for structured learning and progress tracking
+                </p>
               </div>
             </CardContent>
           </Card>

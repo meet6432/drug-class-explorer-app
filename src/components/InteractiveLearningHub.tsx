@@ -201,19 +201,19 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
         </Button>
         <div className="text-center">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Interactive Learning Hub
+            Pharmacy MasterApp - Learning Hub
           </h1>
           <p className="text-gray-600 mt-2">Comprehensive pharmacy and medical learning tools</p>
         </div>
-        <div className="w-24">
+        <div className="w-32">
           {!session && (
             <Button onClick={() => window.location.href = '/auth'} variant="outline">
               Login
             </Button>
           )}
           {session && (
-            <div className="text-sm text-gray-600">
-              Welcome, {session.user.email}
+            <div className="text-sm text-gray-600 text-right">
+              Welcome, {session.user.email?.split('@')[0]}
             </div>
           )}
         </div>
@@ -221,7 +221,7 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
 
       <Tabs defaultValue="pharmacy-tools" className="space-y-6">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="pharmacy-tools">Pharmacy Tools</TabsTrigger>
+          <TabsTrigger value="pharmacy-tools">Free Pharmacy Tools</TabsTrigger>
           <TabsTrigger value="quizzes-cases">Interactive Quizzes & Cases</TabsTrigger>
         </TabsList>
 
@@ -229,7 +229,7 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
           <div className="text-center mb-6">
             <h2 className="text-2xl font-semibold text-gray-800 mb-2">Advanced Pharmacy Tools</h2>
             <p className="text-gray-600">Professional tools for drug analysis, interaction checking, and clinical decision support</p>
-            <p className="text-sm text-green-600 font-medium mt-2">✨ All pharmacy tools are completely FREE!</p>
+            <p className="text-lg text-green-600 font-bold mt-2">✨ All pharmacy tools are completely FREE forever!</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -238,11 +238,11 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
               return (
                 <Card 
                   key={feature.id} 
-                  className="cursor-pointer hover:shadow-lg transition-all duration-300 border-2 hover:border-blue-200"
+                  className="cursor-pointer hover:shadow-xl transition-all duration-300 border-2 hover:border-blue-300 hover:scale-105"
                   onClick={() => setActiveFeature(feature.id)}
                 >
                   <CardHeader className="text-center">
-                    <div className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-r ${feature.color} flex items-center justify-center mb-4`}>
+                    <div className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-r ${feature.color} flex items-center justify-center mb-4 shadow-lg`}>
                       <Icon className="h-8 w-8 text-white" />
                     </div>
                     <CardTitle className="text-lg">{feature.title}</CardTitle>
@@ -251,7 +251,7 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Button className="w-full" variant="outline">
+                    <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700">
                       Launch Tool
                     </Button>
                   </CardContent>
@@ -265,7 +265,7 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
           <div className="text-center mb-6">
             <h2 className="text-2xl font-semibold text-gray-800 mb-2">Interactive Learning & Assessment</h2>
             <p className="text-gray-600">Test your knowledge with quizzes and practice with clinical case studies</p>
-            <p className="text-sm text-blue-600 font-medium mt-2">💳 Premium quizzes require payment • Symptom diagnosis is FREE!</p>
+            <p className="text-lg text-blue-600 font-bold mt-2">💳 Premium quizzes require one-time payment • Symptom diagnosis is FREE!</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -273,10 +273,16 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
               const Icon = quiz.icon;
               const isPaid = quiz.price !== undefined;
               const isPurchased = isPaid && purchasedQuizzes.includes(quiz.difficulty!);
+              const isFree = !isPaid;
+              
               return (
                 <Card 
                   key={quiz.id} 
-                  className="cursor-pointer hover:shadow-lg transition-all duration-300 border-2 hover:border-purple-200"
+                  className={`cursor-pointer hover:shadow-xl transition-all duration-300 border-2 hover:scale-105 ${
+                    isFree ? 'hover:border-green-300 border-green-200' : 
+                    isPurchased ? 'hover:border-blue-300 border-blue-200' : 
+                    'hover:border-purple-300 border-purple-200'
+                  }`}
                   onClick={() => {
                     if (isPaid) {
                       handleQuizAccess({ difficulty: quiz.difficulty!, price: quiz.price! });
@@ -286,7 +292,7 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
                   }}
                 >
                   <CardHeader className="text-center">
-                    <div className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-r ${quiz.color} flex items-center justify-center mb-4`}>
+                    <div className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-r ${quiz.color} flex items-center justify-center mb-4 shadow-lg`}>
                       <Icon className="h-8 w-8 text-white" />
                     </div>
                     <CardTitle className="text-lg">{quiz.title}</CardTitle>
@@ -294,23 +300,31 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
                       {quiz.description}
                     </CardDescription>
                     {isPaid && (
-                      <div className="flex items-center justify-center gap-1 mt-2">
-                        <DollarSign className="h-4 w-4 text-green-600" />
-                        <span className="text-green-600 font-semibold">₹{quiz.price}</span>
+                      <div className="flex items-center justify-center gap-1 mt-3 p-2 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg">
+                        <DollarSign className="h-5 w-5 text-blue-600" />
+                        <span className="text-blue-600 font-bold text-lg">₹{quiz.price}</span>
                         {isPurchased && (
-                          <span className="ml-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
-                            Purchased
+                          <span className="ml-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full font-medium">
+                            PURCHASED ✓
                           </span>
                         )}
                       </div>
                     )}
-                    {!isPaid && (
-                      <div className="text-green-600 font-semibold text-sm mt-2">FREE</div>
+                    {isFree && (
+                      <div className="mt-3 p-2 bg-gradient-to-r from-green-50 to-green-100 rounded-lg">
+                        <div className="text-green-600 font-bold text-lg">FREE FOREVER</div>
+                      </div>
                     )}
                   </CardHeader>
                   <CardContent>
-                    <Button className="w-full" variant="outline">
-                      {isPaid ? (isPurchased ? 'Start Quiz' : (session ? 'Purchase & Start' : 'Login to Purchase')) : 'Start Free'}
+                    <Button 
+                      className={`w-full ${
+                        isFree ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700' :
+                        isPurchased ? 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700' :
+                        'bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700'
+                      }`}
+                    >
+                      {isPaid ? (isPurchased ? 'Start Quiz' : (session ? 'Purchase & Start' : 'Login to Purchase')) : 'Start Free Practice'}
                     </Button>
                   </CardContent>
                 </Card>
@@ -321,34 +335,58 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
       </Tabs>
 
       {/* Features Overview */}
-      <div className="mt-12 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6">
+      <div className="mt-12 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-8">
         <div className="text-center">
-          <h3 className="text-xl font-semibold text-gray-800 mb-2">Features Overview</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+          <h3 className="text-2xl font-bold text-gray-800 mb-6">Complete Feature Overview</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="text-left">
-              <h4 className="font-semibold text-blue-800 mb-2">Free Pharmacy Tools</h4>
-              <ul className="text-sm text-gray-600 space-y-1">
-                <li>• Check drug interactions and contraindications</li>
-                <li>• Explore drug classifications and relationships</li>
-                <li>• Calculate dosages based on patient parameters</li>
-                <li>• Search comprehensive side effects database</li>
-                <li>• Simulate pharmacokinetic properties</li>
-                <li>• Practice with clinical case scenarios</li>
-                <li>• Disease lookup with drug recommendations</li>
-                <li>• Free symptom diagnosis practice</li>
+              <h4 className="font-bold text-blue-800 mb-4 text-lg">🆓 Free Tools (Forever)</h4>
+              <ul className="text-sm text-gray-700 space-y-2">
+                <li>• <strong>400+ Drug Classes Database</strong> - Complete classification system</li>
+                <li>• <strong>Drug Interaction Checker</strong> - Safety and contraindication alerts</li>
+                <li>• <strong>Drug Class Explorer</strong> - Visual relationship mapping</li>
+                <li>• <strong>Dosage Calculator</strong> - Patient-specific calculations</li>
+                <li>• <strong>Side Effects Database</strong> - Comprehensive adverse effects</li>
+                <li>• <strong>Pharmacokinetics Simulator</strong> - ADME modeling</li>
+                <li>• <strong>Clinical Case Studies</strong> - Real-world scenarios</li>
+                <li>• <strong>Disease Lookup</strong> - Condition-drug recommendations</li>
+                <li>• <strong>Symptom Diagnosis Practice</strong> - Free diagnostic training</li>
               </ul>
             </div>
             <div className="text-left">
-              <h4 className="font-semibold text-purple-800 mb-2">Premium Quiz System</h4>
-              <ul className="text-sm text-gray-600 space-y-1">
-                <li>• Easy Quiz: ₹15 (Basic concepts)</li>
-                <li>• Medium Quiz: ₹20 (Intermediate level)</li>
-                <li>• Hard Quiz: ₹30 (Advanced topics)</li>
-                <li>• Lifetime access after purchase</li>
-                <li>• Detailed explanations for each answer</li>
-                <li>• Progress tracking and analytics</li>
-                <li>• Secure Razorpay payment gateway</li>
+              <h4 className="font-bold text-purple-800 mb-4 text-lg">💎 Premium Quiz System</h4>
+              <ul className="text-sm text-gray-700 space-y-2">
+                <li>• <strong>Easy Quiz: ₹15</strong> - Basic pharmacy concepts (1000+ questions)</li>
+                <li>• <strong>Medium Quiz: ₹20</strong> - Intermediate level (1000+ questions)</li>
+                <li>• <strong>Hard Quiz: ₹30</strong> - Advanced topics (1000+ questions)</li>
+                <li>• <strong>Lifetime Access</strong> - One-time payment only</li>
+                <li>• <strong>Detailed Explanations</strong> - Learn from every answer</li>
+                <li>• <strong>Progress Tracking</strong> - Monitor your improvement</li>
+                <li>• <strong>Performance Analytics</strong> - Identify weak areas</li>
+                <li>• <strong>Secure Payments</strong> - Razorpay integration</li>
+                <li>• <strong>Mobile Friendly</strong> - Study anywhere, anytime</li>
               </ul>
+            </div>
+          </div>
+          
+          <div className="mt-8 p-6 bg-white rounded-lg shadow-md">
+            <h4 className="font-bold text-green-800 mb-3 text-lg">🎯 Why Choose Our Platform?</h4>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+              <div className="text-center">
+                <div className="text-2xl mb-2">🎓</div>
+                <strong>Expert Content</strong>
+                <p className="text-gray-600">Created by pharmacy professionals</p>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl mb-2">⚡</div>
+                <strong>Instant Access</strong>
+                <p className="text-gray-600">No waiting, start learning immediately</p>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl mb-2">🔒</div>
+                <strong>Secure & Reliable</strong>
+                <p className="text-gray-600">Your data and payments are protected</p>
+              </div>
             </div>
           </div>
         </div>
