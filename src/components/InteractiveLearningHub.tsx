@@ -150,8 +150,9 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
 
   const handleQuizAccess = async (quiz: { difficulty: 'easy' | 'medium' | 'hard'; price: number }) => {
     if (!session) {
-      // Redirect to auth page
-      window.location.href = '/auth';
+      // Redirect to auth page with return URL
+      const returnUrl = encodeURIComponent(window.location.pathname);
+      window.location.href = `/auth?returnUrl=${returnUrl}`;
       return;
     }
 
@@ -209,6 +210,11 @@ const InteractiveLearningHub = ({ onBackToMenu }: InteractiveLearningHubProps) =
             <Button onClick={() => window.location.href = '/auth'} variant="outline">
               Login
             </Button>
+          )}
+          {session && (
+            <div className="text-sm text-gray-600">
+              Welcome, {session.user.email}
+            </div>
           )}
         </div>
       </div>
