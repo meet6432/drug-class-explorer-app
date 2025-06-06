@@ -15,14 +15,12 @@ const StudentDashboard = () => {
   const supabase = useSupabaseClient();
   const { toast } = useToast();
 
-  // Redirect to auth if not logged in
-  if (!session) {
-    return <Navigate to="/auth" replace />;
-  }
-
+  // Move all hooks to the top before any conditional logic
   const { data: profile } = useQuery({
-    queryKey: ['profile', session.user.id],
+    queryKey: ['profile', session?.user?.id],
     queryFn: async () => {
+      if (!session?.user?.id) return null;
+      
       const { data, error } = await supabase
         .from('profiles')
         .select('*')
@@ -52,8 +50,10 @@ const StudentDashboard = () => {
   });
 
   const { data: progress } = useQuery({
-    queryKey: ['quiz-progress', session.user.id],
+    queryKey: ['quiz-progress', session?.user?.id],
     queryFn: async () => {
+      if (!session?.user?.id) return null;
+      
       const { data, error } = await supabase
         .from('quiz_progress')
         .select('*')
@@ -64,6 +64,11 @@ const StudentDashboard = () => {
     },
     enabled: !!session?.user?.id,
   });
+
+  // Now do conditional returns after all hooks are declared
+  if (!session) {
+    return <Navigate to="/auth" replace />;
+  }
 
   const handleSignOut = async () => {
     const { error } = await supabase.auth.signOut();
