@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useSupabaseClient, useSession } from '@supabase/auth-helpers-react';
 import { Navigate } from 'react-router-dom';
@@ -6,7 +7,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { BookOpen, GraduationCap, Users, Award, CreditCard, Shield } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -18,11 +18,10 @@ const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
-  const [role, setRole] = useState('student');
 
   // Redirect if already logged in
   if (session) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/student" replace />;
   }
 
   const handleSignUp = async (e: React.FormEvent) => {
@@ -34,9 +33,10 @@ const Auth = () => {
         email,
         password,
         options: {
+          emailRedirectTo: undefined,
           data: {
             full_name: fullName,
-            role: role,
+            role: 'student',
           },
         },
       });
@@ -44,9 +44,12 @@ const Auth = () => {
       if (error) throw error;
 
       toast({
-        title: "Success!",
-        description: "Check your email for the confirmation link!",
+        title: "Account Created!",
+        description: "You can now access the Pharmacy MasterApp!",
       });
+
+      // Redirect immediately after successful signup
+      window.location.href = '/student';
     } catch (error: any) {
       toast({
         title: "Error",
@@ -75,9 +78,8 @@ const Auth = () => {
         description: "You have been signed in successfully.",
       });
 
-      // Redirect to dashboard or previous page
-      const returnUrl = new URLSearchParams(window.location.search).get('returnUrl') || '/dashboard';
-      window.location.href = returnUrl;
+      // Redirect to pharmacy masterapp
+      window.location.href = '/student';
     } catch (error: any) {
       toast({
         title: "Error",
@@ -129,7 +131,7 @@ const Auth = () => {
           <CardHeader>
             <CardTitle>Get Started</CardTitle>
             <CardDescription>
-              Sign in to your account or create a new one to access premium quizzes
+              Sign in to your account or create a new one to access the Pharmacy MasterApp
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -203,18 +205,6 @@ const Auth = () => {
                       onChange={(e) => setPassword(e.target.value)}
                       required
                     />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="role">I am a</Label>
-                    <Select value={role} onValueChange={setRole}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your role" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="student">Student</SelectItem>
-                        <SelectItem value="teacher">Teacher</SelectItem>
-                      </SelectContent>
-                    </Select>
                   </div>
                   <Button type="submit" className="w-full" disabled={loading}>
                     {loading ? 'Creating account...' : 'Create Account'}

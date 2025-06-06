@@ -20,7 +20,7 @@ const StudentDashboard = () => {
     return <Navigate to="/auth" replace />;
   }
 
-  const { data: profile, isLoading } = useQuery({
+  const { data: profile } = useQuery({
     queryKey: ['profile', session.user.id],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -29,7 +29,23 @@ const StudentDashboard = () => {
         .eq('id', session.user.id)
         .single();
       
-      if (error) throw error;
+      if (error) {
+        // If no profile exists, create a default one
+        const { data: newProfile, error: createError } = await supabase
+          .from('profiles')
+          .insert({
+            id: session.user.id,
+            email: session.user.email || '',
+            full_name: session.user.user_metadata?.full_name || 'User',
+            role: 'student',
+            status: 'Approved'
+          })
+          .select()
+          .single();
+        
+        if (createError) throw createError;
+        return newProfile;
+      }
       return data;
     },
     enabled: !!session?.user?.id,
@@ -62,22 +78,6 @@ const StudentDashboard = () => {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-purple-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading your dashboard...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Redirect if not a student
-  if (profile?.role !== 'student') {
-    return <Navigate to="/teacher" replace />;
-  }
-
   // Handle different views
   if (currentView === 'learning-hub') {
     return <InteractiveLearningHub onBackToMenu={() => setCurrentView('dashboard')} />;
@@ -102,8 +102,8 @@ const StudentDashboard = () => {
               Home
             </Button>
             <div>
-              <h1 className="text-3xl font-bold text-gray-800">Student Dashboard</h1>
-              <p className="text-gray-600">Welcome back, {profile?.full_name || 'Student'}!</p>
+              <h1 className="text-3xl font-bold text-gray-800">Pharmacy MasterApp</h1>
+              <p className="text-gray-600">Welcome back, {profile?.full_name || session.user.email}!</p>
             </div>
           </div>
           <Button onClick={handleSignOut} variant="outline">
