@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { ArrowLeft, BookOpen, Brain, Microscope, Calculator, Activity, Network, Pill, AlertTriangle, Clock, Search, Stethoscope, DollarSign } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
