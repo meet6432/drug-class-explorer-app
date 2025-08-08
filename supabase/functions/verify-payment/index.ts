@@ -1,7 +1,7 @@
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
-import { createHash } from "https://deno.land/std@0.168.0/crypto/mod.ts"
+// removed unused createHash import
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -14,7 +14,7 @@ serve(async (req) => {
   }
 
   try {
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature, difficulty, userId } = await req.json()
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature, difficulty } = await req.json()
 
     const razorpayKeySecret = Deno.env.get('RAZORPAY_KEY_SECRET')
     
@@ -22,16 +22,24 @@ serve(async (req) => {
       throw new Error('Razorpay secret not configured')
     }
 
+    // Derive authenticated user from JWT
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')!
+    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY')!
+    const authHeader = req.headers.get('Authorization') || ''
+    const token = authHeader.replace('Bearer ', '')
+    const authClient = createClient(supabaseUrl, supabaseAnonKey)
+    const { data: userData, error: userErr } = await authClient.auth.getUser(token)
+    if (userErr || !userData.user) throw new Error('Not authenticated')
+
     // Verify signature
-    const body = razorpay_order_id + "|" + razorpay_payment_id
-    const expectedSignature = await createHash("sha256", razorpayKeySecret, body)
+    const body = razorpay_order_id + '|' + razorpay_payment_id
+    const expectedSignature = await computeHmacSHA256(razorpayKeySecret, body)
     
     if (expectedSignature !== razorpay_signature) {
       throw new Error('Invalid payment signature')
     }
 
-    // Initialize Supabase client
-    const supabaseUrl = Deno.env.get('SUPABASE_URL')!
+    // Service role client for DB writes
     const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
     const supabase = createClient(supabaseUrl, supabaseKey)
 
@@ -39,9 +47,9 @@ serve(async (req) => {
     const { data: existingPurchase } = await supabase
       .from('quiz_purchases')
       .select('*')
-      .eq('user_id', userId)
+      .eq('user_id', userData.user.id)
       .eq('difficulty', difficulty)
-      .single()
+      .maybeSingle()
 
     if (existingPurchase) {
       return new Response(
@@ -51,14 +59,15 @@ serve(async (req) => {
     }
 
     // Record the purchase
+    const amountRupees = difficulty === 'easy' ? 1500 : difficulty === 'medium' ? 2000 : 3000
     const { error } = await supabase
       .from('quiz_purchases')
       .insert({
-        user_id: userId,
-        difficulty: difficulty,
+        user_id: userData.user.id,
+        difficulty,
         payment_id: razorpay_payment_id,
         order_id: razorpay_order_id,
-        amount: difficulty === 'easy' ? 15 : difficulty === 'medium' ? 20 : 30,
+        amount: amountRupees,
         status: 'completed'
       })
 
@@ -85,12 +94,12 @@ serve(async (req) => {
   }
 })
 
-async function createHash(algorithm: string, secret: string, data: string): Promise<string> {
+async function computeHmacSHA256(secret: string, data: string): Promise<string> {
   const encoder = new TextEncoder()
   const key = await crypto.subtle.importKey(
     'raw',
     encoder.encode(secret),
-    { name: 'HMAC', hash: algorithm.toUpperCase() },
+    { name: 'HMAC', hash: 'SHA-256' },
     false,
     ['sign']
   )

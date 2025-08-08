@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useSupabaseClient, useSession } from '@supabase/auth-helpers-react';
 import { useToast } from '@/hooks/use-toast';
-import { DollarSign, Shield, Zap, Trophy } from 'lucide-react';
+import { IndianRupee, Shield, Zap, Trophy } from 'lucide-react';
 
 interface QuizPaymentModalProps {
   quiz: {
@@ -103,9 +103,7 @@ const QuizPaymentModal = ({ quiz, onClose, onSuccess }: QuizPaymentModalProps) =
       // Create Razorpay order
       const { data: orderData, error: orderError } = await supabase.functions.invoke('create-razorpay-order', {
         body: {
-          amount: quiz.price,
-          difficulty: quiz.difficulty,
-          userId: session.user.id
+          difficulty: quiz.difficulty
         }
       });
 
@@ -114,7 +112,7 @@ const QuizPaymentModal = ({ quiz, onClose, onSuccess }: QuizPaymentModalProps) =
       }
 
       const options = {
-        key: 'rzp_test_5FGO5DRX6hm0uc', // Your Razorpay Key ID
+        key: orderData?.key ?? 'rzp_test_5FGO5DRX6hm0uc', // Razorpay Key ID
         amount: orderData.amount,
         currency: 'INR',
         name: 'Pharmacy MasterApp',
@@ -128,8 +126,7 @@ const QuizPaymentModal = ({ quiz, onClose, onSuccess }: QuizPaymentModalProps) =
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
                 razorpay_signature: response.razorpay_signature,
-                difficulty: quiz.difficulty,
-                userId: session.user.id
+                difficulty: quiz.difficulty
               }
             });
 
@@ -309,7 +306,7 @@ const QuizPaymentModal = ({ quiz, onClose, onSuccess }: QuizPaymentModalProps) =
                   </div>
                 ) : (
                   <div className="flex items-center gap-2">
-                    <DollarSign className="h-4 w-4" />
+                    <IndianRupee className="h-4 w-4" />
                     Pay ₹{quiz.price}
                   </div>
                 )}

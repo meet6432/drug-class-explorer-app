@@ -13,7 +13,26 @@ serve(async (req) => {
   }
 
   try {
-    const { amount, difficulty, userId } = await req.json()
+    const { difficulty } = await req.json()
+
+    if (!['easy', 'medium', 'hard'].includes(difficulty)) {
+      throw new Error('Invalid difficulty')
+    }
+
+    // Derive authenticated user
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')!
+    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY')!
+    const authHeader = req.headers.get('Authorization') || ''
+    const token = authHeader.replace('Bearer ', '')
+    const authClient = createClient(supabaseUrl, supabaseAnonKey)
+    const { data: userData, error: userErr } = await authClient.auth.getUser(token)
+    if (userErr || !userData.user) {
+      throw new Error('Not authenticated')
+    }
+
+    // Server-side price mapping (INR)
+    const priceMap: Record<string, number> = { easy: 1500, medium: 2000, hard: 3000 }
+    const amountInPaise = priceMap[difficulty] * 100
 
     // Create Razorpay order
     const razorpayKeyId = Deno.env.get('RAZORPAY_KEY_ID')
@@ -24,12 +43,12 @@ serve(async (req) => {
     }
 
     const orderData = {
-      amount: amount * 100, // Razorpay expects amount in paise
+      amount: amountInPaise, // Razorpay expects amount in paise
       currency: 'INR',
-      receipt: `quiz_${difficulty}_${userId}_${Date.now()}`,
+      receipt: `quiz_${difficulty}_${userData.user.id}_${Date.now()}`,
       notes: {
         quiz_difficulty: difficulty,
-        user_id: userId
+        user_id: userData.user.id
       }
     }
 
@@ -51,7 +70,7 @@ serve(async (req) => {
     }
 
     return new Response(
-      JSON.stringify({ orderId: order.id, amount: order.amount }),
+      JSON.stringify({ orderId: order.id, amount: order.amount, key: razorpayKeyId }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 200 
