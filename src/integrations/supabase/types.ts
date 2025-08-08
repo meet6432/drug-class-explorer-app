@@ -808,6 +808,45 @@ export type Database = {
           },
         ]
       }
+      quiz_purchases: {
+        Row: {
+          amount: number
+          created_at: string
+          currency: string
+          difficulty: string
+          id: string
+          order_id: string | null
+          payment_id: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          currency?: string
+          difficulty: string
+          id?: string
+          order_id?: string | null
+          payment_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          difficulty?: string
+          id?: string
+          order_id?: string | null
+          payment_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       quiz_questions: {
         Row: {
           category: string
@@ -1079,6 +1118,10 @@ export type Database = {
           host_limit: number
           features: Json
         }[]
+      }
+      is_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
       }
     }
     Enums: {
