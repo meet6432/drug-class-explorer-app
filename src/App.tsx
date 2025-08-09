@@ -20,6 +20,7 @@ import ClinicalCaseSimulator from "./components/ClinicalCaseSimulator";
 import DosageCalculator from "./components/DosageCalculator";
 import SideEffectsDatabase from "./components/SideEffectsDatabase";
 import PharmacokineticsSimulator from "./components/PharmacokineticsSimulator";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +46,7 @@ const App = () => (
             <Route path="/dosage-calculator" element={<DosageCalculator onBackToMenu={() => window.history.back()} />} />
             <Route path="/side-effects" element={<SideEffectsDatabase onBackToMenu={() => window.history.back()} />} />
             <Route path="/pharmacokinetics" element={<PharmacokineticsSimulator onBackToMenu={() => window.history.back()} />} />
+            <Route path="/admin" element={<AdminDashboard />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

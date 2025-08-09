@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Network, Info, Search, Plus, Edit, Trash2 } from 'lucide-react';
+import { Network, Info, Search, Plus, Edit } from 'lucide-react';
 import { useDrugClassRelationships, useAddDrugClassRelationship } from '../hooks/usePharmacyFeatures';
-import { useDrugClasses, useAddDrugClass, useUpdateDrugClass, useDeleteDrugClass } from '../hooks/useDrugClasses';
+import { useDrugClasses, useAddDrugClass, useUpdateDrugClass } from '../hooks/useDrugClasses';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -42,7 +42,7 @@ const DrugClassExplorer = ({ onBackToMenu }: DrugClassExplorerProps) => {
   const addRelationshipMutation = useAddDrugClassRelationship();
   const addDrugClassMutation = useAddDrugClass();
   const updateDrugClassMutation = useUpdateDrugClass();
-  const deleteDrugClassMutation = useDeleteDrugClass();
+  
 
   const filteredRelationships = relationships?.filter(rel =>
     rel.parent_class.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -85,11 +85,6 @@ const DrugClassExplorer = ({ onBackToMenu }: DrugClassExplorerProps) => {
     setIsEditDialogOpen(false);
   };
 
-  const handleDeleteDrugClass = async (id: string) => {
-    if (confirm('Are you sure you want to delete this drug class?')) {
-      await deleteDrugClassMutation.mutateAsync(id);
-    }
-  };
 
   const handleAddRelationship = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -151,62 +146,9 @@ const DrugClassExplorer = ({ onBackToMenu }: DrugClassExplorerProps) => {
               placeholder="Search drug classes..."
               className="max-w-md"
             />
-            <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
-              <DialogTrigger asChild>
-                <Button>
-                  <Plus className="h-4 w-4 mr-2" />
-                  Add Drug Class
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-2xl">
-                <DialogHeader>
-                  <DialogTitle>Add New Drug Class</DialogTitle>
-                </DialogHeader>
-                <form onSubmit={handleAddDrugClass} className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <Input
-                      value={newDrugClass.name}
-                      onChange={(e) => setNewDrugClass(prev => ({ ...prev, name: e.target.value }))}
-                      placeholder="Drug class name"
-                      required
-                    />
-                    <Input
-                      value={newDrugClass.category}
-                      onChange={(e) => setNewDrugClass(prev => ({ ...prev, category: e.target.value }))}
-                      placeholder="Category"
-                      required
-                    />
-                  </div>
-                  <Textarea
-                    value={newDrugClass.description}
-                    onChange={(e) => setNewDrugClass(prev => ({ ...prev, description: e.target.value }))}
-                    placeholder="Description"
-                    required
-                  />
-                  <Textarea
-                    value={newDrugClass.mechanism}
-                    onChange={(e) => setNewDrugClass(prev => ({ ...prev, mechanism: e.target.value }))}
-                    placeholder="Mechanism of action"
-                    required
-                  />
-                  <Textarea
-                    value={newDrugClass.uses}
-                    onChange={(e) => setNewDrugClass(prev => ({ ...prev, uses: e.target.value }))}
-                    placeholder="Clinical uses"
-                    required
-                  />
-                  <Textarea
-                    value={newDrugClass.side_effects}
-                    onChange={(e) => setNewDrugClass(prev => ({ ...prev, side_effects: e.target.value }))}
-                    placeholder="Side effects"
-                    required
-                  />
-                  <Button type="submit" disabled={addDrugClassMutation.isPending}>
-                    {addDrugClassMutation.isPending ? 'Adding...' : 'Add Drug Class'}
-                  </Button>
-                </form>
-              </DialogContent>
-            </Dialog>
+            <div className="text-sm text-muted-foreground">
+              View-only mode. Data is managed through the admin dashboard.
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -230,14 +172,7 @@ const DrugClassExplorer = ({ onBackToMenu }: DrugClassExplorerProps) => {
                             setIsEditDialogOpen(true);
                           }}
                         >
-                          <Edit className="h-3 w-3" />
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => handleDeleteDrugClass(drugClass.id)}
-                        >
-                          <Trash2 className="h-3 w-3" />
+                          <Info className="h-3 w-3" />
                         </Button>
                       </div>
                     </div>
@@ -267,52 +202,47 @@ const DrugClassExplorer = ({ onBackToMenu }: DrugClassExplorerProps) => {
           <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
             <DialogContent className="max-w-2xl">
               <DialogHeader>
-                <DialogTitle>Edit Drug Class</DialogTitle>
+                <DialogTitle>Drug Class Details</DialogTitle>
               </DialogHeader>
               {editingDrugClass && (
-                <form onSubmit={handleUpdateDrugClass} className="space-y-4">
+                <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
-                    <Input
-                      value={editingDrugClass.name}
-                      onChange={(e) => setEditingDrugClass(prev => ({ ...prev, name: e.target.value }))}
-                      placeholder="Drug class name"
-                      required
-                    />
-                    <Input
-                      value={editingDrugClass.category}
-                      onChange={(e) => setEditingDrugClass(prev => ({ ...prev, category: e.target.value }))}
-                      placeholder="Category"
-                      required
-                    />
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Name</label>
+                      <p className="text-sm">{editingDrugClass.name}</p>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Category</label>
+                      <p className="text-sm">{editingDrugClass.category}</p>
+                    </div>
                   </div>
-                  <Textarea
-                    value={editingDrugClass.description}
-                    onChange={(e) => setEditingDrugClass(prev => ({ ...prev, description: e.target.value }))}
-                    placeholder="Description"
-                    required
-                  />
-                  <Textarea
-                    value={editingDrugClass.mechanism}
-                    onChange={(e) => setEditingDrugClass(prev => ({ ...prev, mechanism: e.target.value }))}
-                    placeholder="Mechanism of action"
-                    required
-                  />
-                  <Textarea
-                    value={editingDrugClass.uses}
-                    onChange={(e) => setEditingDrugClass(prev => ({ ...prev, uses: e.target.value }))}
-                    placeholder="Clinical uses"
-                    required
-                  />
-                  <Textarea
-                    value={editingDrugClass.side_effects}
-                    onChange={(e) => setEditingDrugClass(prev => ({ ...prev, side_effects: e.target.value }))}
-                    placeholder="Side effects"
-                    required
-                  />
-                  <Button type="submit" disabled={updateDrugClassMutation.isPending}>
-                    {updateDrugClassMutation.isPending ? 'Updating...' : 'Update Drug Class'}
-                  </Button>
-                </form>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Description</label>
+                    <p className="text-sm">{editingDrugClass.description}</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Mechanism of Action</label>
+                    <p className="text-sm">{editingDrugClass.mechanism}</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Clinical Uses</label>
+                    <p className="text-sm">{editingDrugClass.uses}</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Side Effects</label>
+                    <p className="text-sm">{editingDrugClass.side_effects}</p>
+                  </div>
+                  {editingDrugClass.examples && editingDrugClass.examples.length > 0 && (
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Examples</label>
+                      <ul className="list-disc list-inside text-sm">
+                        {editingDrugClass.examples.map((example, index) => (
+                          <li key={index}>{example}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
               )}
             </DialogContent>
           </Dialog>
