@@ -20,8 +20,9 @@ const AdminDashboard = () => {
   const [selectedDifficulty, setSelectedDifficulty] = useState<'easy' | 'medium' | 'hard'>('easy');
 
   useEffect(() => {
-    if (!session?.user?.email || session.user.email !== 'meetdobariya3568@gmail.com') {
-      navigate('/');
+    // Only redirect if session is loaded and user is not admin
+    if (session !== null && (!session?.user?.email || session.user.email !== 'meetdobariya3568@gmail.com')) {
+      navigate('/auth?message=Admin access required');
     }
   }, [session, navigate]);
 
@@ -496,8 +497,30 @@ const AdminDashboard = () => {
     (e.target as HTMLFormElement).reset();
   };
 
+  // Show loading while session is loading
+  if (session === null) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <Shield className="h-12 w-12 text-primary mx-auto mb-4" />
+          <p className="text-lg">Loading admin dashboard...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show access denied if not admin
   if (!session?.user?.email || session.user.email !== 'meetdobariya3568@gmail.com') {
-    return null;
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <Shield className="h-12 w-12 text-destructive mx-auto mb-4" />
+          <h1 className="text-2xl font-bold mb-2">Access Denied</h1>
+          <p className="text-muted-foreground mb-4">This dashboard requires admin privileges.</p>
+          <Button onClick={() => navigate('/')}>Return Home</Button>
+        </div>
+      </div>
+    );
   }
 
   return (
